@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Claude Code",
+      "type": "shell",
+      "command": "claude",
+      "presentation": {
+        "group": "vt-web",
+        "panel": "dedicated",
+        "reveal": "always",
+        "name": "Claude Code"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Usage Monitor",
+      "type": "shell",
+      "command": "/Users/arikgriffin/.pyenv/shims/claude-monitor",
+      "presentation": {
+        "group": "vt-web",
+        "panel": "dedicated",
+        "reveal": "always",
+        "name": "Usage Monitor"
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      },
+      "problemMatcher": []
+    }
+  ]
+}
