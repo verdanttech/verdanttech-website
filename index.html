@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VerdantTech Solutions — CEA Operations Consulting</title>
+    <meta name="description" content="CEA operations consulting from a real operator. VerdantTech Solutions helps CEA operators, equipment vendors, and investors navigate controlled environment agriculture.">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+    <style>
+
+        /* ============================================================
+           TOKENS
+        ============================================================ */
+        :root {
+            --ink:        #1a1e14;
+            --paper:      #f5f2eb;
+            --sage:       #5d7c4f;
+            --sage-light: #8aaa7a;
+            --sage-pale:  #e6ede1;
+            --rule:       #dbd6cc;
+            --accent:     #b87c3a;
+
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body:    'DM Sans', system-ui, sans-serif;
+        }
+
+        /* ============================================================
+           RESET & BASE
+        ============================================================ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ============================================================
+           NOISE TEXTURE OVERLAY
+        ============================================================ */
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ============================================================
+           ANIMATIONS
+        ============================================================ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        .hero-anim {
+            opacity: 0;
+            animation: fadeUp 0.75s ease forwards;
+        }
+        .hero-anim-down {
+            opacity: 0;
+            animation: fadeDown 0.65s ease forwards;
+        }
+        .hero-anim-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        .d1 { animation-delay: 0.05s; }
+        .d2 { animation-delay: 0.18s; }
+        .d3 { animation-delay: 0.32s; }
+        .d4 { animation-delay: 0.46s; }
+        .d5 { animation-delay: 0.60s; }
+        .d6 { animation-delay: 0.74s; }
+
+        [data-anim] {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        [data-anim].visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        [data-anim-delay="1"] { transition-delay: 0.08s; }
+        [data-anim-delay="2"] { transition-delay: 0.18s; }
+        [data-anim-delay="3"] { transition-delay: 0.28s; }
+        [data-anim-delay="4"] { transition-delay: 0.38s; }
+
+        /* ============================================================
+           NAV
+        ============================================================ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 500;
+            background: var(--paper);
+            border-bottom: 1px solid var(--rule);
+            transition: box-shadow 0.3s;
+        }
+        .nav.scrolled {
+            box-shadow: 0 2px 16px rgba(26, 30, 20, 0.07);
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -0.01em;
+        }
+        .nav-cta {
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 400;
+            color: var(--sage);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            padding-bottom: 2px;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        .nav-cta:hover {
+            border-bottom-color: var(--sage);
+        }
+
+        /* ============================================================
+           SHARED SECTION UTILITIES
+        ============================================================ */
+        .section {
+            padding: 100px 40px;
+        }
+        .section-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-label {
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        /* ============================================================
+           HERO
+        ============================================================ */
+        .hero {
+            padding-top: 64px;
+            min-height: 100vh;
+            display: flex;
+        }
+        .hero-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+        }
+
+        .hero-left {
+            padding: 88px 72px 88px 72px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: var(--paper);
+        }
+        .hero-eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 28px;
+        }
+        .hero-headline {
+            font-family: var(--font-display);
+            font-size: clamp(2.125rem, 3.6vw, 3.25rem);
+            font-weight: 500;
+            line-height: 1.14;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 28px;
+            max-width: 580px;
+        }
+        .hero-headline em {
+            font-style: italic;
+            color: var(--sage);
+        }
+        .hero-subhead {
+            font-size: 1rem;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(26, 30, 20, 0.65);
+            margin-bottom: 44px;
+            max-width: 500px;
+        }
+        .hero-cta-link {
+            display: inline-block;
+            padding: 13px 30px;
+            background: var(--sage);
+            color: var(--paper);
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: background 0.2s;
+            align-self: flex-start;
+        }
+        .hero-cta-link:hover {
+            background: #4e6b43;
+        }
+
+        /* Right — dark sage panel */
+        .hero-right {
+            background: #253220;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 60px 48px;
+        }
+        .hero-plant {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.1;
+        }
+
+        /* Credential timeline */
+        .hero-timeline {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .hero-timeline-label {
+            font-family: var(--font-body);
+            font-size: 0.625rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage-light);
+            opacity: 0.65;
+            margin-bottom: 24px;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 18px;
+            position: relative;
+        }
+        .timeline-item + .timeline-item {
+            margin-top: 0;
+        }
+        .timeline-track {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+            width: 14px;
+        }
+        .timeline-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--sage-light);
+            flex-shrink: 0;
+            margin-top: 5px;
+        }
+        .timeline-line {
+            width: 1px;
+            flex: 1;
+            background: rgba(138, 170, 122, 0.25);
+            min-height: 20px;
+        }
+        .timeline-item:last-child .timeline-line {
+            display: none;
+        }
+        .timeline-content {
+            padding-bottom: 24px;
+        }
+        .timeline-item:last-child .timeline-content {
+            padding-bottom: 0;
+        }
+        .timeline-text {
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 300;
+            color: rgba(232, 237, 229, 0.72);
+            line-height: 1.55;
+        }
+        .timeline-text strong {
+            font-weight: 500;
+            color: #e8ede5;
+            display: block;
+            margin-bottom: 2px;
+            font-size: 0.875rem;
+        }
+
+        /* ============================================================
+           AUDIENCE SECTION
+        ============================================================ */
+        .audiences {
+            background: var(--ink);
+            padding: 100px 40px;
+        }
+        .audiences-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .audiences-header {
+            max-width: 620px;
+            margin-bottom: 64px;
+        }
+        .audiences-header .section-label {
+            color: var(--sage-light);
+        }
+        .audiences-header h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 2.8vw, 2.375rem);
+            font-weight: 500;
+            color: #e8ede5;
+            line-height: 1.2;
+            margin-bottom: 14px;
+        }
+        .audiences-header p {
+            font-size: 0.9375rem;
+            font-weight: 300;
+            color: rgba(232, 237, 229, 0.5);
+            line-height: 1.7;
+        }
+        .audiences-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        /* Card */
+        .audience-card {
+            background: #1f2a1b;
+            border-top: 2px solid var(--sage);
+            display: flex;
+            flex-direction: column;
+        }
+        .audience-card-compact {
+            padding: 44px 36px 36px;
+            flex: 1;
+        }
+        .audience-num {
+            font-family: var(--font-body);
+            font-size: 0.625rem;
+            font-weight: 500;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--sage-light);
+            margin-bottom: 18px;
+        }
+        .audience-title {
+            font-family: var(--font-display);
+            font-size: 1.3125rem;
+            font-weight: 500;
+            color: #e8ede5;
+            line-height: 1.25;
+            margin-bottom: 14px;
+        }
+        .audience-problem {
+            font-size: 0.875rem;
+            font-weight: 300;
+            color: rgba(232, 237, 229, 0.5);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(232, 237, 229, 0.08);
+        }
+        .audience-bullets {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+        .audience-bullets li {
+            font-size: 0.8125rem;
+            font-weight: 300;
+            color: rgba(232, 237, 229, 0.72);
+            line-height: 1.6;
+            padding-left: 18px;
+            position: relative;
+        }
+        .audience-bullets li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--sage-light);
+            opacity: 0.7;
+        }
+
+        /* Learn more toggle */
+        .learn-more-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--sage-light);
+            padding: 0;
+            transition: color 0.2s;
+        }
+        .learn-more-btn:hover {
+            color: #e8ede5;
+        }
+        .learn-more-btn .btn-arrow {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            font-style: normal;
+            line-height: 1;
+        }
+        .audience-card.open .learn-more-btn .btn-arrow {
+            transform: rotate(180deg);
+        }
+
+        /* Expanded detail panel */
+        .audience-expanded {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.45s ease;
+            background: rgba(255,255,255,0.03);
+            border-top: 1px solid rgba(232, 237, 229, 0.06);
+        }
+        .audience-card.open .audience-expanded {
+            max-height: 2400px;
+        }
+        .audience-expanded-inner {
+            padding: 36px 36px 44px;
+        }
+        .expanded-section {
+            margin-bottom: 28px;
+        }
+        .expanded-section:last-child {
+            margin-bottom: 0;
+        }
+        .expanded-phase {
+            font-family: var(--font-body);
+            font-size: 0.625rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage-light);
+            opacity: 0.65;
+            margin-bottom: 20px;
+        }
+        .expanded-service {
+            margin-bottom: 22px;
+        }
+        .expanded-service:last-child {
+            margin-bottom: 0;
+        }
+        .expanded-service h4 {
+            font-family: var(--font-display);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: #e8ede5;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        .expanded-service p {
+            font-size: 0.8125rem;
+            font-weight: 300;
+            color: rgba(232, 237, 229, 0.55);
+            line-height: 1.7;
+        }
+        .audience-card-footer {
+            padding: 0 36px 36px;
+        }
+
+        /* ============================================================
+           ABOUT
+        ============================================================ */
+        .about {
+            border-top: 1px solid var(--rule);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 88px;
+            align-items: start;
+        }
+        .about-text h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 2.8vw, 2.375rem);
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 28px;
+        }
+        .about-text p {
+            font-size: 0.9375rem;
+            font-weight: 300;
+            color: rgba(26, 30, 20, 0.7);
+            line-height: 1.8;
+            margin-bottom: 18px;
+        }
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+        .about-disclosure {
+            margin-top: 28px;
+            padding: 22px 24px;
+            background: var(--sage-pale);
+            border-left: 3px solid var(--sage);
+        }
+        .about-disclosure p {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: 0.875rem;
+            color: rgba(26, 30, 20, 0.65);
+            line-height: 1.65;
+            margin-bottom: 0;
+        }
+        .about-creds h3 {
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 20px;
+        }
+        .creds-list {
+            list-style: none;
+        }
+        .creds-list li {
+            font-size: 0.9rem;
+            font-weight: 300;
+            color: rgba(26, 30, 20, 0.75);
+            line-height: 1.6;
+            padding: 15px 0 15px 20px;
+            border-bottom: 1px solid var(--rule);
+            position: relative;
+        }
+        .creds-list li:first-child {
+            border-top: 1px solid var(--rule);
+        }
+        .creds-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 23px;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--sage-light);
+        }
+
+        /* ============================================================
+           CONTACT
+        ============================================================ */
+        .contact {
+            background: var(--sage);
+            padding: 100px 40px;
+            scroll-margin-top: 64px;
+        }
+        .contact-inner {
+            max-width: 640px;
+            margin: 0 auto;
+        }
+        .contact .section-label {
+            color: rgba(232, 237, 229, 0.65);
+        }
+        .contact h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 2.8vw, 2.375rem);
+            font-weight: 500;
+            color: #e8ede5;
+            margin-bottom: 16px;
+        }
+        .contact-intro {
+            font-size: 0.9375rem;
+            font-weight: 300;
+            color: rgba(232, 237, 229, 0.75);
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        /* Form */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-field label {
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(232, 237, 229, 0.6);
+        }
+        .form-field input,
+        .form-field textarea {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(232, 237, 229, 0.2);
+            color: #e8ede5;
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 300;
+            padding: 12px 14px;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+            border-radius: 0;
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+        }
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: rgba(232, 237, 229, 0.3);
+        }
+        .form-field input:focus,
+        .form-field textarea:focus {
+            border-color: rgba(232, 237, 229, 0.5);
+            background: rgba(255, 255, 255, 0.14);
+        }
+        .form-field textarea {
+            resize: vertical;
+            min-height: 130px;
+            line-height: 1.6;
+        }
+        .form-submit {
+            align-self: flex-start;
+            display: inline-block;
+            padding: 13px 32px;
+            background: #e8ede5;
+            color: var(--sage);
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+        }
+        .form-submit:hover {
+            background: #ffffff;
+        }
+
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        .footer {
+            background: var(--ink);
+            padding: 28px 40px;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: rgba(232, 237, 229, 0.55);
+        }
+        .footer-copy {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: rgba(232, 237, 229, 0.3);
+        }
+
+        /* ============================================================
+           RESPONSIVE — TABLET (≤1024px)
+        ============================================================ */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr 340px;
+            }
+            .hero-left {
+                padding: 72px 48px;
+            }
+            .audiences-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .audiences-grid .audience-card:last-child {
+                grid-column: 1 / -1;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 56px;
+            }
+        }
+
+        /* ============================================================
+           RESPONSIVE — MOBILE (≤768px)
+        ============================================================ */
+        @media (max-width: 768px) {
+            .nav-inner {
+                padding: 0 20px;
+            }
+            .hero {
+                min-height: auto;
+            }
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-left {
+                padding: 60px 24px 56px;
+            }
+            .hero-right {
+                padding: 44px 24px 52px;
+                min-height: 340px;
+                justify-content: flex-end;
+            }
+            .section {
+                padding: 72px 24px;
+            }
+            .audiences {
+                padding: 72px 24px;
+            }
+            .contact {
+                padding: 72px 24px;
+            }
+            .audiences-grid {
+                grid-template-columns: 1fr;
+            }
+            .audiences-grid .audience-card:last-child {
+                grid-column: auto;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .footer-inner {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+        }
+
+        /* ============================================================
+           RESPONSIVE — SMALL MOBILE (≤480px)
+        ============================================================ */
+        @media (max-width: 480px) {
+            .hero-left {
+                padding: 52px 20px 48px;
+            }
+            .hero-right {
+                padding: 36px 20px 44px;
+            }
+            .audience-card-compact {
+                padding: 36px 24px 28px;
+            }
+            .audience-card-footer {
+                padding: 0 24px 28px;
+            }
+            .audience-expanded-inner {
+                padding: 28px 24px 36px;
+            }
+            .about-grid {
+                gap: 44px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Noise texture overlay -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <!-- ================================================================
+         NAV
+    ================================================================ -->
+    <nav class="nav hero-anim-down d1" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-logo">VerdantTech Solutions</a>
+            <a href="#contact" class="nav-cta">Get in touch</a>
+        </div>
+    </nav>
+
+    <!-- ================================================================
+         HERO
+    ================================================================ -->
+    <section class="hero">
+        <div class="hero-grid">
+
+            <div class="hero-left">
+                <span class="hero-eyebrow hero-anim d1">CEA Operations Consulting</span>
+                <h1 class="hero-headline hero-anim d2">
+                    Built inside a live operation.<br>
+                    <em>Not modeled from the outside.</em>
+                </h1>
+                <p class="hero-subhead hero-anim d3">
+                    Over a decade inside CEA operations — from financial leadership through full-scale facility design and build-out. The kind of experience that only comes from doing it, not studying it.
+                </p>
+                <a href="#contact" class="hero-cta-link hero-anim d4">Start a conversation</a>
+            </div>
+
+            <div class="hero-right hero-anim-in d2">
+                <div class="hero-plant" aria-hidden="true">
+                    <svg width="280" height="380" viewBox="0 0 280 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M140 370 C140 350 138 315 136 278 C134 241 132 204 133 168 C134 132 138 95 140 58" stroke="#8aaa7a" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M136 278 C112 264 84 252 56 243 C38 238 20 236 8 233" stroke="#8aaa7a" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M8 233 C28 216 68 212 92 226 C83 240 47 250 22 245 Z" fill="#5d7c4f" opacity="0.7"/>
+                        <path d="M136 255 C160 242 190 232 218 226 C237 221 256 221 268 219" stroke="#8aaa7a" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M268 219 C249 202 211 199 188 213 C197 227 233 237 256 231 Z" fill="#5d7c4f" opacity="0.7"/>
+                        <path d="M134 198 C110 184 80 173 52 164 C34 158 16 156 5 153" stroke="#8aaa7a" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M5 153 C25 136 65 133 88 147 C79 161 44 170 20 165 Z" fill="#5d7c4f" opacity="0.65"/>
+                        <path d="M135 177 C158 163 188 154 215 148 C233 143 252 143 263 142" stroke="#8aaa7a" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M263 142 C245 125 208 123 186 137 C195 150 230 160 252 154 Z" fill="#5d7c4f" opacity="0.65"/>
+                        <path d="M134 128 C112 114 84 104 58 96 C40 90 22 88 10 85" stroke="#8aaa7a" stroke-width="1.2" stroke-linecap="round"/>
+                        <path d="M10 85 C28 69 66 67 88 81 C80 94 46 102 23 97 Z" fill="#5d7c4f" opacity="0.55"/>
+                        <path d="M136 110 C157 97 185 89 210 83 C228 78 246 78 257 77" stroke="#8aaa7a" stroke-width="1.2" stroke-linecap="round"/>
+                        <path d="M257 77 C240 60 204 59 183 73 C191 86 225 94 246 88 Z" fill="#5d7c4f" opacity="0.55"/>
+                        <path d="M140 58 C122 40 110 18 114 4" stroke="#8aaa7a" stroke-width="1.2" stroke-linecap="round"/>
+                        <path d="M114 4 C124 21 134 38 140 46 C133 30 122 11 114 4 Z" fill="#5d7c4f" opacity="0.5"/>
+                        <path d="M140 58 C156 38 166 16 163 2" stroke="#8aaa7a" stroke-width="1.2" stroke-linecap="round"/>
+                        <path d="M163 2 C156 19 147 38 140 46 C147 30 156 11 163 2 Z" fill="#5d7c4f" opacity="0.5"/>
+                    </svg>
+                </div>
+
+                <div class="hero-timeline">
+                    <p class="hero-timeline-label">Background</p>
+
+                    <div class="timeline-item hero-anim d3">
+                        <div class="timeline-track">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-line"></div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-text">
+                                <strong>Jackson, Wyoming</strong>
+                                Learned the full business from inside Vertical Harvest's small-scale multi-crop facility — production, economics, operations
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item hero-anim d4">
+                        <div class="timeline-track">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-line"></div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-text">
+                                <strong>Financial leadership</strong>
+                                Took on financial responsibility when the organization needed it — built production economics models across a live operation
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item hero-anim d5">
+                        <div class="timeline-track">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-line"></div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-text">
+                                <strong>Farm systems oversight</strong>
+                                Moved into the stronger fit — systems oversight, technology evaluation, and production infrastructure
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item hero-anim d6">
+                        <div class="timeline-track">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-line"></div>
+                        </div>
+                        <div class="timeline-content">
+                            <div class="timeline-text">
+                                <strong>Maine — large-scale automated facility</strong>
+                                Operator-side systems lead for the full build-out: coordinating expert vendor and internal teams across every major discipline. The role was the integrated picture, not the vendor expertise within each discipline.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================================================================
+         AUDIENCE SECTION
+    ================================================================ -->
+    <section class="audiences" id="audiences">
+        <div class="audiences-inner">
+
+            <div class="audiences-header">
+                <span class="section-label" data-anim>Who I Work With</span>
+                <h2 data-anim data-anim-delay="1">The right fit depends on<br>what you're trying to solve.</h2>
+                <p data-anim data-anim-delay="2">CEA is a specific operating context. The challenges look different depending on where you sit — and so does meaningful help.</p>
+            </div>
+
+            <div class="audiences-grid">
+
+                <!-- 01 — CEA Operators -->
+                <div class="audience-card" data-anim data-anim-delay="1" id="card-operators">
+                    <div class="audience-card-compact">
+                        <p class="audience-num">01 — CEA Operators</p>
+                        <h3 class="audience-title">CEA Operators</h3>
+                        <p class="audience-problem">The gap between where a CEA operation is and where it should be performing persists not because operators aren't capable of closing it, but because the root cause is genuinely hard to isolate — the model may have been built on assumptions that were never validated, or the data needed to know which problem it actually is may not exist yet.</p>
+                        <ul class="audience-bullets">
+                            <li>Operations and unit economics assessment</li>
+                            <li>Production economics modeling and crop profitability analysis</li>
+                            <li>Systems and technology selection — climate, SCADA, WOMS, WMS</li>
+                            <li>Scale-up planning and SOP development</li>
+                        </ul>
+                    </div>
+                    <div class="audience-card-footer">
+                        <button class="learn-more-btn" onclick="toggleCard('card-operators')" aria-expanded="false" aria-controls="expanded-operators">
+                            Learn more <span class="btn-arrow" aria-hidden="true">↓</span>
+                        </button>
+                    </div>
+                    <div class="audience-expanded" id="expanded-operators" role="region">
+                        <div class="audience-expanded-inner">
+
+                            <div class="expanded-section">
+                                <div class="expanded-service">
+                                    <h4>Operations Assessment</h4>
+                                    <p>Structured review of production systems, labor model, supply chain, and unit economics. Starting point is the gap between your model and your current performance — yield per square foot, labor cost per unit, energy consumption, food safety compliance posture. The output is a clear picture of where the gap is coming from and what it would realistically take to close it.</p>
+                                </div>
+                                <div class="expanded-service">
+                                    <h4>Production Economics Modeling</h4>
+                                    <p>Crop profitability, throughput analysis, and facility fit. Built from actual cost structures rather than industry benchmarks. Useful for evaluating a potential crop addition, stress-testing a scale-up assumption, or understanding which parts of your current model aren't holding.</p>
+                                </div>
+                                <div class="expanded-service">
+                                    <h4>Systems and Technology Selection</h4>
+                                    <p>Evaluation of climate systems, SCADA, WOMS, WMS, and supporting infrastructure against your operational requirements. Direct working experience includes Priva, Siemens WinCC OA, Opcenter X, Parity Factory, and RFID-based tray tracking systems. Evaluation starts with what your operation needs, not what a vendor's capability sheet says.</p>
+                                </div>
+                                <div class="expanded-service">
+                                    <h4>Scale-Up Planning</h4>
+                                    <p>Operational planning for facilities moving from pilot to production, or from one facility to multiple. The failure modes that appear at production scale are different from the ones that appear at pilot — and most models don't anticipate them.</p>
+                                </div>
+                                <div class="expanded-service">
+                                    <h4>SOP Development and Data Discipline</h4>
+                                    <p>One of the reasons performance gaps are hard to close is that the data needed to diagnose them doesn't exist or isn't reliable. Production SOPs, food safety systems, and data collection infrastructure are where that problem gets fixed — and where most facilities have the most exposure to audit failure, buyer relationship risk, and management decisions made on bad numbers.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 02 — Equipment Vendors -->
+                <div class="audience-card" data-anim data-anim-delay="2" id="card-vendors">
+                    <div class="audience-card-compact">
+                        <p class="audience-num">02 — Equipment Vendors</p>
+                        <h3 class="audience-title">Equipment Vendors</h3>
+                        <p class="audience-problem">Equipment vendors bring deep expertise in what their product does. CEA operators are building toward the readiness to support it. The gap between those two bodies of knowledge — in workflow design, systems integration, staffing, and operational infrastructure — is where implementation timelines stretch and potential performance gets left on the table.</p>
+                        <ul class="audience-bullets">
+                            <li>Pre-sales advisory: operator-side perspective on fit and workflow implications</li>
+                            <li>Integration gap analysis before the vendor has to respond to it</li>
+                            <li>Competitive differentiation through operator credibility in the sales process</li>
+                        </ul>
+                    </div>
+                    <div class="audience-card-footer">
+                        <button class="learn-more-btn" onclick="toggleCard('card-vendors')" aria-expanded="false" aria-controls="expanded-vendors">
+                            Learn more <span class="btn-arrow" aria-hidden="true">↓</span>
+                        </button>
+                    </div>
+                    <div class="audience-expanded" id="expanded-vendors" role="region">
+                        <div class="audience-expanded-inner">
+
+                            <div class="expanded-section">
+                                <div class="expanded-service">
+                                    <h4>Pre-Sales Advisory Support</h4>
+                                    <p>Your customer is evaluating your system and has questions you can't fully answer — not about equipment capability, but about how the equipment fits their specific operation. Workflow implications, staffing and training requirements, upstream and downstream process changes, integration with existing systems. An operator-side perspective at the pre-sales stage helps customers make better buying decisions, which typically produces better integrations.</p>
+                                </div>
+                                <div class="expanded-service">
+                                    <h4>Integration Gap Analysis</h4>
+                                    <p>The vendor knows what the equipment needs to perform. The operator often hasn't yet worked through what their operation needs to support it. My role is to close that gap — working with the operator to surface the right requirements, think through upstream and downstream implications, and arrive at a well-defined picture of what's actually needed before the vendor has to respond to it. The goal is a cleaner, more complete requirement handed to the vendor — reducing back-and-forth, compressing the timeline to a confirmed scope, and lowering the probability of change orders downstream. The vendor's solution authority stays intact throughout.</p>
+                                </div>
+                                <div class="expanded-service">
+                                    <h4>Competitive Differentiation in the Sales Process</h4>
+                                    <p>CEA operators evaluating equipment vendors are also evaluating how well those vendors understand their industry. A vendor who arrives at a sales conversation with an operator-side resource already engaged — someone who can speak to production economics, workflow implications, integration requirements, and operational realities beyond the equipment spec — is demonstrating something most competitors aren't. That's a different kind of sales conversation, and it's a harder one to walk away from.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 03 — Investors & Lenders -->
+                <div class="audience-card" data-anim data-anim-delay="3" id="card-investors">
+                    <div class="audience-card-compact">
+                        <p class="audience-num">03 — Investors &amp; Lenders</p>
+                        <h3 class="audience-title">Investors &amp; Lenders</h3>
+                        <p class="audience-problem">CEA pro formas follow predictable patterns: yield assumptions that don't account for ramp period, energy models that underestimate consumption at production density, and labor cost structures built on efficiency curves that take years to develop. The question is whether the operational assumptions in a given plan will actually hold — and that requires someone who has read those assumptions against actual operating performance.</p>
+                        <ul class="audience-bullets">
+                            <li>Pro forma stress-testing against actual operating experience</li>
+                            <li>Feasibility and pre-development review for facilities in design</li>
+                            <li>Post-investment operations assessment and unit economics review</li>
+                        </ul>
+                    </div>
+                    <div class="audience-card-footer">
+                        <button class="learn-more-btn" onclick="toggleCard('card-investors')" aria-expanded="false" aria-controls="expanded-investors">
+                            Learn more <span class="btn-arrow" aria-hidden="true">↓</span>
+                        </button>
+                    </div>
+                    <div class="audience-expanded" id="expanded-investors" role="region">
+                        <div class="audience-expanded-inner">
+
+                            <div class="expanded-section">
+                                <p class="expanded-phase">Pre-Investment Analysis</p>
+                                <div class="expanded-service">
+                                    <h4>Pro Forma Stress-Testing</h4>
+                                    <p>Line-by-line review of yield assumptions, production cost structures, energy sensitivity, and labor models. A particular focus is the ramp period — the gap between when a facility starts operating and when it reaches projected throughput is one of the most consistently undermodeled risks in CEA pro formas. My starting point is identifying which numbers are defensible against actual operating experience and which require assumptions the facility will struggle to meet.</p>
+                                </div>
+                                <div class="expanded-service">
+                                    <h4>Feasibility and Pre-Development Review</h4>
+                                    <p>For facilities still in design or early development: assessment of whether the proposed system — crops, scale, technology stack — produces the economics the model projects. Includes energy load modeling and throughput analysis.</p>
+                                </div>
+                            </div>
+
+                            <div class="expanded-section">
+                                <p class="expanded-phase">Post-Investment / Active Asset Management</p>
+                                <div class="expanded-service">
+                                    <h4>Operations Assessment</h4>
+                                    <p>Structured review of whether the farm is performing against its model — yield per square foot, actual versus projected labor cost, energy consumption, food safety compliance status, and unit economics across the full cost structure.</p>
+                                </div>
+                                <div class="expanded-service">
+                                    <h4>Unit Economics Review</h4>
+                                    <p>Detailed analysis of the cost and yield side of the operation — where the gaps between projected and actual performance are coming from, which are structural and which are fixable, and what realistic improvement looks like for this specific facility.</p>
+                                </div>
+                            </div>
+
+                            <div class="expanded-section">
+                                <p class="expanded-phase">Both Phases</p>
+                                <div class="expanded-service">
+                                    <h4>Technology and Systems Review</h4>
+                                    <p>Independent evaluation of the facility's technology stack — climate systems, CMMS, WOMS, WMS, Food Safety Management System, automation. Is the system designed to run at projected throughput? Are there known integration or reliability issues in the chosen configuration? Relevant whether the facility is still in design or already operating.</p>
+                                </div>
+                            </div>
+
+                            <div class="expanded-section">
+                                <div class="expanded-service">
+                                    <p>The scope of this engagement is the operational and unit economics picture. Sales strategy, pricing, and market development are outside it. VerdantTech takes no vendor referral arrangements and carries no ongoing relationships with the developers or technology providers being reviewed. All conflicts of interest are disclosed upfront.</p>
+                                    <p style="margin-top:12px; font-size:0.8125rem; color:rgba(232,237,229,0.45);">Registered Investment Adviser Representative (Series 65).</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         ABOUT
+    ================================================================ -->
+    <section class="section about" id="about">
+        <div class="section-inner">
+            <div class="about-grid">
+
+                <div class="about-text">
+                    <span class="section-label" data-anim>About</span>
+                    <h2 data-anim data-anim-delay="1">Built from the inside out.</h2>
+
+                    <p data-anim data-anim-delay="2">Arik Griffin started inside a working CEA operation — not as a consultant, but as an operator learning the full business from the ground up at Vertical Harvest's small-scale multi-crop facility in Jackson, Wyoming. When the organization needed financial leadership, he took it on. That eventually gave way to the work that was the stronger fit: farm systems oversight.</p>
+
+                    <p data-anim data-anim-delay="2">As operator-side systems lead for the full design and build-out of Vertical Harvest's large-scale automated production facility in Maine — one of the more highly automated CEA facilities built in North America, designed for space and labor efficiency — he coordinated expert vendor and internal teams across every major discipline. The role was the integrated picture: the operational requirements, the economics, how all the pieces fit together. Not vendor-level technical expertise in each discipline, but the thing vendors often can't provide: the operator perspective holding it all together.</p>
+
+                    <p data-anim data-anim-delay="3">That combination — operator, financial manager, and systems integrator, across two facilities at very different scales, through the industry's difficult years — reflects someone who has stayed in CEA long enough to learn from what didn't work, and is focused on applying those lessons to help operations actually perform.</p>
+
+                    <p data-anim data-anim-delay="3">VerdantTech is the independent consulting practice built on that background. Discovery is the product — figuring out where the actual problem is usually turns out to be most of the work.</p>
+
+                    <div class="about-disclosure" data-anim data-anim-delay="4">
+                        <p>Engagements run in two modes. Operator-side: advising the operation directly, with any vendor relationships disclosed upfront. Vendor-side: serving as a CEA subject matter resource on the vendor's team, bridging the gap between equipment capability and operational reality. In both cases, conflicts of interest are always disclosed upfront.</p>
+                    </div>
+                </div>
+
+                <div class="about-creds" data-anim data-anim-delay="2">
+                    <h3>Background &amp; Credentials</h3>
+                    <ul class="creds-list">
+                        <li>Chief of Farm Systems, Vertical Harvest (2016–present) — operator-side systems lead through small-scale multi-crop operations and large-scale automated facility build-out in Maine</li>
+                        <li>Over a decade of embedded CEA operations experience across two facilities at very different scales</li>
+                        <li>Direct working experience with Priva, Siemens WinCC OA, Opcenter X, Parity Factory, and RFID-based tray tracking systems</li>
+                        <li>Production economics modeling across live operations — unit cost structures, yield prediction, process flow analysis</li>
+                        <li>MBA, Duke Fuqua School of Business</li>
+                        <li>Prior: COO, Circ Inc.; Founder, Focus43 (web and application development)</li>
+                        <li>Thirty years of business operations across technology, services, and agriculture</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         CONTACT
+    ================================================================ -->
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <span class="section-label" data-anim>Contact</span>
+            <h2 data-anim data-anim-delay="1">Let's talk about what<br>you're working on.</h2>
+            <p class="contact-intro" data-anim data-anim-delay="2">The first conversation is straightforward — no pitch, no intake process. Tell me what you're trying to figure out, and I'll tell you honestly whether there's a fit.</p>
+
+            <form class="contact-form" id="contact-form" data-anim data-anim-delay="3" novalidate>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="f-name">Name</label>
+                        <input type="text" id="f-name" name="name" placeholder="Your name" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="f-company">Company <span style="opacity:0.5; font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+                        <input type="text" id="f-company" name="company" placeholder="Organization or fund">
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="f-message">What you're working on</label>
+                    <textarea id="f-message" name="message" placeholder="Describe what you're trying to figure out — an operation you're evaluating, a product you're selling into CEA, or a gap you're trying to close." required></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- ================================================================
+         FOOTER
+    ================================================================ -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-logo">VerdantTech Solutions</span>
+            <span class="footer-copy">&copy; 2026 VerdantTech Solutions &mdash; verdanttechsolutions.com</span>
+        </div>
+    </footer>
+
+    <!-- ================================================================
+         JS
+    ================================================================ -->
+    <script>
+        // Nav shadow on scroll
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 16);
+        }, { passive: true });
+
+        // IntersectionObserver for scroll-triggered elements
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('[data-anim]').forEach(el => observer.observe(el));
+
+        // Expand/collapse audience cards
+        function toggleCard(cardId) {
+            const card = document.getElementById(cardId);
+            const btn = card.querySelector('.learn-more-btn');
+            const isOpen = card.classList.contains('open');
+            card.classList.toggle('open', !isOpen);
+            btn.setAttribute('aria-expanded', String(!isOpen));
+        }
+
+        // Contact form — mailto
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name    = document.getElementById('f-name').value.trim();
+            const company = document.getElementById('f-company').value.trim();
+            const message = document.getElementById('f-message').value.trim();
+
+            if (!name || !message) {
+                const missing = !name ? document.getElementById('f-name') : document.getElementById('f-message');
+                missing.focus();
+                return;
+            }
+
+            const subject = encodeURIComponent('VerdantTech — New Inquiry');
+            const body = encodeURIComponent(
+                'Name: ' + name + '\n' +
+                (company ? 'Company: ' + company + '\n' : '') +
+                '\n' + message
+            );
+            window.location.href = 'mailto:arik@verdant.biz?subject=' + subject + '&body=' + body;
+        });
+    </script>
+
+</body>
+</html>
