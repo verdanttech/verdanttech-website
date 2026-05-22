@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <!-- No bounding circle — pentagon is the container -->
+
+  <!-- Outer pentagon, circumradius=18, top vertex up -->
+  <polygon points="22,4 39.13,16.46 32.56,37.54 11.44,37.54 4.87,16.46"
+    stroke="#416843" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Five spokes from center (22,22) to outer vertices — thin, no opacity -->
+  <line x1="22" y1="22" x2="22"    y2="4"     stroke="#416843" stroke-width="0.5"/>
+  <line x1="22" y1="22" x2="39.13" y2="16.46" stroke="#416843" stroke-width="0.5"/>
+  <line x1="22" y1="22" x2="32.56" y2="37.54" stroke="#416843" stroke-width="0.5"/>
+  <line x1="22" y1="22" x2="11.44" y2="37.54" stroke="#416843" stroke-width="0.5"/>
+  <line x1="22" y1="22" x2="4.87"  y2="16.46" stroke="#416843" stroke-width="0.5"/>
+
+  <!-- Inner data polygon -->
+  <polygon points="22,9.76 34.85,17.84 28.12,31.01 14.40,33.19 11.37,18.60"
+    stroke="#416843" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Nodes at inner polygon vertices -->
+  <circle cx="22.00" cy="9.76"  r="1.35" fill="#416843" stroke="none"/>
+  <circle cx="34.85" cy="17.84" r="1.35" fill="#416843" stroke="none"/>
+  <circle cx="28.12" cy="31.01" r="1.35" fill="#416843" stroke="none"/>
+  <circle cx="14.40" cy="33.19" r="1.35" fill="#416843" stroke="none"/>
+  <circle cx="11.37" cy="18.60" r="1.35" fill="#416843" stroke="none"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 115">
+  <!-- Mark: scaled to 50px tall, centered at x=110, top at y=4 -->
+  <!-- scale=50/92≈0.5435, tx=110-(126*0.5435/2)=75.76 -->
+  <g transform="translate(75.76 4) scale(0.5435)">
+    <path fill="#FFFFFF" d="M 59.51 54.48 C 60.43 42.60 65.30 29.76 74.42 21.65 C 80.99 15.82 87.64 12.98 96.55 9.60 Q 106.68 5.75 118.53 5.56 A 0.18 0.18 0.0 0 1 118.69 5.83 L 115.41 11.51 A 0.44 0.43 -76.2 0 1 115.05 11.73 C 95.15 12.88 77.41 26.26 66.55 42.54 Q 65.34 44.36 59.89 54.60 A 0.21 0.20 61.9 0 1 59.51 54.48 Z"/>
+    <path fill="#6F965E" d="M 52.19 55.56 A 0.28 0.27 -59.7 0 1 51.67 55.70 Q 49.61 51.64 43.46 39.55 Q 42.39 37.44 37.49 31.75 Q 27.36 19.97 14.17 15.84 A 3.54 3.52 85.4 0 1 12.07 14.04 L 9.09 8.00 A 0.71 0.71 0.0 0 1 9.85 6.99 Q 33.41 11.08 44.20 28.56 C 49.09 36.48 51.87 46.31 52.19 55.56 Z"/>
+    <path fill="#FFFFFF" d="M 52.56 85.22 L 56.04 73.74 Q 61.87 57.84 69.91 45.39 Q 76.35 35.42 86.61 26.87 Q 96.87 18.31 109.51 14.49 Q 112.72 13.52 113.85 13.53 A 0.46 0.46 0.0 0 1 114.26 14.18 C 112.11 19.03 109.78 24.19 107.88 29.18 C 102.76 42.63 95.74 54.77 81.64 60.40 C 71.54 64.43 64.89 66.11 60.21 74.23 Q 58.19 77.74 55.65 84.53 A 0.97 0.94 85.7 0 1 55.24 85.02 Q 54.34 85.58 52.56 85.22 Z"/>
+    <path fill="#6F965E" d="M 56.04 73.74 L 52.56 85.22 L 48.01 85.28 A 0.97 0.95 -12.6 0 1 47.14 84.74 L 14.05 17.65 A 0.53 0.52 -5.5 0 1 14.66 16.92 C 23.79 19.36 32.09 27.22 36.55 35.20 C 40.64 42.51 43.71 47.82 47.30 55.60 Q 51.42 64.54 56.04 73.74 Z"/>
+  </g>
+
+  <!-- VERDANTTECH -->
+  <text x="110" y="72" font-family="'Montserrat', sans-serif" font-size="15"
+    font-weight="700" letter-spacing="0.18em" fill="#FFFFFF" text-anchor="middle">VERDANTTECH</text>
+
+  <!-- Rules + SOLUTIONS -->
+  <line x1="22" y1="80" x2="80" y2="80" stroke="#A9C89A" stroke-width="0.6" opacity="0.5"/>
+  <text x="110" y="83.5" font-family="'Montserrat', sans-serif" font-size="7"
+    font-weight="500" letter-spacing="0.22em" fill="#A9C89A" text-anchor="middle">SOLUTIONS</text>
+  <line x1="140" y1="80" x2="198" y2="80" stroke="#A9C89A" stroke-width="0.6" opacity="0.5"/>
+
+  <!-- CEA OPERATIONS CONSULTING -->
+  <text x="110" y="97" font-family="'Montserrat', sans-serif" font-size="6"
+    font-weight="500" letter-spacing="0.18em" fill="#FFFFFF" opacity="0.65" text-anchor="middle">CEA OPERATIONS CONSULTING</text>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44">
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="22" cy="22" r="20" stroke="#416843" stroke-width="1.4" opacity="1" fill="none"/>
+    <!-- Top-left box -->
+    <rect x="9" y="9" width="11" height="9" rx="2.5" fill="#416843" stroke="none"/>
+    <!-- Middle-right box -->
+    <rect x="27" y="18" width="11" height="9" rx="2.5" fill="#416843" stroke="none"/>
+    <!-- Bottom-left box -->
+    <rect x="9" y="27" width="11" height="9" rx="2.5" fill="#416843" stroke="none"/>
+    <!-- Arrow 1: right of box1 → right angle → top of box2 -->
+    <path d="M 20,13.5 L 32.5,13.5 L 32.5,15.5" stroke="#416843" stroke-width="2.0" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="32.5,18 30.5,15.5 34.5,15.5" fill="#416843" stroke="none"/>
+    <!-- Arrow 2: left of box2 → right angle → top of box3 -->
+    <path d="M 27,22.5 L 14.5,22.5 L 14.5,24.5" stroke="#416843" stroke-width="2.0" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="14.5,27 12.5,24.5 16.5,24.5" fill="#416843" stroke="none"/>
+  </g>
+</svg>
