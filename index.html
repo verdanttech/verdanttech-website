@@ -1308,11 +1308,21 @@
             <p class="contact-intro" data-anim data-anim-delay="2">The first conversation is straightforward — no pitch, no intake process. Tell me what you're trying to figure out, and I'll tell you honestly whether there's a fit.</p>
 
             <form class="contact-form" id="contact-form" data-anim data-anim-delay="3" novalidate>
+                <input type="hidden" name="access_key" value="edd68b28-76a9-4c30-a504-4f0fa04c924f">
+                <input type="hidden" name="subject" value="New Contact Form Submission — VerdantTech Solutions">
+                <input type="hidden" name="from_name" value="VerdantTech Solutions Website">
+                <input type="checkbox" name="botcheck" style="display:none">
                 <div class="form-row">
                     <div class="form-field">
                         <label for="f-name">Name</label>
                         <input type="text" id="f-name" name="name" placeholder="Your name" required>
                     </div>
+                    <div class="form-field">
+                        <label for="f-email">Email</label>
+                        <input type="email" id="f-email" name="email" placeholder="Your email address" required>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-field">
                         <label for="f-company">Company <span style="opacity:0.5; font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
                         <input type="text" id="f-company" name="company" placeholder="Organization or fund">
@@ -1322,7 +1332,8 @@
                     <label for="f-message">What you're working on</label>
                     <textarea id="f-message" name="message" placeholder="Describe what you're trying to figure out — an operation you're evaluating, a product you're selling into CEA, or a gap you're trying to close." required></textarea>
                 </div>
-                <button type="submit" class="form-submit">Send</button>
+                <button type="submit" class="form-submit" id="form-submit-btn">Send</button>
+                <div id="form-status" style="display:none; margin-top:20px; font-family:var(--font-body); font-size:0.875rem; line-height:1.6;"></div>
             </form>
         </div>
     </section>
@@ -1368,26 +1379,52 @@
             btn.setAttribute('aria-expanded', String(!isOpen));
         }
 
-        // Contact form — mailto
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
+        // Contact form — web3forms
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
+            const form   = e.target;
+            const btn    = document.getElementById('form-submit-btn');
+            const status = document.getElementById('form-status');
+
             const name    = document.getElementById('f-name').value.trim();
-            const company = document.getElementById('f-company').value.trim();
+            const email   = document.getElementById('f-email').value.trim();
             const message = document.getElementById('f-message').value.trim();
 
-            if (!name || !message) {
-                const missing = !name ? document.getElementById('f-name') : document.getElementById('f-message');
+            if (!name || !email || !message) {
+                const missing = !name ? document.getElementById('f-name')
+                              : !email ? document.getElementById('f-email')
+                              : document.getElementById('f-message');
                 missing.focus();
                 return;
             }
 
-            const subject = encodeURIComponent('VerdantTech — New Inquiry');
-            const body = encodeURIComponent(
-                'Name: ' + name + '\n' +
-                (company ? 'Company: ' + company + '\n' : '') +
-                '\n' + message
-            );
-            window.location.href = 'mailto:arik@verdant.biz?subject=' + subject + '&body=' + body;
+            btn.disabled = true;
+            btn.textContent = 'Sending…';
+            status.style.display = 'none';
+
+            try {
+                const data = Object.fromEntries(new FormData(form));
+                const res  = await fetch('https://api.web3forms.com/submit', {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body:    JSON.stringify(data)
+                });
+                const json = await res.json();
+                if (res.ok && json.success) {
+                    form.style.display = 'none';
+                    status.style.display = 'block';
+                    status.style.color = '#A9C89A';
+                    status.textContent = 'Message sent. I’ll be in touch shortly.';
+                } else {
+                    throw new Error(json.message || 'Submission failed');
+                }
+            } catch (err) {
+                btn.disabled = false;
+                btn.textContent = 'Send';
+                status.style.display = 'block';
+                status.style.color = 'rgba(232,237,229,0.6)';
+                status.textContent = 'Something went wrong. Please try again or email arik@verdant.biz directly.';
+            }
         });
     </script>
 
