@@ -393,6 +393,49 @@
             text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
         }
 
+
+        /* Hero problem list */
+        .hero-problem-list {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            padding: 48px 48px 24px;
+        }
+        .problem-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px 0;
+            border-bottom: 0.5px solid rgba(255,255,255,0.12);
+        }
+        .problem-item:last-child {
+            border-bottom: none;
+        }
+        .problem-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #A9C89A;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+        .problem-body {}
+        .problem-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: #A9C89A;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+        .problem-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: rgba(243,246,242,0.8);
+            line-height: 1.5;
+        }
         /* Hero icon row */
         .hero-icon-row {
             position: relative;
@@ -1002,57 +1045,45 @@
                 -->
                 <div class="hero-panel-content">
 
-                    <div class="hero-timeline">
+                    <div class="hero-problem-list">
 
-                        <div class="timeline-item hero-anim d3">
-                            <div class="timeline-track">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-line"></div>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-text">
-                                    <strong>Jackson, Wyoming</strong>
-                                    Learned the full business from inside Vertical Harvest's small-scale multi-crop facility — production, economics, operations
-                                </div>
+                        <div class="problem-item hero-anim d3">
+                            <div class="problem-dot"></div>
+                            <div class="problem-body">
+                                <div class="problem-label">Workflow Design</div>
+                                <div class="problem-text">Workflows designed for one scale rarely survive the next one — and the gaps don’t announce themselves.</div>
                             </div>
                         </div>
 
-                        <div class="timeline-item hero-anim d4">
-                            <div class="timeline-track">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-line"></div>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-text">
-                                    <strong>Financial leadership</strong>
-                                    Took on financial responsibility when the organization needed it — built production economics models across a live operation
-                                </div>
+                        <div class="problem-item hero-anim d4">
+                            <div class="problem-dot"></div>
+                            <div class="problem-body">
+                                <div class="problem-label">Systems Integration</div>
+                                <div class="problem-text">The platforms exist. Getting them to work together as an actual system is the part that usually doesn’t happen.</div>
                             </div>
                         </div>
 
-                        <div class="timeline-item hero-anim d5">
-                            <div class="timeline-track">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-line"></div>
-                            </div>
-                            <div class="timeline-content">
-                                <div class="timeline-text">
-                                    <strong>Farm systems oversight</strong>
-                                    Moved into the stronger fit — systems oversight, technology evaluation, and production infrastructure
-                                </div>
+                        <div class="problem-item hero-anim d5">
+                            <div class="problem-dot"></div>
+                            <div class="problem-body">
+                                <div class="problem-label">Unit Economics</div>
+                                <div class="problem-text">The model that justified the build is only as good as the assumptions behind it — and without a mechanism to test those assumptions against real operational data, the gap compounds until it becomes a capital problem.</div>
                             </div>
                         </div>
 
-                        <div class="timeline-item hero-anim d6">
-                            <div class="timeline-track">
-                                <div class="timeline-dot"></div>
-                                <div class="timeline-line"></div>
+                        <div class="problem-item hero-anim d6">
+                            <div class="problem-dot"></div>
+                            <div class="problem-body">
+                                <div class="problem-label">Operational Performance</div>
+                                <div class="problem-text">Performance targets that looked achievable on paper create persistent pressure when the operation can’t close the gap.</div>
                             </div>
-                            <div class="timeline-content">
-                                <div class="timeline-text">
-                                    <strong>Maine — large-scale automated facility</strong>
-                                    Operator-side systems lead for the full build-out: coordinating expert vendor and internal teams across every major discipline. The role was the integrated picture, not the vendor expertise within each discipline.
-                                </div>
+                        </div>
+
+                        <div class="problem-item hero-anim d7">
+                            <div class="problem-dot"></div>
+                            <div class="problem-body">
+                                <div class="problem-label">Sustainable Growth</div>
+                                <div class="problem-text">Scaling a CEA operation that wasn’t designed to scale creates compounding problems in capital, labor, and the unit economics that have to support the next raise.</div>
                             </div>
                         </div>
 
