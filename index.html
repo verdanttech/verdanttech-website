@@ -523,14 +523,14 @@
         .audience-card {
             background: #1a2e1d;
             border-top: 2px solid var(--sage);
-            display: grid;
-            grid-template-rows: 1fr auto auto;
-            align-content: start;
+            display: flex;
+            flex-direction: column;
         }
         .audience-card-compact {
             padding: 44px 36px 36px;
             display: grid;
             grid-template-rows: auto auto 1fr auto;
+            flex: 1;
         }
         .audience-num {
             font-family: var(--font-body);
@@ -582,7 +582,17 @@
             opacity: 0.7;
         }
 
-        /* Learn more toggle */
+        /* Audience detail panel */
+        #audience-detail-panel {
+            background: #1a2e1d;
+            width: 100%;
+            margin-top: 2px;
+        }
+        .audience-detail-block {
+            padding: 44px 36px;
+        }
+
+                /* Learn more toggle */
         .learn-more-btn {
             display: inline-flex;
             align-items: center;
@@ -1147,39 +1157,9 @@
                         </ul>
                     </div>
                     <div class="audience-card-footer">
-                        <button class="learn-more-btn" onclick="toggleCard('card-operators')" aria-expanded="false" aria-controls="expanded-operators">
+                        <button class="learn-more-btn" onclick="toggleCard('operators')" aria-expanded="false" aria-controls="detail-operators">
                             Learn more <span class="btn-arrow" aria-hidden="true">↓</span>
                         </button>
-                    </div>
-                    <div class="audience-expanded" id="expanded-operators" role="region">
-                        <div class="audience-expanded-inner">
-
-                            <p style="font-size:0.875rem; font-weight:300; color:rgba(232,237,229,0.55); line-height:1.7; margin-bottom:28px;">Most CEA facilities are run on models built before the farm had real data to work with. Call it Spreadsheet Farming — projections based on assumed yield, estimated labor efficiency, forecast energy consumption. Those models are useful for early-stage decision making. The problem is that without actual operational data feeding back into them over time, they never get more accurate. The farm keeps running; the model stays frozen at its original assumptions. The gap between what the spreadsheet said and what the operation actually does is where margin disappears, where investor expectations go unmet, and where operators run out of answers.</p>
-
-                            <div class="expanded-section">
-                                <div class="expanded-service">
-                                    <h4>Operations Assessment</h4>
-                                    <p>Structured review of production systems, labor model, supply chain, and unit economics. Starting point is the gap between your model and your current performance — yield per square foot, labor cost per unit, energy consumption, food safety compliance posture. The output is a clear picture of where the gap is coming from and what it would realistically take to close it.</p>
-                                </div>
-                                <div class="expanded-service">
-                                    <h4>Production Economics Modeling</h4>
-                                    <p>Crop profitability, throughput analysis, and facility fit. Built from actual cost structures rather than industry benchmarks. Useful for evaluating a potential crop addition, stress-testing a scale-up assumption, or understanding which parts of your current model aren't holding.</p>
-                                </div>
-                                <div class="expanded-service">
-                                    <h4>Systems and Technology Selection</h4>
-                                    <p>Evaluation of climate systems, SCADA, WOMS, WMS, and supporting infrastructure against your operational requirements. Working experience includes Priva (climate control), Opcenter X (WOMS), Provision (food safety task management and recordkeeping), and SureTrends by Hygiena (environmental testing) — with broader evaluation experience across climate systems, food safety platforms, CMMS, and production modeling systems. Evaluation starts with what your operation needs, not what a vendor's capability sheet says.</p>
-                                </div>
-                                <div class="expanded-service">
-                                    <h4>Scale-Up Planning</h4>
-                                    <p>Operational planning for facilities moving from pilot to production, or from one facility to multiple. The failure modes that appear at production scale are different from the ones that appear at pilot — and most models don't anticipate them.</p>
-                                </div>
-                                <div class="expanded-service">
-                                    <h4>SOP Development and Data Discipline</h4>
-                                    <p>One of the reasons performance gaps are hard to close is that the data needed to diagnose them doesn't exist or isn't reliable. Production SOPs, food safety systems, and data collection infrastructure are where that problem gets fixed — and where most facilities have the most exposure to audit failure, buyer relationship risk, and management decisions made on bad numbers.</p>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
                 </div>
 
@@ -1196,29 +1176,9 @@
                         </ul>
                     </div>
                     <div class="audience-card-footer">
-                        <button class="learn-more-btn" onclick="toggleCard('card-vendors')" aria-expanded="false" aria-controls="expanded-vendors">
+                        <button class="learn-more-btn" onclick="toggleCard('vendors')" aria-expanded="false" aria-controls="detail-vendors">
                             Learn more <span class="btn-arrow" aria-hidden="true">↓</span>
                         </button>
-                    </div>
-                    <div class="audience-expanded" id="expanded-vendors" role="region">
-                        <div class="audience-expanded-inner">
-
-                            <div class="expanded-section">
-                                <div class="expanded-service">
-                                    <h4>Pre-Sales Advisory Support</h4>
-                                    <p>Your customer is evaluating your system and has questions you can't fully answer — not about equipment capability, but about how the equipment fits their specific operation. Workflow implications, staffing and training requirements, upstream and downstream process changes, integration with existing systems. An operator-side perspective at the pre-sales stage helps customers make better buying decisions, which typically produces better integrations.</p>
-                                </div>
-                                <div class="expanded-service">
-                                    <h4>Integration Gap Analysis</h4>
-                                    <p>The vendor knows what the equipment needs to perform. The operator often hasn't yet worked through what their operation needs to support it. My role is to close that gap — working with the operator to surface the right requirements, think through upstream and downstream implications, and arrive at a well-defined picture of what's actually needed before the vendor has to respond to it. The goal is a cleaner, more complete requirement handed to the vendor — reducing back-and-forth, compressing the timeline to a confirmed scope, and lowering the probability of change orders downstream. The vendor's solution authority stays intact throughout.</p>
-                                </div>
-                                <div class="expanded-service">
-                                    <h4>Competitive Differentiation in the Sales Process</h4>
-                                    <p>CEA operators evaluating equipment vendors are also evaluating how well those vendors understand their industry. A vendor who arrives at a sales conversation with an operator-side resource already engaged — someone who can speak to production economics, workflow implications, integration requirements, and operational realities beyond the equipment spec — is demonstrating something most competitors aren't. That's a different kind of sales conversation, and it's a harder one to walk away from.</p>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
                 </div>
 
@@ -1235,57 +1195,106 @@
                         </ul>
                     </div>
                     <div class="audience-card-footer">
-                        <button class="learn-more-btn" onclick="toggleCard('card-investors')" aria-expanded="false" aria-controls="expanded-investors">
+                        <button class="learn-more-btn" onclick="toggleCard('investors')" aria-expanded="false" aria-controls="detail-investors">
                             Learn more <span class="btn-arrow" aria-hidden="true">↓</span>
                         </button>
                     </div>
-                    <div class="audience-expanded" id="expanded-investors" role="region">
-                        <div class="audience-expanded-inner">
+                </div>
 
-                            <div class="expanded-section">
-                                <p class="expanded-phase">Pre-Investment Analysis</p>
-                                <div class="expanded-service">
-                                    <h4>Pro Forma Stress-Testing</h4>
-                                    <p>Line-by-line review of yield assumptions, production cost structures, energy sensitivity, and labor models. A particular focus is the ramp period — the gap between when a facility starts operating and when it reaches projected throughput is one of the most consistently undermodeled risks in CEA pro formas. My starting point is identifying which numbers are defensible against actual operating experience and which require assumptions the facility will struggle to meet. The industry has a Spreadsheet Farming problem: capital gets committed against projections built on assumed inputs, and without actual operating data feeding back into those models over time, the gap between projection and performance compounds silently until it becomes a capital problem.</p>
-                                </div>
-                                <div class="expanded-service">
-                                    <h4>Feasibility and Pre-Development Review</h4>
-                                    <p>For facilities still in design or early development: assessment of whether the proposed system — crops, scale, technology stack — produces the economics the model projects. Includes energy load modeling and throughput analysis.</p>
-                                </div>
+            </div>
+
+            <!-- Detail panel — shown when a card is expanded -->
+            <div id="audience-detail-panel" style="display:none">
+
+                <div class="audience-detail-block" id="detail-operators" data-detail="operators" style="display:none">
+                    <div class="audience-expanded-inner">
+                        <p style="font-size:0.875rem; font-weight:300; color:rgba(232,237,229,0.55); line-height:1.7; margin-bottom:28px;">Most CEA facilities are run on models built before the farm had real data to work with. Call it Spreadsheet Farming — projections based on assumed yield, estimated labor efficiency, forecast energy consumption. Those models are useful for early-stage decision making. The problem is that without actual operational data feeding back into them over time, they never get more accurate. The farm keeps running; the model stays frozen at its original assumptions. The gap between what the spreadsheet said and what the operation actually does is where margin disappears, where investor expectations go unmet, and where operators run out of answers.</p>
+                        <div class="expanded-section">
+                            <div class="expanded-service">
+                                <h4>Operations Assessment</h4>
+                                <p>Structured review of production systems, labor model, supply chain, and unit economics. Starting point is the gap between your model and your current performance — yield per square foot, labor cost per unit, energy consumption, food safety compliance posture. The output is a clear picture of where the gap is coming from and what it would realistically take to close it.</p>
                             </div>
-
-                            <div class="expanded-section">
-                                <p class="expanded-phase">Post-Investment / Active Asset Management</p>
-                                <div class="expanded-service">
-                                    <h4>Operations Assessment</h4>
-                                    <p>Structured review of whether the farm is performing against its model — yield per square foot, actual versus projected labor cost, energy consumption, food safety compliance status, and unit economics across the full cost structure.</p>
-                                </div>
-                                <div class="expanded-service">
-                                    <h4>Unit Economics Review</h4>
-                                    <p>Detailed analysis of the cost and yield side of the operation — where the gaps between projected and actual performance are coming from, which are structural and which are fixable, and what realistic improvement looks like for this specific facility.</p>
-                                </div>
+                            <div class="expanded-service">
+                                <h4>Production Economics Modeling</h4>
+                                <p>Crop profitability, throughput analysis, and facility fit. Built from actual cost structures rather than industry benchmarks. Useful for evaluating a potential crop addition, stress-testing a scale-up assumption, or understanding which parts of your current model aren't holding.</p>
                             </div>
-
-                            <div class="expanded-section">
-                                <p class="expanded-phase">Both Phases</p>
-                                <div class="expanded-service">
-                                    <h4>Technology and Systems Review</h4>
-                                    <p>Independent evaluation of the facility's technology stack — climate systems, CMMS, WOMS, WMS, Food Safety Management System, automation. Is the system designed to run at projected throughput? Are there known integration or reliability issues in the chosen configuration? Relevant whether the facility is still in design or already operating.</p>
-                                </div>
+                            <div class="expanded-service">
+                                <h4>Systems and Technology Selection</h4>
+                                <p>Evaluation of climate systems, SCADA, WOMS, WMS, and supporting infrastructure against your operational requirements. Working experience includes Priva (climate control), Opcenter X (WOMS), Provision (food safety task management and recordkeeping), and SureTrends by Hygiena (environmental testing) — with broader evaluation experience across climate systems, food safety platforms, CMMS, and production modeling systems. Evaluation starts with what your operation needs, not what a vendor's capability sheet says.</p>
                             </div>
-
-                            <div class="expanded-section">
-                                <div class="expanded-service">
-                                    <p>The scope of this engagement is the operational and unit economics picture. Sales strategy, pricing, and market development are outside it. VerdantTech takes no vendor referral arrangements and carries no ongoing relationships with the developers or technology providers being reviewed. All conflicts of interest are disclosed upfront.</p>
-                                    <p style="margin-top:12px; font-size:0.8125rem; color:rgba(232,237,229,0.45);">Registered Investment Adviser Representative (Series 65).</p>
-                                </div>
+                            <div class="expanded-service">
+                                <h4>Scale-Up Planning</h4>
+                                <p>Operational planning for facilities moving from pilot to production, or from one facility to multiple. The failure modes that appear at production scale are different from the ones that appear at pilot — and most models don't anticipate them.</p>
                             </div>
+                            <div class="expanded-service">
+                                <h4>SOP Development and Data Discipline</h4>
+                                <p>One of the reasons performance gaps are hard to close is that the data needed to diagnose them doesn't exist or isn't reliable. Production SOPs, food safety systems, and data collection infrastructure are where that problem gets fixed — and where most facilities have the most exposure to audit failure, buyer relationship risk, and management decisions made on bad numbers.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="audience-detail-block" id="detail-vendors" data-detail="vendors" style="display:none">
+                    <div class="audience-expanded-inner">
+                        <div class="expanded-section">
+                            <div class="expanded-service">
+                                <h4>Pre-Sales Advisory Support</h4>
+                                <p>Your customer is evaluating your system and has questions you can't fully answer — not about equipment capability, but about how the equipment fits their specific operation. Workflow implications, staffing and training requirements, upstream and downstream process changes, integration with existing systems. An operator-side perspective at the pre-sales stage helps customers make better buying decisions, which typically produces better integrations.</p>
+                            </div>
+                            <div class="expanded-service">
+                                <h4>Integration Gap Analysis</h4>
+                                <p>The vendor knows what the equipment needs to perform. The operator often hasn't yet worked through what their operation needs to support it. My role is to close that gap — working with the operator to surface the right requirements, think through upstream and downstream implications, and arrive at a well-defined picture of what's actually needed before the vendor has to respond to it. The goal is a cleaner, more complete requirement handed to the vendor — reducing back-and-forth, compressing the timeline to a confirmed scope, and lowering the probability of change orders downstream. The vendor's solution authority stays intact throughout.</p>
+                            </div>
+                            <div class="expanded-service">
+                                <h4>Competitive Differentiation in the Sales Process</h4>
+                                <p>CEA operators evaluating equipment vendors are also evaluating how well those vendors understand their industry. A vendor who arrives at a sales conversation with an operator-side resource already engaged — someone who can speak to production economics, workflow implications, integration requirements, and operational realities beyond the equipment spec — is demonstrating something most competitors aren't. That's a different kind of sales conversation, and it's a harder one to walk away from.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="audience-detail-block" id="detail-investors" data-detail="investors" style="display:none">
+                    <div class="audience-expanded-inner">
+                        <div class="expanded-section">
+                            <p class="expanded-phase">Pre-Investment Analysis</p>
+                            <div class="expanded-service">
+                                <h4>Pro Forma Stress-Testing</h4>
+                                <p>Line-by-line review of yield assumptions, production cost structures, energy sensitivity, and labor models. A particular focus is the ramp period — the gap between when a facility starts operating and when it reaches projected throughput is one of the most consistently undermodeled risks in CEA pro formas. My starting point is identifying which numbers are defensible against actual operating experience and which require assumptions the facility will struggle to meet. The industry has a Spreadsheet Farming problem: capital gets committed against projections built on assumed inputs, and without actual operating data feeding back into those models over time, the gap between projection and performance compounds silently until it becomes a capital problem.</p>
+                            </div>
+                            <div class="expanded-service">
+                                <h4>Feasibility and Pre-Development Review</h4>
+                                <p>For facilities still in design or early development: assessment of whether the proposed system — crops, scale, technology stack — produces the economics the model projects. Includes energy load modeling and throughput analysis.</p>
+                            </div>
+                        </div>
+                        <div class="expanded-section">
+                            <p class="expanded-phase">Post-Investment / Active Asset Management</p>
+                            <div class="expanded-service">
+                                <h4>Operations Assessment</h4>
+                                <p>Structured review of whether the farm is performing against its model — yield per square foot, actual versus projected labor cost, energy consumption, food safety compliance status, and unit economics across the full cost structure.</p>
+                            </div>
+                            <div class="expanded-service">
+                                <h4>Unit Economics Review</h4>
+                                <p>Detailed analysis of the cost and yield side of the operation — where the gaps between projected and actual performance are coming from, which are structural and which are fixable, and what realistic improvement looks like for this specific facility.</p>
+                            </div>
+                        </div>
+                        <div class="expanded-section">
+                            <p class="expanded-phase">Both Phases</p>
+                            <div class="expanded-service">
+                                <h4>Technology and Systems Review</h4>
+                                <p>Independent evaluation of the facility's technology stack — climate systems, CMMS, WOMS, WMS, Food Safety Management System, automation. Is the system designed to run at projected throughput? Are there known integration or reliability issues in the chosen configuration? Relevant whether the facility is still in design or already operating.</p>
+                            </div>
+                        </div>
+                        <div class="expanded-section">
+                            <div class="expanded-service">
+                                <p>The scope of this engagement is the operational and unit economics picture. Sales strategy, pricing, and market development are outside it. VerdantTech takes no vendor referral arrangements and carries no ongoing relationships with the developers or technology providers being reviewed. All conflicts of interest are disclosed upfront.</p>
+                                <p style="margin-top:12px; font-size:0.8125rem; color:rgba(232,237,229,0.45);">Registered Investment Adviser Representative (Series 65).</p>
+                            </div>
                         </div>
                     </div>
                 </div>
 
             </div>
+
         </div>
     </section>
 
@@ -1417,12 +1426,37 @@
         document.querySelectorAll('[data-anim]').forEach(el => observer.observe(el));
 
         // Expand/collapse audience cards
-        function toggleCard(cardId) {
-            const card = document.getElementById(cardId);
-            const btn = card.querySelector('.learn-more-btn');
-            const isOpen = card.classList.contains('open');
-            card.classList.toggle('open', !isOpen);
-            btn.setAttribute('aria-expanded', String(!isOpen));
+        let _activeAudience = null;
+
+        function toggleCard(key) {
+            const panel  = document.getElementById('audience-detail-panel');
+            const cards  = document.querySelectorAll('.audience-card');
+            const blocks = document.querySelectorAll('.audience-detail-block');
+
+            // Reset all cards and blocks
+            cards.forEach(c => {
+                c.classList.remove('open');
+                c.querySelector('.learn-more-btn').setAttribute('aria-expanded', 'false');
+            });
+            blocks.forEach(b => { b.style.display = 'none'; });
+
+            if (_activeAudience === key) {
+                // Toggle off
+                panel.style.display = 'none';
+                _activeAudience = null;
+                return;
+            }
+
+            // Activate selected card and detail block
+            const card  = document.getElementById('card-' + key);
+            const block = document.getElementById('detail-' + key);
+            if (card)  { card.classList.add('open'); card.querySelector('.learn-more-btn').setAttribute('aria-expanded', 'true'); }
+            if (block) { block.style.display = 'block'; }
+            panel.style.display = 'block';
+            _activeAudience = key;
+            if (window.innerWidth <= 1024) {
+                panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         // Contact form — web3forms
