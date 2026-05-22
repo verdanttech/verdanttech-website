@@ -1333,8 +1333,8 @@
                     <textarea id="f-message" name="message" placeholder="Describe what you're trying to figure out — an operation you're evaluating, a product you're selling into CEA, or a gap you're trying to close." required></textarea>
                 </div>
                 <button type="submit" class="form-submit" id="form-submit-btn">Send</button>
-                <div id="form-status" style="display:none; margin-top:20px; font-family:var(--font-body); font-size:0.875rem; line-height:1.6;"></div>
             </form>
+            <div id="form-status" data-success="Got it — I'll be in touch." style="display:none; margin-top:40px; font-family:var(--font-display); font-size:1.75rem; font-weight:600; line-height:1.4; color:#A9C89A; text-align:center;"></div>
         </div>
     </section>
 
@@ -1414,7 +1414,8 @@
                     form.style.display = 'none';
                     status.style.display = 'block';
                     status.style.color = '#A9C89A';
-                    status.textContent = 'Message sent. I’ll be in touch shortly.';
+                    status.textContent = status.dataset.success;
+                    status.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
                     throw new Error(json.message || 'Submission failed');
                 }
