@@ -1307,7 +1307,7 @@
             <h2 data-anim data-anim-delay="1">Let's talk about what<br>you're working on.</h2>
             <p class="contact-intro" data-anim data-anim-delay="2">The first conversation is straightforward — no pitch, no intake process. Tell me what you're trying to figure out, and I'll tell you honestly whether there's a fit.</p>
 
-            <form class="contact-form" id="contact-form" data-anim data-anim-delay="3" novalidate>
+            <form class="contact-form" id="contact-form" data-anim data-anim-delay="3">
                 <input type="hidden" name="access_key" value="edd68b28-76a9-4c30-a504-4f0fa04c924f">
                 <input type="hidden" name="subject" value="New Contact Form Submission — VerdantTech Solutions">
                 <input type="hidden" name="from_name" value="VerdantTech Solutions Website">
@@ -1424,7 +1424,7 @@
                 btn.textContent = 'Send';
                 status.style.display = 'block';
                 status.style.color = 'rgba(232,237,229,0.6)';
-                status.textContent = 'Something went wrong. Please try again or email arik@verdant.biz directly.';
+                status.textContent = res && res.status === 400 ? 'Please check your email address and try again.' : 'Something went wrong. Please try again or email arik@verdant.biz directly.';
             }
         });
     </script>
