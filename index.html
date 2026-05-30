@@ -18,6 +18,15 @@
       gtag('js', new Date());
       gtag('config', 'G-RV0GH2BG5P');
     </script>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "wzb00xc8jb");
+    </script>
     <style>
 
         /* ============================================================
@@ -1108,7 +1117,7 @@
                 <img src="assets/mark-clean.svg" alt="" class="nav-mark" height="32">
                 <span class="nav-wordmark">VERDANTTECH</span>
             </a>
-            <a href="#contact" class="nav-cta">Get in touch</a>
+            <a href="#contact" class="nav-cta" onclick="gtag('event', 'cta_click', { location: 'nav' })">Get in touch</a>
         </div>
     </nav>
 
@@ -1128,7 +1137,7 @@
                 <p class="hero-subhead hero-anim d4">
                     The pitfalls and opportunities that come with scaling a Controlled Environment Agriculture (CEA) operation aren't always visible until you've been through it. The unit economics, the equipment integrations, and the capital decisions behind the build are all challenging changes. <strong style="font-weight:500; color:rgba(20,36,23,0.85);">OPERATORS, VENDORS, and INVESTORS each encounter a different version of those challenges.</strong> I have a decade of operator-side experience, from financial leadership through full-facility build-out at scale, and can speak to all three.
                 </p>
-                <a href="#contact" class="hero-cta-link hero-anim d5">Let's have a conversation</a>
+                <a href="#contact" class="hero-cta-link hero-anim d5" onclick="gtag('event', 'cta_click', { location: 'hero' })">Let's have a conversation</a>
             </div>
 
             <div class="hero-panel hero-anim-in d2">
@@ -1250,7 +1259,7 @@
                         </ul>
                     </div>
                     <div class="audience-card-footer">
-                        <button class="learn-more-btn" onclick="toggleCard('operators')" aria-expanded="false" aria-controls="detail-operators">
+                        <button class="learn-more-btn" onclick="gtag('event', 'cta_click', { location: 'audience_card', audience: 'operators' }); toggleCard('operators')" aria-expanded="false" aria-controls="detail-operators">
                             See how I can help <span class="btn-arrow" aria-hidden="true">↓</span>
                         </button>
                     </div>
@@ -1271,7 +1280,7 @@
                         </ul>
                     </div>
                     <div class="audience-card-footer">
-                        <button class="learn-more-btn" onclick="toggleCard('vendors')" aria-expanded="false" aria-controls="detail-vendors">
+                        <button class="learn-more-btn" onclick="gtag('event', 'cta_click', { location: 'audience_card', audience: 'vendors' }); toggleCard('vendors')" aria-expanded="false" aria-controls="detail-vendors">
                             See how I can help <span class="btn-arrow" aria-hidden="true">↓</span>
                         </button>
                     </div>
@@ -1292,7 +1301,7 @@
                         </ul>
                     </div>
                     <div class="audience-card-footer">
-                        <button class="learn-more-btn" onclick="toggleCard('investors')" aria-expanded="false" aria-controls="detail-investors">
+                        <button class="learn-more-btn" onclick="gtag('event', 'cta_click', { location: 'audience_card', audience: 'investors' }); toggleCard('investors')" aria-expanded="false" aria-controls="detail-investors">
                             See how I can help <span class="btn-arrow" aria-hidden="true">↓</span>
                         </button>
                     </div>
@@ -1644,6 +1653,7 @@
             if (block) { block.style.display = 'block'; }
             panel.style.display = 'block';
             _activeAudience = key;
+            gtag('event', 'card_expand', { audience: key });
             if (window.innerWidth <= 1024) {
                 panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
@@ -1681,6 +1691,7 @@
                 });
                 const json = await res.json();
                 if (res.ok && json.success) {
+                    gtag('event', 'form_submit', { form_location: 'contact' });
                     form.style.display = 'none';
                     status.style.display = 'block';
                     status.style.color = '#A9C89A';
