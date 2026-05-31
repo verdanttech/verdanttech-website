@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VerdantTech Solutions | CEA Operations Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:        #142417;
+    --paper:      #F3F6F2;
+    --sage:       #416843;
+    --sage-mid:   #6F965E;
+    --sage-light: #A9C89A;
+    --sage-pale:  #EDF2EB;
+    --rule:       #D0D8CC;
+    --dark-panel: #213A26;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #d8dcd6;
+    color: var(--ink);
+    padding: 48px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .page {
+    background: var(--paper);
+    width: 816px;
+    min-height: 1056px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 48px rgba(20,36,23,0.18), 0 1px 8px rgba(20,36,23,0.10);
+  }
+
+  /* ── HEADER FULL ── */
+  .header-full {
+    background: var(--paper);
+    border-bottom: 3px solid var(--sage);
+    padding: 18px 52px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .logo-lockup svg { width: 220px; height: 115px; display: block; }
+
+  .header-divider {
+    width: 1px;
+    align-self: stretch;
+    background: var(--rule);
+    flex-shrink: 0;
+    margin: 8px 0;
+  }
+
+  .header-right { text-align: center; flex: 1; }
+
+  .header-right h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  .header-right .sub {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    white-space: normal;
+  }
+
+  /* ── HEADER SLIM ── */
+  .header-slim {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 16px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo-lockup-slim svg { width: 180px; height: 60px; display: block; }
+
+  .page-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  /* ── LEAD ── */
+  .lead {
+    background: var(--dark-panel);
+    padding: 18px 52px;
+  }
+
+  .lead p {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.68;
+    color: #D8E8D2;
+  }
+
+  .lead p + p {
+    margin-top: 8px;
+  }
+
+  .lead strong {
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  /* ── CONTENT WRAPPER ── */
+  .content {
+    display: flex;
+    flex-direction: column;
+    padding: 18px 52px 20px;
+    gap: 14px;
+    flex: 1;
+  }
+
+  .content-p2 {
+    flex: 0 0 auto;
+    padding-bottom: 22px;
+  }
+
+  /* ── CREDENTIAL ── */
+  .credential {
+    background: var(--sage-pale);
+    border-top: 3px solid var(--sage);
+    padding: 16px 20px;
+  }
+
+  .credential p {
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+
+  .credential p + p {
+    margin-top: 10px;
+  }
+
+  .credential strong {
+    font-weight: 600;
+    color: var(--dark-panel);
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ── DISCIPLINE CARD GRID — 3-col ── */
+  .discipline-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px 16px;
+  }
+
+  .discipline-card {
+    background: var(--sage-pale);
+    border-top: 3px solid var(--sage);
+    padding: 9px 12px;
+  }
+
+  .discipline-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dark-panel);
+    margin-bottom: 8px;
+  }
+
+  .discipline-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .discipline-card ul li {
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .discipline-card ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--sage-mid);
+    font-weight: 700;
+  }
+
+  /* ── SERVICE GRID — 2-col ── */
+  .service-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 24px;
+  }
+
+  .service-card {
+    background: var(--sage-pale);
+    border-top: 3px solid var(--sage);
+    padding: 10px 14px 11px;
+  }
+
+  .service-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dark-panel);
+    margin-bottom: 7px;
+  }
+
+  .service-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .service-card ul li {
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--ink);
+    padding-left: 12px;
+    position: relative;
+  }
+
+  .service-card ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--sage-mid);
+    font-weight: 700;
+  }
+
+  .service-card .statement {
+    font-size: 11.5px;
+    font-style: italic;
+    line-height: 1.58;
+    color: var(--dark-panel);
+    margin-bottom: 8px;
+  }
+
+  /* ── CTA BLOCK ── */
+  .cta-block {
+    background: var(--dark-panel);
+    padding: 22px 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  .footer-push {
+    margin-top: auto;
+  }
+
+  .cta-statement {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    font-style: italic;
+    line-height: 1.65;
+    color: var(--sage-light);
+    letter-spacing: 0.01em;
+    max-width: 580px;
+  }
+
+  .callout-cta {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #F3F6F2;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--ink);
+    padding: 20px 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .contact-row {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    white-space: nowrap;
+  }
+
+  .contact-item .clabel {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 7px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-mid);
+  }
+
+  .contact-item .cval {
+    font-size: 13px;
+    font-weight: 400;
+    color: #F3F6F2;
+    letter-spacing: 0.01em;
+  }
+
+  /* ── PAGE 2 TIGHTENING ── */
+  .page-2 .section-label { margin-bottom: 10px; }
+  .page-2 .credential p {
+    font-size: 12.5px;
+    line-height: 1.68;
+  }
+  .page-2 .credential p + p {
+    margin-top: 6px;
+  }
+  .page-2 .content-p2 {
+    gap: 10px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  .page-2 {
+    min-height: 1056px;
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    * {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: none;
+      display: block;
+      width: 8.5in;
+    }
+    .page {
+      box-shadow: none;
+      width: 8.5in;
+      min-height: 11in;
+      page-break-after: always;
+    }
+    .page:last-child {
+      page-break-after: avoid;
+    }
+    @page {
+      size: letter;
+      margin: 0;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════ PAGE 1 ════════════════════════ -->
+<div class="page page-1">
+
+  <div class="header-full">
+    <div class="logo-lockup">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 115">
+        <g transform="translate(75.76 4) scale(0.5435)">
+          <path fill="#213A26" d="M 59.51 54.48 C 60.43 42.60 65.30 29.76 74.42 21.65 C 80.99 15.82 87.64 12.98 96.55 9.60 Q 106.68 5.75 118.53 5.56 A 0.18 0.18 0.0 0 1 118.69 5.83 L 115.41 11.51 A 0.44 0.43 -76.2 0 1 115.05 11.73 C 95.15 12.88 77.41 26.26 66.55 42.54 Q 65.34 44.36 59.89 54.60 A 0.21 0.20 61.9 0 1 59.51 54.48 Z"/>
+          <path fill="#6F965E" d="M 52.19 55.56 A 0.28 0.27 -59.7 0 1 51.67 55.70 Q 49.61 51.64 43.46 39.55 Q 42.39 37.44 37.49 31.75 Q 27.36 19.97 14.17 15.84 A 3.54 3.52 85.4 0 1 12.07 14.04 L 9.09 8.00 A 0.71 0.71 0.0 0 1 9.85 6.99 Q 33.41 11.08 44.20 28.56 C 49.09 36.48 51.87 46.31 52.19 55.56 Z"/>
+          <path fill="#213A26" d="M 52.56 85.22 L 56.04 73.74 Q 61.87 57.84 69.91 45.39 Q 76.35 35.42 86.61 26.87 Q 96.87 18.31 109.51 14.49 Q 112.72 13.52 113.85 13.53 A 0.46 0.46 0.0 0 1 114.26 14.18 C 112.11 19.03 109.78 24.19 107.88 29.18 C 102.76 42.63 95.74 54.77 81.64 60.40 C 71.54 64.43 64.89 66.11 60.21 74.23 Q 58.19 77.74 55.65 84.53 A 0.97 0.94 85.7 0 1 55.24 85.02 Q 54.34 85.58 52.56 85.22 Z"/>
+          <path fill="#6F965E" d="M 56.04 73.74 L 52.56 85.22 L 48.01 85.28 A 0.97 0.95 -12.6 0 1 47.14 84.74 L 14.05 17.65 A 0.53 0.52 -5.5 0 1 14.66 16.92 C 23.79 19.36 32.09 27.22 36.55 35.20 C 40.64 42.51 43.71 47.82 47.30 55.60 Q 51.42 64.54 56.04 73.74 Z"/>
+        </g>
+        <text x="110" y="72" font-family="'Montserrat', sans-serif" font-size="15" font-weight="700" letter-spacing="0.18em" fill="#142417" text-anchor="middle">VERDANTTECH</text>
+        <line x1="22" y1="80" x2="80" y2="80" stroke="#416843" stroke-width="0.6" opacity="0.5"/>
+        <text x="110" y="83.5" font-family="'Montserrat', sans-serif" font-size="7" font-weight="500" letter-spacing="0.22em" fill="#416843" text-anchor="middle">SOLUTIONS</text>
+        <line x1="140" y1="80" x2="198" y2="80" stroke="#416843" stroke-width="0.6" opacity="0.5"/>
+        <text x="110" y="97" font-family="'Montserrat', sans-serif" font-size="6" font-weight="500" letter-spacing="0.18em" fill="#142417" opacity="0.65" text-anchor="middle">CEA OPERATIONS CONSULTING</text>
+      </svg>
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-right">
+      <h1>CEA Operations<br>Consulting</h1>
+      <div class="sub">Operator-side advisory &nbsp;·&nbsp; Performance and scale-up</div>
+    </div>
+  </div>
+
+  <!-- LEAD -->
+  <div class="lead">
+    <p>Running a Controlled Environment Agriculture (CEA) facility according to plan is harder than anyone tells you before you're in it. The gap between where your operation is and where it needs to be — on costs, yield, quality, or all three — is real, but the solutions are not always obvious. And if you're scaling up, you're being asked to make decisions about systems, equipment, and operational models you haven't run before. I've lived both situations from the inside.</p>
+    <p>Most CEA facilities have a version of the same underlying problem: projections built before the farm had real data to work with — assumed yield, estimated labor efficiency, raw materials and energy forecasts from the best information available at the time. The models were useful for early-stage decisions, but are out of date by launch day and don't age well from there. The farm keeps running, but the model stays frozen, and the gap between what the spreadsheet said and what the operation can actually perform is where margin disappears and operators run out of answers.</p>
+    <p style="margin-top: 10px; text-align: center;"><strong>My job is to help you close the gaps and find opportunities faster.</strong></p>
+  </div>
+
+  <div class="content">
+
+    <!-- WHERE THE GAPS TYPICALLY LIVE -->
+    <div>
+      <div class="section-label">Where the Gaps Typically Live</div>
+      <div class="discipline-grid">
+
+        <div class="discipline-card">
+          <h3>Production Economics</h3>
+          <ul>
+            <li>Unit cost structure</li>
+            <li>Yield vs. model</li>
+            <li>Energy consumption</li>
+          </ul>
+        </div>
+
+        <div class="discipline-card">
+          <h3>Operations &amp; Labor</h3>
+          <ul>
+            <li>Workflow design</li>
+            <li>Staffing model</li>
+            <li>Food safety compliance</li>
+          </ul>
+        </div>
+
+        <div class="discipline-card">
+          <h3>Systems &amp; Data</h3>
+          <ul>
+            <li>Technology &amp; equipment fit</li>
+            <li>Data collection discipline</li>
+            <li>SOP development</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WHERE I CAN HELP -->
+    <div>
+      <div class="section-label">Where I Can Help</div>
+      <div class="service-grid">
+
+        <div class="service-card">
+          <h3>Operations Assessment</h3>
+          <p class="statement">A diagnosis, not another hypothesis about where margin is going.</p>
+          <ul>
+            <li>Yield per square foot, labor cost per unit, energy consumption vs. model</li>
+            <li>Food safety compliance posture</li>
+            <li>End to end operational flow</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <h3>Production Economics Modeling</h3>
+          <p class="statement">I build analysis from your actual cost structure, not industry benchmarks — because your facility is the one that matters.</p>
+          <ul>
+            <li>Crop profitability and throughput analysis</li>
+            <li>Stress-test scale-up scenarios</li>
+            <li>Assumptions testing and validation</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <h3>Systems &amp; Technology Selection</h3>
+          <p class="statement">Working experience with Priva, Opcenter X, Provision, and SureTrends — with broad evaluation experience across climate systems, lighting, food safety platforms, CMMS, and seeding through packaging automation.</p>
+          <ul>
+            <li>Growing systems and climate infrastructure</li>
+            <li>Post harvest equipment</li>
+            <li>Software and data platforms</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <h3>Scale-Up Planning</h3>
+          <p class="statement">I've been through it. I'll help you avoid traps and find opportunities that exist when you scale.</p>
+          <ul>
+            <li>Pilot to production, or single to multi-facility</li>
+            <li>End to end operations plans before you purchase</li>
+            <li>SOP and data infrastructure built for your scale</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div><!-- /page 1 -->
+
+
+<!-- ════════════════════════ PAGE 2 ════════════════════════ -->
+<div class="page page-2">
+
+  <div class="header-slim">
+    <div class="logo-lockup-slim">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 115">
+        <g transform="translate(75.76 4) scale(0.5435)">
+          <path fill="#213A26" d="M 59.51 54.48 C 60.43 42.60 65.30 29.76 74.42 21.65 C 80.99 15.82 87.64 12.98 96.55 9.60 Q 106.68 5.75 118.53 5.56 A 0.18 0.18 0.0 0 1 118.69 5.83 L 115.41 11.51 A 0.44 0.43 -76.2 0 1 115.05 11.73 C 95.15 12.88 77.41 26.26 66.55 42.54 Q 65.34 44.36 59.89 54.60 A 0.21 0.20 61.9 0 1 59.51 54.48 Z"/>
+          <path fill="#6F965E" d="M 52.19 55.56 A 0.28 0.27 -59.7 0 1 51.67 55.70 Q 49.61 51.64 43.46 39.55 Q 42.39 37.44 37.49 31.75 Q 27.36 19.97 14.17 15.84 A 3.54 3.52 85.4 0 1 12.07 14.04 L 9.09 8.00 A 0.71 0.71 0.0 0 1 9.85 6.99 Q 33.41 11.08 44.20 28.56 C 49.09 36.48 51.87 46.31 52.19 55.56 Z"/>
+          <path fill="#213A26" d="M 52.56 85.22 L 56.04 73.74 Q 61.87 57.84 69.91 45.39 Q 76.35 35.42 86.61 26.87 Q 96.87 18.31 109.51 14.49 Q 112.72 13.52 113.85 13.53 A 0.46 0.46 0.0 0 1 114.26 14.18 C 112.11 19.03 109.78 24.19 107.88 29.18 C 102.76 42.63 95.74 54.77 81.64 60.40 C 71.54 64.43 64.89 66.11 60.21 74.23 Q 58.19 77.74 55.65 84.53 A 0.97 0.94 85.7 0 1 55.24 85.02 Q 54.34 85.58 52.56 85.22 Z"/>
+          <path fill="#6F965E" d="M 56.04 73.74 L 52.56 85.22 L 48.01 85.28 A 0.97 0.95 -12.6 0 1 47.14 84.74 L 14.05 17.65 A 0.53 0.52 -5.5 0 1 14.66 16.92 C 23.79 19.36 32.09 27.22 36.55 35.20 C 40.64 42.51 43.71 47.82 47.30 55.60 Q 51.42 64.54 56.04 73.74 Z"/>
+        </g>
+        <text x="110" y="72" font-family="'Montserrat', sans-serif" font-size="15" font-weight="700" letter-spacing="0.18em" fill="#142417" text-anchor="middle">VERDANTTECH</text>
+        <line x1="22" y1="80" x2="80" y2="80" stroke="#416843" stroke-width="0.6" opacity="0.5"/>
+        <text x="110" y="83.5" font-family="'Montserrat', sans-serif" font-size="7" font-weight="500" letter-spacing="0.22em" fill="#416843" text-anchor="middle">SOLUTIONS</text>
+        <line x1="140" y1="80" x2="198" y2="80" stroke="#416843" stroke-width="0.6" opacity="0.5"/>
+        <text x="110" y="97" font-family="'Montserrat', sans-serif" font-size="6" font-weight="500" letter-spacing="0.18em" fill="#142417" opacity="0.65" text-anchor="middle">CEA OPERATIONS CONSULTING</text>
+      </svg>
+    </div>
+    <span class="page-label">CEA Operations Consulting &nbsp;·&nbsp; continued</span>
+  </div>
+
+  <div class="content content-p2">
+
+    <!-- 5th service card -->
+    <div>
+      <div class="section-label">Also</div>
+      <div class="service-grid">
+        <div class="service-card" style="grid-column: 1 / -1;">
+          <h3>Performance Tracking &amp; Data Discipline</h3>
+          <p class="statement">One of the reasons performance gaps are hard to close is that the data needed to diagnose them often doesn't exist or is hard to compile. Production SOPs are there, but tracking compliance is spotty. Food safety plans are in place, but records are hard to review. The result is audit exposure, buyer relationship risk, and management decisions made on bad numbers.</p>
+          <ul style="columns: 2; gap: 24px;">
+            <li>Production SOP tracking and compliance visibility</li>
+            <li>Food safety record infrastructure</li>
+            <li>Data collection systems that reduce workload and improve management visibility</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- BACKGROUND -->
+    <div>
+      <div class="section-label">Background &amp; Experience</div>
+      <div class="credential">
+        <p>I've spent over a decade in the CEA industry at Vertical Harvest. I started this part of my career inside their small-scale multi-crop facility in Jackson, Wyoming — first as a founding board member and general business consultant, then joining the company full-time in 2016 as a key executive alongside the co-founders.</p>
+        <p>Like leaders in most startups, I held many roles over time. As CFO I provided financial leadership and gained a deep understanding of the critical cost drivers and unit economics of the business. As Director of Farm Systems I served as technical systems lead, where I led the re-think, re-design, and upgrade of existing operational and growing systems.</p>
+        <p>In my final role as Chief of Farm Systems, I served as the operator-side systems lead for the design and build-out of their large-scale automated facility in Maine — one of the more highly automated CEA facilities built in North America, designed for space and labor efficiency. I coordinated expert vendor and internal teams across every major discipline. I was responsible for all final equipment and software purchase selections, and had design oversight for how all the pieces fit together operationally. Throughout, I built and applied production economics models for the live operation to understand and project unit costs, yield prediction, process flow analysis, and projection-to-actual tracking.</p>
+        <p><strong>VerdantTech Solutions is the independent consulting practice built on that background.</strong></p>
+      </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div>
+      <div class="section-label">How It Works</div>
+      <div class="credential">
+        <p>I'll want to start with a conversation to understand where your operation is and what's getting in the way — and we'll both decide from there whether what I do is a good fit for what you need. If it is, we'll figure out the right scope and fee structure together: a fixed fee with a clear deliverable, a retainer agreement for support through a scale-up or systems transition, or an hourly arrangement for ongoing advisory.</p>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- CTA -->
+  <div class="cta-block footer-push">
+    <p class="cta-statement">The right starting point is a conversation about where the friction is in your operation or plans for scaling.</p>
+    <span class="callout-cta">Let's Talk</span>
+  </div>
+
+  <div class="footer">
+    <div class="contact-row">
+      <div class="contact-item">
+        <span class="clabel">Email</span>
+        <span class="cval">arik@verdant.biz</span>
+      </div>
+      <div class="contact-item">
+        <span class="clabel">Phone</span>
+        <span class="cval">(307) 413-4104</span>
+      </div>
+      <div class="contact-item">
+        <span class="clabel">Web</span>
+        <span class="cval">verdant.biz</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page 2 -->
+
+</body>
+</html>
