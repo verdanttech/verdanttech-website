@@ -201,9 +201,9 @@
   /* ── PHASE LABEL ── */
   .phase-label {
     font-family: 'Montserrat', sans-serif;
-    font-size: 7.5px;
-    font-weight: 600;
-    letter-spacing: 0.18em;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--sage-mid);
     margin-bottom: 10px;
@@ -309,12 +309,10 @@
     font-weight: 700;
   }
 
-  /* Full-width card uses 2-col interior layout */
+  /* Full-width card uses single-column interior layout */
   .service-card.full-width .card-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 28px;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
   }
 
   .service-card .statement {
@@ -336,7 +334,6 @@
   .phase-group {
     display: flex;
     flex-direction: column;
-    gap: 10px;
   }
 
   /* ── CTA BLOCK ── */
@@ -493,9 +490,9 @@
 
   <!-- LEAD -->
   <div class="lead">
-    <p>CEA operations are complex enough that standard due diligence doesn't always surface the right questions. The numbers in the model were arrived at with the best information available at the time, but still not reflect how the facility will actually perform at production scale.</p>
+    <p>CEA operations are complex enough that standard due diligence doesn't always surface the right questions. The numbers in the model were arrived at with the best information available at the time, but still don't reflect how the facility will actually perform at production scale.</p>
     <p>CEA pro formas follow predictable patterns: yield assumptions that don't account for ramp period, energy models that underestimate consumption at production density, labor cost structures built on efficiency curves that take years to develop. These aren't unusual errors; they're structural features of how facilities get modeled before they operate. Capital gets committed against projections built on assumed inputs, and the gap between projection and performance compounds silently until it becomes a capital problem.</p>
-    <p>Performing due diligence on how well a projection model will perform during ramp and at production capacity requires someone with scale up experience.</p>
+    <p>Performing due diligence on how well a projection model will perform during the ramp up period and at full production capacity requires someone with scale up experience.</p>
     <p style="margin-top: 10px; text-align: center;"><strong>My job is to tell you what the model is actually assuming, and whether those assumptions are defensible.</strong></p>
   </div>
 
@@ -528,7 +525,7 @@
           <h3>Technology &amp; Integration</h3>
           <ul>
             <li>System selection assumptions</li>
-            <li>Production/financial sensitivity</li>
+            <li>Production constraints analysis</li>
             <li>Operational integration plans</li>
           </ul>
         </div>
@@ -540,9 +537,11 @@
     <div>
       <div class="section-label">Where I Can Help</div>
 
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+
       <!-- Pre-Investment -->
       <div class="phase-group">
-        <div class="phase-label">Pre-Investment Analysis &nbsp;·&nbsp; For investors and lenders evaluating a CEA opportunity before capital is committed</div>
+        <div class="phase-label">Pre-Investment Analysis &nbsp;·&nbsp; For investors evaluating a CEA opportunity before capital is committed</div>
         <div class="service-grid">
 
           <div class="service-card">
@@ -557,7 +556,7 @@
 
           <div class="service-card">
             <h3>Feasibility &amp; Pre-Development Review</h3>
-            <p class="statement">For facilities still in design: does the proposed system actually produce the economics the model projects?</p>
+            <p class="statement">For facilities still in design: can the proposed system actually produce what the model projects?</p>
             <ul>
               <li>Crop fit</li>
               <li>Scale evaluation</li>
@@ -569,8 +568,8 @@
       </div>
 
       <!-- Post-Investment -->
-      <div class="phase-group" style="margin-top: 10px;">
-        <div class="phase-label">Post-Investment / Active Asset Management &nbsp;·&nbsp; For investors and lenders managing a facility already in operation</div>
+      <div class="phase-group">
+        <div class="phase-label">Post-Investment / Active Asset Management &nbsp;·&nbsp; For investors in a facility already in operation</div>
         <div class="service-grid">
 
           <div class="service-card">
@@ -595,6 +594,8 @@
 
         </div>
       </div>
+
+      </div><!-- /phase-groups wrapper -->
 
     </div>
 
@@ -629,12 +630,12 @@
 
     <!-- BOTH PHASES -->
     <div>
-      <div class="section-label">Both Phases</div>
+      <div class="phase-label">Both Phases</div>
       <div class="service-grid">
         <div class="service-card full-width">
           <h3>Technology &amp; Systems Review</h3>
           <div class="card-inner">
-            <p class="statement" style="margin-bottom:0; font-size:12px; line-height:1.55;">I'll provide an evaluation of the facility's technology stack. This is relevant whether the facility is in design or already operating.</p>
+            <p class="statement">I'll provide an evaluation of the facility's technology stack, whether the facility is in design or already operating.</p>
             <ul>
               <li>Growing systems, climate &amp; irrigation, harvest and packaging technology</li>
               <li>Food safety management, data collection, and general automation</li>
@@ -652,15 +653,14 @@
         <p>I've spent over a decade in the CEA industry at Vertical Harvest. I started this part of my career inside their small-scale multi-crop facility in Jackson, Wyoming — first as a founding board member and general business consultant, then joining the company full-time in 2016 as a key executive alongside the co-founders.</p>
         <p>Like leaders in most startups, I held many roles over time. As CFO I provided financial leadership and gained a deep understanding of the critical cost drivers and unit economics of the business. As Director of Farm Systems I served as technical systems lead, where I led the re-think, re-design, and upgrade of existing operational and growing systems.</p>
         <p>In my final role as Chief of Farm Systems, I served as the operator-side systems lead for the design and build-out of their large-scale automated facility in Maine — one of the more highly automated CEA facilities built in North America, designed for space and labor efficiency. I coordinated expert vendor and internal teams across every major discipline. I was responsible for all final equipment and software purchase selections, and had design oversight for how all the pieces fit together operationally. Throughout, I built and applied production economics models for the live operation to understand and project unit costs, yield prediction, process flow analysis, and projection-to-actual tracking.</p>
-        <p><strong>VerdantTech Solutions is the independent consulting practice built on that background.</strong></p>
-      </div>
+<p style="text-align: center;"><strong>VerdantTech Solutions is the independent consulting practice built on that background.</strong></p>      </div>
     </div>
 
     <!-- SCOPE AND ENGAGEMENT -->
     <div>
       <div class="section-label">Scope and Engagement</div>
       <div class="credential">
-        <p>My engagement scope is the operational and unit economics picture — sales strategy, pricing, and market development are outside it. Operational improvement work is a separate engagement, but one I can take on directly. For investors who want operational support built in as a condition of the investment, that structure is available.</p>
+        <p>My specialty is the operational and unit economics picture — sales strategy, pricing, and market development are outside my scope. Operational improvement work is a separate engagement, but one I can take on directly. For investors who want operational support built in as a condition of the investment, that structure is available.</p>
         <p>I will disclose all existing vendor and operator relationships to make sure any conflicts of interest are clear before any engagement begins.</p>
       </div>
     </div>
@@ -669,7 +669,7 @@
 
   <!-- CTA -->
   <div class="cta-block footer-push">
-    <p class="cta-statement" style="font-size:15px;">If you're evaluating a CEA opportunity and want an operator-side read on the assumptions — the right next step is a conversation.</p>
+    <p class="cta-statement" style="font-size:15px; max-width:420px;">The right starting point is a conversation about where the operational picture is unclear.</p>
     <span class="callout-cta">Let's Talk</span>
   </div>
 
