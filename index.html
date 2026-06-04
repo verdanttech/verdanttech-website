@@ -9,6 +9,20 @@
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     <link rel="alternate icon" type="image/png" href="assets/favicon.svg">
     <link rel="canonical" href="https://verdanttechsolutions.com">
+
+    <!-- Open Graph / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://verdanttechsolutions.com">
+    <meta property="og:site_name" content="VerdantTech Solutions">
+    <meta property="og:title" content="VerdantTech Solutions — CEA Operations Consulting">
+    <meta property="og:description" content="CEA operations consulting from a real operator. Arik Griffin helps operators, equipment vendors, and investors navigate the operational and economic challenges of scaling controlled environment agriculture.">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="VerdantTech Solutions — CEA Operations Consulting">
+    <meta name="twitter:description" content="CEA operations consulting from a real operator. Arik Griffin helps operators, equipment vendors, and investors navigate the operational and economic challenges of scaling controlled environment agriculture.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!-- Google Analytics -->
@@ -128,6 +142,7 @@
         .d4 { animation-delay: 0.46s; }
         .d5 { animation-delay: 0.60s; }
         .d6 { animation-delay: 0.74s; }
+        .d7 { animation-delay: 0.88s; }
 
         [data-anim] {
             opacity: 0;
@@ -207,6 +222,7 @@
         ============================================================ */
         .section {
             padding: 100px 40px;
+            scroll-margin-top: 64px;
         }
         .about {
             padding-bottom: 64px;
@@ -217,7 +233,7 @@
         }
         .section-label {
             font-family: var(--font-body);
-            font-size: 0.6875rem;
+            font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.14em;
             text-transform: uppercase;
@@ -251,7 +267,7 @@
         }
         .hero-eyebrow {
             font-family: var(--font-body);
-            font-size: 0.6875rem;
+            font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.14em;
             text-transform: uppercase;
@@ -297,13 +313,6 @@
         .hero-cta-link:hover {
             background: var(--sage-mid);
         }
-        .hero-logo-large {
-            display: block;
-            width: 520px;
-            max-width: 90%;
-            margin: 0 auto 32px auto;
-        }
-
         /* Right — dark panel */
         .hero-panel {
             position: relative;
@@ -311,10 +320,6 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-        }
-        .hero-panel-bg {
-            background-color: #213A26;
-            height: 0;
         }
         .hero-rack-overlay {
             position: absolute;
@@ -351,81 +356,6 @@
             justify-content: flex-start;
         }
 
-        /* Credential timeline */
-        .hero-timeline {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            padding: 60px 48px 24px;
-        }
-        .hero-timeline-label {
-            font-family: var(--font-body);
-            font-size: 0.625rem;
-            font-weight: 500;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--sage-light);
-            opacity: 0.65;
-            margin-bottom: 24px;
-        }
-        .timeline-item {
-            display: flex;
-            gap: 18px;
-            position: relative;
-        }
-        .timeline-item + .timeline-item {
-            margin-top: 0;
-        }
-        .timeline-track {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex-shrink: 0;
-            width: 14px;
-        }
-        .timeline-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: #A9C89A;
-            flex-shrink: 0;
-            margin-top: 5px;
-        }
-        .timeline-line {
-            width: 1px;
-            flex: 1;
-            background: rgba(169, 200, 154, 0.25);
-            min-height: 20px;
-        }
-        .timeline-item:last-child .timeline-line {
-            display: none;
-        }
-        .timeline-content {
-            padding-bottom: 24px;
-        }
-        .timeline-item:last-child .timeline-content {
-            padding-bottom: 0;
-        }
-        .timeline-text {
-            font-family: var(--font-body);
-            font-size: 0.8125rem;
-            font-weight: 300;
-            color: #D4E8CC !important;
-            line-height: 1.55;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
-        }
-        .timeline-text strong {
-            font-weight: 500;
-            color: #FFFFFF !important;
-            display: block;
-            margin-bottom: 2px;
-            font-size: 0.875rem;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
-        }
-
-
         /* Hero problem list */
         .hero-problem-list {
             position: relative;
@@ -452,7 +382,6 @@
             margin-top: 6px;
             flex-shrink: 0;
         }
-        .problem-body {}
         .problem-label {
             font-family: 'Montserrat', sans-serif;
             font-size: 13px;
@@ -519,6 +448,7 @@
         .audiences {
             background: #213A26;
             padding: 100px 40px;
+            scroll-margin-top: 64px;
         }
         .audiences-inner {
             max-width: 1200px;
@@ -567,26 +497,6 @@
             grid-template-rows: subgrid;
             grid-row: span 5;
             flex: 1;
-        }
-        .audience-num {
-            font-family: var(--font-body);
-            font-size: 0.625rem;
-            font-weight: 500;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            color: var(--sage-light);
-            margin-bottom: 18px;
-        }
-        .audience-title {
-            font-family: var(--font-display);
-            font-size: 1.3125rem;
-            font-weight: 500;
-            color: #F3F6F2;
-            line-height: 1.25;
-            margin-bottom: 14px;
-        }
-        .audience-card-compact h3 {
-            color: rgba(232, 237, 229, 0.5);
         }
         .audience-problem {
             font-size: 0.875rem;
@@ -644,7 +554,7 @@
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--sage-light);
-            padding: 0;
+            padding: 10px 0;
             transition: color 0.2s;
         }
         .learn-more-btn:hover {
@@ -660,17 +570,6 @@
             transform: rotate(180deg);
         }
 
-        /* Expanded detail panel */
-        .audience-expanded {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.45s ease;
-            background: rgba(255,255,255,0.03);
-            border-top: 1px solid rgba(232, 237, 229, 0.06);
-        }
-        .audience-card.open .audience-expanded {
-            max-height: 2400px;
-        }
         .audience-expanded-inner {
             padding: 36px 36px 44px;
         }
@@ -682,7 +581,7 @@
         }
         .expanded-phase {
             font-family: var(--font-body);
-            font-size: 0.625rem;
+            font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.14em;
             text-transform: uppercase;
@@ -715,27 +614,14 @@
             margin-top: auto;
         }
 
-        /* Pill+card column wrappers (audiences section) */
+        /* Card column wrapper (audiences section) */
         .audience-col {
             display: grid;
             grid-template-rows: subgrid;
             grid-row: span 5;
         }
-        .audience-pill {
-            background: rgba(20,36,23,0.5);
-            border-radius: 9999px;
-            padding: 0.5rem 1.5rem;
-            text-align: center;
-            font-size: 0.8125rem;
-            font-weight: 300;
-            color: rgba(232,237,229,0.65);
-            line-height: 1.5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
 
-        /* About section tiles grid with pills */
+        /* About section tiles grid */
         .about-tiles-grid {
             display: flex;
             flex-direction: row;
@@ -748,19 +634,37 @@
             flex-direction: column;
             gap: 12px;
             align-self: stretch;
+            flex: 1;
         }
-        .about-tile-pill {
-            background: var(--ink);
-            border-radius: 9999px;
-            padding: 0.5rem 1.5rem;
-            text-align: center;
-            font-size: 0.8125rem;
+        .about-tile-card {
+            background: #EDF2EB;
+            border-top: 3px solid var(--sage);
+            padding: 32px 28px;
+            flex: 1;
+        }
+        .about-tile-label {
+            display: block;
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage);
+            margin-bottom: 14px;
+        }
+        .about-tile-heading {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        .about-tile-body {
+            font-size: 0.875rem;
             font-weight: 300;
-            color: rgba(232,237,229,0.75);
-            line-height: 1.5;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: rgba(20, 36, 23, 0.7);
+            line-height: 1.75;
         }
 
         /* ============================================================
@@ -768,51 +672,6 @@
         ============================================================ */
         .about {
             border-top: 1px solid var(--rule);
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 88px;
-            align-items: start;
-        }
-        .about-text h2 {
-            font-family: var(--font-display);
-            font-size: clamp(1.75rem, 2.8vw, 2.375rem);
-            font-weight: 500;
-            color: var(--ink);
-            margin-bottom: 28px;
-        }
-        .about-text p {
-            font-size: 0.9375rem;
-            font-weight: 300;
-            color: rgba(20, 36, 23, 0.7);
-            line-height: 1.8;
-            margin-bottom: 18px;
-        }
-        .about-text p:last-child {
-            margin-bottom: 0;
-        }
-        .about-disclosure {
-            margin-top: 28px;
-            padding: 22px 24px;
-            background: #EDF2EB;
-            border-left: 3px solid var(--sage);
-        }
-        .about-disclosure p {
-            font-family: var(--font-display);
-            font-size: 0.875rem;
-            color: rgba(20, 36, 23, 0.65);
-            line-height: 1.65;
-            margin-bottom: 0;
-        }
-        .about-creds h3 {
-            font-family: var(--font-body);
-            font-size: 0.6875rem;
-            font-weight: 500;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--sage);
-            margin-bottom: 20px;
         }
         .creds-list {
             list-style: none;
@@ -888,7 +747,7 @@
         }
         .form-field label {
             font-family: var(--font-body);
-            font-size: 0.6875rem;
+            font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.1em;
             text-transform: uppercase;
@@ -942,6 +801,11 @@
         .form-submit:hover {
             background: #ffffff;
         }
+        .form-field input.field-error,
+        .form-field textarea.field-error {
+            border-color: rgba(220, 100, 80, 0.7);
+            background: rgba(220, 100, 80, 0.06);
+        }
 
         /* ============================================================
            FOOTER
@@ -968,6 +832,90 @@
             font-weight: 300;
             color: rgba(232, 237, 229, 0.3);
         }
+        /* Hero inline style classes */
+        .hero-eyebrow-name {
+            font-weight: 700;
+        }
+        .hero-headline-em {
+            font-style: normal;
+            color: var(--sage);
+        }
+        .hero-cta-pulse {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 600;
+            color: var(--sage);
+            letter-spacing: 0.04em;
+            display: block;
+            margin-top: 16px;
+        }
+        .hero-subhead-emphasis {
+            font-weight: 500;
+            color: rgba(20, 36, 23, 0.85);
+        }
+        .hero-panel-heading {
+            padding: 32px 48px 0;
+            position: relative;
+            z-index: 3;
+        }
+        .hero-panel-heading p {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #F3F6F2;
+            margin-bottom: 24px;
+        }
+
+        /* Audience card label */
+        .audience-card-label {
+            font-family: var(--font-display);
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage-light);
+            display: block;
+            margin-bottom: 18px;
+        }
+        .audience-card-need {
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: rgba(243, 246, 242, 0.85);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            padding-top: 24px;
+        }
+
+        /* About section headings */
+        .about-section-heading {
+            font-family: var(--font-display);
+            font-size: clamp(1.75rem, 2.8vw, 2.375rem);
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        .about-section-intro {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(20, 36, 23, 0.7);
+            line-height: 1.6;
+            margin-bottom: 48px;
+        }
+
+        .footer-linkedin {
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: rgba(232, 237, 229, 0.4);
+            letter-spacing: 0.04em;
+            transition: color 0.2s;
+        }
+        .footer-linkedin:hover {
+            color: rgba(232, 237, 229, 0.75);
+        }
 
         /* ============================================================
            RESPONSIVE — TABLET (≤1024px)
@@ -984,14 +932,6 @@
             }
             .audiences-grid .audience-col:last-child {
                 grid-column: 1 / -1;
-            }
-            .audiences-grid .audience-col:last-child .audience-pill {
-                max-width: 560px;
-                margin: 0 auto;
-            }
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 56px;
             }
         }
         @media (max-width: 1024px) and (min-width: 769px) {
@@ -1024,9 +964,6 @@
             .hero-panel {
                 min-height: 520px;
                 overflow: hidden;
-            }
-            .hero-timeline {
-                padding: 44px 24px 24px;
             }
             .hero-rack-overlay {
                 bottom: 80px;
@@ -1079,14 +1016,32 @@
         }
 
         /* ============================================================
+           REDUCED MOTION
+        ============================================================ */
+        @media (prefers-reduced-motion: reduce) {
+            .pulse {
+                animation: none;
+            }
+            .hero-anim,
+            .hero-anim-down,
+            .hero-anim-in {
+                opacity: 1;
+                transform: none;
+                animation: none;
+            }
+            [data-anim] {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+        }
+
+        /* ============================================================
            RESPONSIVE — SMALL MOBILE (≤480px)
         ============================================================ */
         @media (max-width: 480px) {
             .hero-left {
                 padding: 52px 20px 48px;
-            }
-            .hero-timeline {
-                padding: 36px 20px 20px;
             }
             .audience-card-compact {
                 padding: 36px 24px 28px;
@@ -1096,9 +1051,6 @@
             }
             .audience-expanded-inner {
                 padding: 28px 24px 36px;
-            }
-            .about-grid {
-                gap: 44px;
             }
         }
 
@@ -1112,7 +1064,7 @@
         }
         .onepager-label {
             font-family: var(--font-body);
-            font-size: 0.6875rem;
+            font-size: 0.75rem;
             font-weight: 500;
             letter-spacing: 0.14em;
             text-transform: uppercase;
@@ -1141,7 +1093,7 @@
             border-color: var(--sage-light);
         }
         .onepager-btn-download {
-            background: var(--forest);
+            background: var(--dark-panel);
             color: var(--sage-light);
             border: 1px solid transparent;
         }
@@ -1161,7 +1113,7 @@
     ================================================================ -->
     <nav class="nav hero-anim-down d1" id="nav">
         <div class="nav-inner">
-            <a href="#" class="nav-logo">
+            <a href="/" class="nav-logo">
                 <img src="assets/mark-clean.svg" alt="" class="nav-mark" height="32">
                 <span class="nav-wordmark">VERDANTTECH</span>
             </a>
@@ -1176,20 +1128,18 @@
         <div class="hero-grid">
 
             <div class="hero-left">
-                <img src="assets/logo-primary.svg" alt="VerdantTech Solutions" class="hero-logo-large hero-anim d1">
-                <p class="hero-eyebrow hero-anim d2" style="font-weight:700;">Arik Griffin, Principal</p>
-                <h1 class="hero-headline hero-anim d3">
-                    Scaling a CEA operation is complicated. <em style="font-style:normal; color:#416843;">Getting it wrong is expensive.</em>
-                    <span class="pulse" style="font-family:var(--font-display);font-size:clamp(1.75rem,3vw,2.5rem);font-weight:600;color:#416843;letter-spacing:0.04em;display:block;margin-top:16px">I can help.</span>
+                <p class="hero-eyebrow hero-eyebrow-name hero-anim d1">Arik Griffin, Principal</p>
+                <h1 class="hero-headline hero-anim d2">
+                    Scaling a CEA operation is complicated. <em class="hero-headline-em">Getting it wrong is expensive.</em>
+                    <span class="pulse hero-cta-pulse">I can help.</span>
                 </h1>
-                <p class="hero-subhead hero-anim d4">
-                    The pitfalls and opportunities that come with scaling a Controlled Environment Agriculture (CEA) operation aren't always visible until you've been through it. The unit economics, the equipment integrations, and the capital decisions behind the build are all challenging changes. <strong style="font-weight:500; color:rgba(20,36,23,0.85);">OPERATORS, VENDORS, and INVESTORS each encounter a different version of those challenges.</strong> I have a decade of operator-side experience, from financial leadership through full-facility build-out at scale, and can speak to all three.
+                <p class="hero-subhead hero-anim d3">
+                    The pitfalls and opportunities that come with scaling a Controlled Environment Agriculture (CEA) operation aren't always visible until you've been through it. The unit economics, the equipment integrations, and the capital decisions behind the build are all challenging changes. <strong class="hero-subhead-emphasis">OPERATORS, VENDORS, and INVESTORS each encounter a different version of those challenges.</strong> I have a decade of operator-side experience, from financial leadership through full-facility build-out at scale, and can speak to all three.
                 </p>
-                <a href="#contact" class="hero-cta-link hero-anim d5" onclick="gtag('event', 'cta_click', { location: 'hero' })">Let's have a conversation</a>
+                <a href="#contact" class="hero-cta-link hero-anim d4" onclick="gtag('event', 'cta_click', { location: 'hero' })">Let's have a conversation</a>
             </div>
 
             <div class="hero-panel hero-anim-in d2">
-                <div class="hero-panel-bg"></div>
                 <div class="hero-rack-overlay">
                   <img src="assets/grow-rack-overlay.svg" alt="" class="hero-rack-img" aria-hidden="true">
                 </div>
@@ -1199,8 +1149,8 @@
                 <div style="position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(to top,rgba(20,36,23,0.7) 0%,rgba(20,36,23,0.7) 30%,transparent 50%)" aria-hidden="true"></div>
                 <div class="hero-panel-content">
 
-                    <div style="padding: 32px 48px 0px; position: relative; z-index: 3;">
-                        <p style="font-family: 'Montserrat', sans-serif; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #F3F6F2; margin-bottom: 24px;">Where I usually start looking</p>
+                    <div class="hero-panel-heading">
+                        <p>Where I usually start looking</p>
                     </div>
 
                     <div class="hero-problem-list">
@@ -1296,9 +1246,9 @@
                 <div class="audience-col">
                 <div class="audience-card" data-anim data-anim-delay="1" id="card-operators">
                     <div class="audience-card-compact">
-                        <span style="font-family:'Montserrat',sans-serif;font-size:0.875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage-light);display:block;margin-bottom:18px">Operators</span>
+                        <span class="audience-card-label">Operators</span>
                         <p class="audience-problem">The gap between where your operation is and where it needs to be — on costs, yield, and quality — is real, but where it's coming from isn't always obvious. Scaling up introduces decisions about systems, equipment, and operational models you may not have encountered before.</p>
-                        <p style="font-size:0.8125rem;font-weight:500;color:rgba(243,246,242,0.85);line-height:1.6;margin-bottom:16px;padding-top:24px;">You need clarity.</p>
+                        <p class="audience-card-need">You need clarity.</p>
                         <ul class="audience-bullets">
                             <li>A diagnosis, not another hypothesis about where margin is going</li>
                             <li>A cost model that reflects what the operation actually does — not what was projected at build</li>
@@ -1318,9 +1268,9 @@
                 <div class="audience-col">
                 <div class="audience-card" data-anim data-anim-delay="2" id="card-vendors">
                     <div class="audience-card-compact">
-                        <span style="font-family:'Montserrat',sans-serif;font-size:0.875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage-light);display:block;margin-bottom:18px">Vendors</span>
+                        <span class="audience-card-label">Vendors</span>
                         <p class="audience-problem">By the time equipment arrives on site, gaps between the operator's planning assumptions and the reality of implementation are already baked in. The downstream costs — delays, change orders, support burdens — fall on the vendor as much as the operator.</p>
-                        <p style="font-size:0.8125rem;font-weight:500;color:rgba(243,246,242,0.85);line-height:1.6;margin-bottom:16px;padding-top:24px;">You need to get it right for your customer.</p>
+                        <p class="audience-card-need">You need to get it right for your customer.</p>
                         <ul class="audience-bullets">
                             <li>A customer who arrives at integration knowing what their operation actually requires — before the installation begins</li>
                             <li>A pre-sales conversation that demonstrates operational depth your competitors can't match</li>
@@ -1339,9 +1289,9 @@
                 <div class="audience-col">
                 <div class="audience-card" data-anim data-anim-delay="3" id="card-investors">
                     <div class="audience-card-compact">
-                        <span style="font-family:'Montserrat',sans-serif;font-size:0.875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage-light);display:block;margin-bottom:18px">Investors</span>
+                        <span class="audience-card-label">Investors</span>
                         <p class="audience-problem">CEA operations are complex enough that standard due diligence doesn't always surface the right questions. The numbers in the model may be honest — and still not reflect what the facility will actually do at production scale.</p>
-                        <p style="font-size:0.8125rem;font-weight:500;color:rgba(243,246,242,0.85);line-height:1.6;margin-bottom:16px;padding-top:24px;">You want an independent read.</p>
+                        <p class="audience-card-need">You want an independent read.</p>
                         <ul class="audience-bullets">
                             <li>A clear view of which pro forma assumptions are defensible and which ones the facility will struggle to meet — before capital is committed</li>
                             <li>An operational assessment built around your interests</li>
@@ -1498,32 +1448,32 @@
     <div class="section-inner">
 
         <span class="section-label" data-anim>MY EXPERIENCE</span>
-        <h2 style="font-family:var(--font-display);font-size:clamp(1.75rem,2.8vw,2.375rem);font-weight:500;color:var(--ink);margin-bottom:24px;line-height:1.2" data-anim data-anim-delay="1">A decade inside CEA, from startup to large-scale automated facility.</h2>
-        <p style="font-family:var(--font-body);font-size:1rem;font-weight:300;color:rgba(20,36,23,0.7);line-height:1.6;margin-bottom:48px" data-anim data-anim-delay="2">Time inside the industry changed what I notice and what I know is important to ask.</p>
+        <h2 class="about-section-heading" data-anim data-anim-delay="1">A decade inside CEA, from startup to large-scale automated facility.</h2>
+        <p class="about-section-intro" data-anim data-anim-delay="2">Time inside the industry changed what I notice and what I know is important to ask.</p>
 
         <div class="about-tiles-grid">
 
             <div class="about-tile-col" data-anim data-anim-delay="1">
-                <div style="background:#EDF2EB;border-top:3px solid var(--sage);padding:32px 28px;flex:1">
-                    <span style="display:block;font-family:’Montserrat’,sans-serif;font-size:0.875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:14px">OPERATORS</span>
-                    <h3 style="font-family:var(--font-display);font-size:1.125rem;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.3">I've been in your position.</h3>
-                    <p style="font-size:0.875rem;font-weight:300;color:rgba(20,36,23,0.7);line-height:1.75">I started inside a small working operation and learned what pitfalls and opportunities are there financially, mechanically, and operationally both when you start out and when you scale.</p>
+                <div class="about-tile-card">
+                    <span class="about-tile-label">OPERATORS</span>
+                    <h3 class="about-tile-heading">I’ve been in your position.</h3>
+                    <p class="about-tile-body">I started inside a small working operation and learned what pitfalls and opportunities are there financially, mechanically, and operationally both when you start out and when you scale.</p>
                 </div>
             </div>
 
             <div class="about-tile-col" data-anim data-anim-delay="2">
-                <div style="background:#EDF2EB;border-top:3px solid var(--sage);padding:32px 28px;flex:1">
-                    <span style="display:block;font-family:’Montserrat’,sans-serif;font-size:0.875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:14px">VENDORS</span>
-                    <h3 style="font-family:var(--font-display);font-size:1.125rem;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.3">I've led the teams that built it.</h3>
-                    <p style="font-size:0.875rem;font-weight:300;color:rgba(20,36,23,0.7);line-height:1.75">I coordinated 14 vendor and internal teams of a large-scale automated facility build. I understand what operators need both up and downstream of your part of the picture.</p>
+                <div class="about-tile-card">
+                    <span class="about-tile-label">VENDORS</span>
+                    <h3 class="about-tile-heading">I’ve led the teams that built it.</h3>
+                    <p class="about-tile-body">I coordinated 14 vendor and internal teams of a large-scale automated facility build. I understand what operators need both up and downstream of your part of the picture.</p>
                 </div>
             </div>
 
             <div class="about-tile-col" data-anim data-anim-delay="3">
-                <div style="background:#EDF2EB;border-top:3px solid var(--sage);padding:32px 28px;flex:1">
-                    <span style="display:block;font-family:’Montserrat’,sans-serif;font-size:0.875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage);margin-bottom:14px">INVESTORS</span>
-                    <h3 style="font-family:var(--font-display);font-size:1.125rem;font-weight:500;color:var(--ink);margin-bottom:12px;line-height:1.3">I know what realistic looks like.</h3>
-                    <p style="font-size:0.875rem;font-weight:300;color:rgba(20,36,23,0.7);line-height:1.75">The models I built weren't theoretical — they were built against a live operation and updated as the facility ran. I know what the numbers look like when they're grounded in reality, and when they aren't.</p>
+                <div class="about-tile-card">
+                    <span class="about-tile-label">INVESTORS</span>
+                    <h3 class="about-tile-heading">I know what realistic looks like.</h3>
+                    <p class="about-tile-body">The models I built weren’t theoretical — they were built against a live operation and updated as the facility ran. I know what the numbers look like when they’re grounded in reality, and when they aren’t.</p>
                 </div>
             </div>
 
@@ -1571,44 +1521,16 @@
     <section class="audiences" id="engagement">
         <div class="audiences-inner">
 
-            <div class="audiences-header">
+            <div class="audiences-header" style="margin-bottom: 0;">
                 <span class="section-label" data-anim>HOW I’LL WORK WITH YOU</span>
-                <h2 data-anim data-anim-delay="1">I work for your outcome.</h2>
-                <p data-anim data-anim-delay="2">In all cases I will always disclose any conflicts of interest upfront.</p>
+                <h2 data-anim data-anim-delay="1">The engagement is built around what you’re trying to accomplish.</h2>
             </div>
 
-            <div class="audiences-grid">
-
-                <div class="audience-col">
-                    <div class="audience-card" data-anim data-anim-delay="1">
-                        <div class="audience-card-compact">
-                            <span style="font-family:’Montserrat’,sans-serif;font-size:0.875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage-light);display:block;margin-bottom:14px">OPERATORS</span>
-                            <h3 style="font-family:var(--font-display);font-size:1.125rem;font-weight:500;color:#F3F6F2;margin-bottom:12px;line-height:1.3">I love solving problems.</h3>
-                            <p style="font-size:0.875rem;font-weight:300;color:rgba(232,237,229,0.7);line-height:1.75">I’ll work with you directly to get you where you want to be. Your goal is mine.</p>
-                        </div>
-                    </div>
+            <div style="max-width: 760px; margin-top: 40px;" data-anim data-anim-delay="2">
+                <p style="font-size: 0.9375rem; font-weight: 300; color: rgba(232, 237, 229, 0.75); line-height: 1.8; margin-bottom: 32px;">Whether you’re running an operation, selling into one, or evaluating one as a capital investment, my work starts with understanding what you actually need — not fitting you into a predefined scope. I’m direct when the answer is inconvenient, and honest when there isn’t a fit.</p>
+                <div style="border-left: 3px solid var(--sage-light); padding: 20px 24px; background: rgba(255,255,255,0.04);">
+                    <p style="font-family: var(--font-display); font-size: 0.875rem; color: rgba(232, 237, 229, 0.7); line-height: 1.65; margin: 0;">Vendor and operator relationships exist in this industry. Any that are relevant to your engagement will be disclosed before work begins, so you can assess independence for yourself.</p>
                 </div>
-
-                <div class="audience-col">
-                    <div class="audience-card" data-anim data-anim-delay="2">
-                        <div class="audience-card-compact">
-                            <span style="font-family:’Montserrat’,sans-serif;font-size:0.875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage-light);display:block;margin-bottom:14px">VENDORS</span>
-                            <h3 style="font-family:var(--font-display);font-size:1.125rem;font-weight:500;color:#F3F6F2;margin-bottom:12px;line-height:1.3">I’m the CEA expert on your team.</h3>
-                            <p style="font-size:0.875rem;font-weight:300;color:rgba(232,237,229,0.7);line-height:1.75">My job is to bridge the gap between what you provide and what the operator needs it to do.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="audience-col">
-                    <div class="audience-card" data-anim data-anim-delay="3">
-                        <div class="audience-card-compact">
-                            <span style="font-family:’Montserrat’,sans-serif;font-size:0.875rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--sage-light);display:block;margin-bottom:14px">INVESTORS</span>
-                            <h3 style="font-family:var(--font-display);font-size:1.125rem;font-weight:500;color:#F3F6F2;margin-bottom:12px;line-height:1.3">The truth is my priority.</h3>
-                            <p style="font-size:0.875rem;font-weight:300;color:rgba(232,237,229,0.7);line-height:1.75">I’ll provide an independent operational read on the facility and the economics.</p>
-                        </div>
-                    </div>
-                </div>
-
             </div>
 
         </div>
@@ -1638,11 +1560,9 @@
                         <input type="email" id="f-email" name="email" placeholder="Your email address" required>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-field">
-                        <label for="f-company">Company <span style="opacity:0.5; font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
-                        <input type="text" id="f-company" name="company" placeholder="Organization or fund">
-                    </div>
+                <div class="form-field">
+                    <label for="f-company">Company <span style="opacity:0.5; font-weight:300; text-transform:none; letter-spacing:0;">(optional)</span></label>
+                    <input type="text" id="f-company" name="company" placeholder="Organization or fund">
                 </div>
                 <div class="form-field">
                     <label for="f-message">What you're working on</label>
@@ -1660,6 +1580,7 @@
     <footer class="footer">
         <div class="footer-inner">
             <span class="footer-logo">VerdantTech Solutions</span>
+            <a href="https://www.linkedin.com/in/arikgriffin/" class="footer-linkedin" target="_blank" rel="noopener">LinkedIn</a>
             <span class="footer-copy">&copy; 2026 VerdantTech Solutions | verdanttechsolutions.com</span>
         </div>
     </footer>
@@ -1722,6 +1643,13 @@
             }
         }
 
+        // Clear field errors on input
+        ['f-name', 'f-email', 'f-message'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                this.classList.remove('field-error');
+            });
+        });
+
         // Contact form — web3forms
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -1729,15 +1657,19 @@
             const btn    = document.getElementById('form-submit-btn');
             const status = document.getElementById('form-status');
 
-            const name    = document.getElementById('f-name').value.trim();
-            const email   = document.getElementById('f-email').value.trim();
-            const message = document.getElementById('f-message').value.trim();
+            const nameEl    = document.getElementById('f-name');
+            const emailEl   = document.getElementById('f-email');
+            const messageEl = document.getElementById('f-message');
+            const name    = nameEl.value.trim();
+            const email   = emailEl.value.trim();
+            const message = messageEl.value.trim();
+
+            [nameEl, emailEl, messageEl].forEach(el => el.classList.remove('field-error'));
 
             if (!name || !email || !message) {
-                const missing = !name ? document.getElementById('f-name')
-                              : !email ? document.getElementById('f-email')
-                              : document.getElementById('f-message');
-                missing.focus();
+                if (!name)    { nameEl.classList.add('field-error');    nameEl.focus(); }
+                else if (!email)   { emailEl.classList.add('field-error');   emailEl.focus(); }
+                else          { messageEl.classList.add('field-error'); messageEl.focus(); }
                 return;
             }
 
@@ -1777,7 +1709,7 @@
             const arrow = document.getElementById('about-toggle-arrow');
             const isOpen = expanded.style.maxHeight !== '0px' && expanded.style.maxHeight !== '';
             if (isOpen) {
-                expanded.style.maxHeight = '0';
+                expanded.style.maxHeight = '0px';
                 arrow.style.transform = 'rotate(0deg)';
             } else {
                 expanded.style.maxHeight = expanded.scrollHeight + 'px';
