@@ -2,14 +2,14 @@
 
 ## Repo
 - Version C only. Versions A and B are frozen — do not touch.
-- Local path: /Users/arikgriffin/Projects/verdanttech-website-c/
+- Local path: /Users/arikgriffin/Dev/verdanttech-website-c/
 - Branch: version-c
 - Live at: verdanttechsolutions.com
 
 ## Git Rules
 - NEVER use --force or --force-with-lease on this repo under any circumstances
 - If a push is rejected, always resolve with: git pull origin version-c
-- Standard push command: git -C /Users/arikgriffin/Projects/verdanttech-website-c/ add -A && git commit -m "message" && git push origin version-c
+- Standard push command: git -C /Users/arikgriffin/Dev/verdanttech-website-c/ add -A && git commit -m "message" && git push origin version-c
 - CNAME file must always be present in repo root — do not delete it
 
 ## Build
