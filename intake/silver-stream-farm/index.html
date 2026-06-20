@@ -969,28 +969,21 @@
     }
 
     // ============================================================
-    // HTML TABLE SUMMARY (used for final submission email)
+    // PLAIN-TEXT MESSAGE (all submissions)
     // ============================================================
-    function buildHtmlMessage(d) {
-        var rows = Object.entries(d).map(function([k, v]) {
-            var val = (v || '(no response)').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            return '<tr>'
-                + '<td style="padding:9px 12px;font-weight:600;vertical-align:top;width:38%;'
-                +   'border-bottom:1px solid #dce2da;font-family:sans-serif;font-size:13px;'
-                +   'color:#142417;line-height:1.5">' + k + '</td>'
-                + '<td style="padding:9px 12px;vertical-align:top;border-bottom:1px solid #dce2da;'
-                +   'font-family:sans-serif;font-size:13px;color:#213A26;line-height:1.6;'
-                +   'white-space:pre-wrap">' + val + '</td>'
-                + '</tr>';
-        }).join('');
+    function buildPlainMessage(d, label) {
+        var header = [
+            'VERDANTTECH SOLUTIONS',
+            'Silver Stream Farm — Phase 1 Intake ' + label,
+            '================================================',
+            ''
+        ].join('\n');
 
-        return '<table style="border-collapse:collapse;width:100%;max-width:720px;font-family:sans-serif">'
-             + '<thead><tr><th colspan="2" style="background:#416843;color:#F3F6F2;padding:14px 12px;'
-             +   'text-align:left;font-size:14px;font-weight:700;letter-spacing:0.04em">'
-             +   'Silver Stream Farm &mdash; Phase 1 Intake Submission'
-             + '</th></tr></thead>'
-             + '<tbody>' + rows + '</tbody>'
-             + '</table>';
+        var body = Object.entries(d)
+            .map(function([k, v]) { return k + ':\n' + (v || '(no response)'); })
+            .join('\n\n');
+
+        return header + body;
     }
 
     // ============================================================
@@ -1020,7 +1013,7 @@
                     from_name:  'Silver Stream Farm Intake',
                     email:      'arik@verdant.biz',
                     botcheck:   '',
-                    message:    buildHtmlMessage(data),
+                    message:    buildPlainMessage(data, 'Draft'),
                 })
             });
             const json = await res.json();
@@ -1063,7 +1056,7 @@
             email:      'arikgriffin@gmail.com',
             replyto:    'arikgriffin@gmail.com',
             botcheck:   '',
-            message:    buildHtmlMessage(data),
+            message:    buildPlainMessage(data, 'Submission'),
         }, data);
 
         try {
