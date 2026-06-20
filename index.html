@@ -1546,10 +1546,6 @@
             <p class="contact-intro" data-anim data-anim-delay="2">The first conversation is straightforward — no pitch, no intake process. Tell me what you're trying to figure out, and I'll tell you honestly whether there's a fit.</p>
 
             <form class="contact-form" id="contact-form" data-anim data-anim-delay="3">
-                <input type="hidden" name="access_key" value="edd68b28-76a9-4c30-a504-4f0fa04c924f">
-                <input type="hidden" name="subject" value="New Contact Form Submission — VerdantTech Solutions">
-                <input type="hidden" name="from_name" value="VerdantTech Solutions Website">
-                <input type="checkbox" name="botcheck" style="display:none">
                 <div class="form-row">
                     <div class="form-field">
                         <label for="f-name">Name</label>
@@ -1650,10 +1646,9 @@
             });
         });
 
-        // Contact form — web3forms
+        // Contact form — Resend via Cloudflare Worker
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const form   = e.target;
             const btn    = document.getElementById('form-submit-btn');
             const status = document.getElementById('form-status');
 
@@ -1663,13 +1658,14 @@
             const name    = nameEl.value.trim();
             const email   = emailEl.value.trim();
             const message = messageEl.value.trim();
+            const company = document.getElementById('f-company').value.trim();
 
             [nameEl, emailEl, messageEl].forEach(el => el.classList.remove('field-error'));
 
             if (!name || !email || !message) {
-                if (!name)    { nameEl.classList.add('field-error');    nameEl.focus(); }
+                if (!name)         { nameEl.classList.add('field-error');    nameEl.focus(); }
                 else if (!email)   { emailEl.classList.add('field-error');   emailEl.focus(); }
-                else          { messageEl.classList.add('field-error'); messageEl.focus(); }
+                else               { messageEl.classList.add('field-error'); messageEl.focus(); }
                 return;
             }
 
@@ -1677,23 +1673,44 @@
             btn.textContent = 'Sending…';
             status.style.display = 'none';
 
+            const companyRow = company
+                ? '<tr><td style="padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:0.03em;color:#416843;border-bottom:1px solid #e8ece6;width:26%">Company</td><td style="padding:10px 16px;font-size:13px;color:#142417;border-bottom:1px solid #e8ece6">' + company.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</td></tr>' : '';
+
+            const html = '<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#fff;border:1px solid #D8DDD6">'
+                + '<div style="background:#213A26;padding:18px 24px">'
+                + '<div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:#A9C89A;margin-bottom:6px">VerdantTech Solutions</div>'
+                + '<div style="font-size:14px;font-weight:700;color:#F3F6F2">New Contact Form Submission</div>'
+                + '</div>'
+                + '<table style="width:100%;border-collapse:collapse">'
+                + '<tr><td style="padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:0.03em;color:#416843;border-bottom:1px solid #e8ece6;width:26%">Name</td><td style="padding:10px 16px;font-size:13px;color:#142417;border-bottom:1px solid #e8ece6">' + name.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</td></tr>'
+                + '<tr><td style="padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:0.03em;color:#416843;border-bottom:1px solid #e8ece6">Email</td><td style="padding:10px 16px;font-size:13px;color:#142417;border-bottom:1px solid #e8ece6">' + email.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</td></tr>'
+                + companyRow
+                + '<tr><td style="padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:0.03em;color:#416843;vertical-align:top;border-bottom:1px solid #e8ece6">Message</td><td style="padding:10px 16px;font-size:13px;color:#142417;border-bottom:1px solid #e8ece6;line-height:1.65;white-space:pre-wrap">' + message.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</td></tr>'
+                + '</table>'
+                + '<div style="padding:12px 24px;background:#f5f7f4;border-top:1px solid #D8DDD6;font-size:10px;color:rgba(20,36,23,0.38);letter-spacing:0.06em">VERDANTTECH SOLUTIONS &nbsp;&middot;&nbsp; verdanttechsolutions.com</div>'
+                + '</div>';
+
             try {
-                const data = Object.fromEntries(new FormData(form));
-                const res  = await fetch('https://api.web3forms.com/submit', {
+                const res = await fetch('https://mailer.verdanttechsolutions.com', {
                     method:  'POST',
-                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                    body:    JSON.stringify(data)
+                    headers: { 'Content-Type': 'application/json' },
+                    body:    JSON.stringify({
+                        from:     'VerdantTech Solutions <arik@mail.verdant.biz>',
+                        to:       ['arik@verdant.biz'],
+                        reply_to: email,
+                        subject:  'New Contact Form Submission — VerdantTech Solutions',
+                        html:     html,
+                    })
                 });
-                const json = await res.json();
-                if (res.ok && json.success) {
+                if (res.ok) {
                     gtag('event', 'form_submit', { form_location: 'contact' });
-                    form.style.display = 'none';
+                    e.target.style.display = 'none';
                     status.style.display = 'block';
                     status.style.color = '#A9C89A';
                     status.textContent = status.dataset.success;
                     status.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 } else {
-                    throw new Error(json.message || 'Submission failed');
+                    throw new Error('HTTP ' + res.status);
                 }
             } catch (err) {
                 btn.disabled = false;
