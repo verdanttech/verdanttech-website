@@ -960,30 +960,16 @@
     document.getElementById('intake-form').addEventListener('change', saveToLocalStorage);
 
     // ============================================================
-    // PLAIN-TEXT MESSAGE (used for draft emails)
+    // BUILD SUBMISSION PAYLOAD
+    // Sends each Q&A as a named field — Web3Forms renders these
+    // in its own HTML table template rather than as escaped text.
     // ============================================================
-    function buildPlainMessage(d) {
-        return Object.entries(d)
-            .map(function([k, v]) { return k + ':\n' + (v || '(no response)'); })
-            .join('\n\n---\n\n');
-    }
-
-    // ============================================================
-    // PLAIN-TEXT MESSAGE (all submissions)
-    // ============================================================
-    function buildPlainMessage(d, label) {
-        var header = [
-            'VERDANTTECH SOLUTIONS',
-            'Silver Stream Farm — Phase 1 Intake ' + label,
-            '================================================',
-            ''
-        ].join('\n');
-
-        var body = Object.entries(d)
-            .map(function([k, v]) { return k + ':\n' + (v || '(no response)'); })
-            .join('\n\n');
-
-        return header + body;
+    function buildPayload(meta, data) {
+        var payload = Object.assign({}, meta, { botcheck: '' });
+        Object.entries(data).forEach(function([k, v]) {
+            payload[k] = v || '(no response)';
+        });
+        return payload;
     }
 
     // ============================================================
@@ -1007,14 +993,12 @@
             const res  = await fetch('https://api.web3forms.com/submit', {
                 method:  'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body:    JSON.stringify({
+                body:    JSON.stringify(buildPayload({
                     access_key: ACCESS_KEY,
                     subject:    'SSF Intake — Draft Saved ' + ts,
                     from_name:  'Silver Stream Farm Intake',
                     email:      'arik@verdant.biz',
-                    botcheck:   '',
-                    message:    buildPlainMessage(data, 'Draft'),
-                })
+                }, data))
             });
             const json = await res.json();
             if (res.ok && json.success) {
@@ -1046,24 +1030,17 @@
         status.textContent = '';
         status.className = 'submission-status';
 
-        // Build an object where every Q&A is a separate named field so
-        // Web3Forms includes them in both the notification to Arik and
-        // the confirmation email to Nicci.
-        const payload = Object.assign({
-            access_key: ACCESS_KEY,
-            subject:    'SSF Intake — Final Submission',
-            from_name:  'Silver Stream Farm Intake',
-            email:      'arikgriffin@gmail.com',
-            replyto:    'arikgriffin@gmail.com',
-            botcheck:   '',
-            message:    buildPlainMessage(data, 'Submission'),
-        }, data);
-
         try {
             const res  = await fetch('https://api.web3forms.com/submit', {
                 method:  'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body:    JSON.stringify(payload)
+                body:    JSON.stringify(buildPayload({
+                    access_key: ACCESS_KEY,
+                    subject:    'SSF Intake — Final Submission',
+                    from_name:  'Silver Stream Farm Intake',
+                    email:      'arikgriffin@gmail.com',
+                    replyto:    'arikgriffin@gmail.com',
+                }, data))
             });
             const json = await res.json();
             if (res.ok && json.success) {
