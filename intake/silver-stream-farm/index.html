@@ -794,8 +794,7 @@
      JS
 ================================================================ -->
 <script>
-    const RESEND_KEY = 're_SxErKYaQ_KnPL4y8Gjy5ftUFj8Z89m728';
-    const LS_KEY     = 'ssf-intake-draft';
+    const LS_KEY = 'ssf-intake-draft';
 
     // ============================================================
     // OTHER-field enable/disable wiring
@@ -1017,15 +1016,15 @@
     // ============================================================
     async function sendEmail(to, subject, html, replyTo) {
         const body = {
-            from:    'Silver Stream Farm Intake <intake@mail.verdant.biz>',
+            from:    'Silver Stream Farm Intake <arik@mail.verdant.biz>',
             to:      Array.isArray(to) ? to : [to],
             subject: subject,
             html:    html,
         };
         if (replyTo) body.reply_to = replyTo;
-        const res = await fetch('https://api.resend.com/emails', {
+        const res = await fetch('https://mailer.verdanttechsolutions.com', {
             method:  'POST',
-            headers: { 'Authorization': 'Bearer ' + RESEND_KEY, 'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' },
             body:    JSON.stringify(body),
         });
         if (!res.ok) {
@@ -1093,10 +1092,10 @@
                     'arik@verdant.biz',
                     'SSF Intake — Final Submission',
                     buildNotificationHtml(data, 'Final Submission', ts),
-                    'arikgriffin@gmail.com'
+                    'nicci@silverstreamfarm.com'
                 ),
                 sendEmail(
-                    'arikgriffin@gmail.com',
+                    'nicci@silverstreamfarm.com',
                     'Your Silver Stream Farm intake form has been submitted',
                     buildConfirmationHtml(data),
                     'arik@verdant.biz'
