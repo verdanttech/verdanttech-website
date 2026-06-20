@@ -265,45 +265,78 @@
         }
 
         /* ============================================================
-           CHECKBOXES
+           CHANNEL TABLE (Q1)
         ============================================================ */
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 9px;
+        .channel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
         }
-        .checkbox-label {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            cursor: pointer;
+        .channel-table thead th {
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--sage-mid);
+            padding: 0 0 9px 0;
+            border-bottom: 1px solid var(--sage);
+            text-align: left;
+            white-space: nowrap;
+        }
+        .channel-table thead th:nth-child(2) {
+            text-align: center;
+            padding-left: 18px;
+        }
+        .channel-table thead th:nth-child(3) {
+            padding-left: 18px;
+        }
+        .channel-table td {
+            padding: 9px 0;
+            border-bottom: 1px solid var(--rule);
             font-size: 0.9375rem;
             font-weight: 300;
             color: var(--ink);
-            line-height: 1.5;
-            user-select: none;
+            vertical-align: middle;
         }
-        .checkbox-label input[type="checkbox"] {
-            flex-shrink: 0;
+        .channel-table td:nth-child(2) {
+            text-align: center;
+            padding-left: 18px;
+        }
+        .channel-table td:nth-child(3) {
+            padding-left: 18px;
+            white-space: nowrap;
+        }
+        .channel-table input[type="checkbox"] {
             width: 16px;
             height: 16px;
-            margin-top: 0.2em;
             accent-color: var(--sage);
             cursor: pointer;
+            vertical-align: middle;
         }
-        .checkbox-other-wrap {
-            display: flex;
-            align-items: center;
-            gap: 0;
-            flex: 1;
+        .timeline-input {
+            display: none;
+            margin-left: 8px;
+            background: #fff;
+            border: 1px solid var(--rule);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 300;
+            padding: 4px 8px;
+            outline: none;
+            border-radius: 0;
+            transition: border-color 0.2s;
+            width: 118px;
+            vertical-align: middle;
         }
-        .checkbox-other-tag {
-            flex-shrink: 0;
-            padding-right: 8px;
+        .timeline-input.visible {
+            display: inline;
         }
-        .checkbox-other-input {
-            flex: 1;
-            min-width: 0;
+        .timeline-input:focus {
+            border-color: var(--sage);
+        }
+        .other-channel-input {
             background: #fff;
             border: 1px solid var(--rule);
             color: var(--ink);
@@ -313,13 +346,13 @@
             padding: 5px 10px;
             outline: none;
             border-radius: 0;
-            transition: border-color 0.2s, opacity 0.2s;
+            transition: border-color 0.2s;
+            width: 100%;
         }
-        .checkbox-other-input:disabled {
-            opacity: 0.4;
-            background: #f7f7f5;
+        .other-channel-input::placeholder {
+            color: rgba(20, 36, 23, 0.28);
         }
-        .checkbox-other-input:focus {
+        .other-channel-input:focus {
             border-color: var(--sage);
         }
 
@@ -496,6 +529,8 @@
             .main { padding: 40px 20px 72px; }
             .button-row { flex-direction: column; }
             .btn { width: 100%; text-align: center; }
+            .timeline-input { width: 84px; font-size: 0.8125rem; }
+            .channel-table thead th:nth-child(3) { white-space: normal; }
         }
     </style>
 </head>
@@ -562,50 +597,89 @@
 
                 <!-- Q1 -->
                 <div class="question">
-                    <label class="question-label">Q1. Which sales channels are currently active? <span style="font-weight:300;color:rgba(20,36,23,0.45);font-size:0.875rem">(select all that apply)</span></label>
-                    <div class="checkbox-group" id="q1-checkboxes">
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="q1_direct" value="Direct to consumer (farm stand, CSA, market)">
-                            Direct to consumer (farm stand, CSA, market)
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="q1_restaurant" value="Restaurant / foodservice" checked>
-                            Restaurant / foodservice
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="q1_retail" value="Retail grocery">
-                            Retail grocery
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="q1_wholesale" value="Wholesale distributor">
-                            Wholesale distributor
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="q1_institutional" value="Institutional (schools, hospitals, corporate)">
-                            Institutional (schools, hospitals, corporate)
-                        </label>
-                        <label class="checkbox-label" id="q1-other-row">
-                            <input type="checkbox" name="q1_other_check" id="q1-other-check">
-                            <div class="checkbox-other-wrap">
-                                <span class="checkbox-other-tag">Other:</span>
-                                <input type="text" name="q1_other_text" id="q1-other-text" class="checkbox-other-input" placeholder="describe" disabled>
-                            </div>
-                        </label>
-                    </div>
-                    <p class="question-hint" style="margin-top:8px;margin-bottom:0">Distinguish between channels currently generating revenue and channels you plan to add as you scale. List them separately if needed (e.g., &ldquo;Active: farmers market, restaurant direct. Planned: retail grocery, wholesale distributor&rdquo;).</p>
+                    <label class="question-label">Q1. Sales channels</label>
+                    <table class="channel-table" id="q1-channel-table">
+                        <thead>
+                            <tr>
+                                <th>Sales Channel</th>
+                                <th>Active Now</th>
+                                <th>Planned &mdash; When?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Farmers market / farm stand</td>
+                                <td><input type="checkbox" name="q1_farmers_active" id="q1-farmers-active"></td>
+                                <td>
+                                    <input type="checkbox" name="q1_farmers_planned" id="q1-farmers-planned" class="q1-planned-cb" data-timeline="q1-farmers-timeline">
+                                    <input type="text" name="q1_farmers_timeline" id="q1-farmers-timeline" class="timeline-input" placeholder="e.g., Q4 2026">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Direct to consumer (CSA, on-farm pickup)</td>
+                                <td><input type="checkbox" name="q1_csa_active" id="q1-csa-active"></td>
+                                <td>
+                                    <input type="checkbox" name="q1_csa_planned" id="q1-csa-planned" class="q1-planned-cb" data-timeline="q1-csa-timeline">
+                                    <input type="text" name="q1_csa_timeline" id="q1-csa-timeline" class="timeline-input" placeholder="e.g., Q4 2026">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Restaurant / foodservice direct</td>
+                                <td><input type="checkbox" name="q1_restaurant_active" id="q1-restaurant-active" checked></td>
+                                <td>
+                                    <input type="checkbox" name="q1_restaurant_planned" id="q1-restaurant-planned" class="q1-planned-cb" data-timeline="q1-restaurant-timeline">
+                                    <input type="text" name="q1_restaurant_timeline" id="q1-restaurant-timeline" class="timeline-input" placeholder="e.g., Q4 2026">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Retail grocery</td>
+                                <td><input type="checkbox" name="q1_retail_active" id="q1-retail-active"></td>
+                                <td>
+                                    <input type="checkbox" name="q1_retail_planned" id="q1-retail-planned" class="q1-planned-cb" data-timeline="q1-retail-timeline" checked>
+                                    <input type="text" name="q1_retail_timeline" id="q1-retail-timeline" class="timeline-input visible" placeholder="e.g., Q4 2026" value="Dec 2026">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Wholesale distributor</td>
+                                <td><input type="checkbox" name="q1_wholesale_active" id="q1-wholesale-active"></td>
+                                <td>
+                                    <input type="checkbox" name="q1_wholesale_planned" id="q1-wholesale-planned" class="q1-planned-cb" data-timeline="q1-wholesale-timeline" checked>
+                                    <input type="text" name="q1_wholesale_timeline" id="q1-wholesale-timeline" class="timeline-input visible" placeholder="e.g., Q4 2026" value="Dec 2026">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Institutional (schools, hospitals, corporate)</td>
+                                <td><input type="checkbox" name="q1_institutional_active" id="q1-institutional-active"></td>
+                                <td>
+                                    <input type="checkbox" name="q1_institutional_planned" id="q1-institutional-planned" class="q1-planned-cb" data-timeline="q1-institutional-timeline">
+                                    <input type="text" name="q1_institutional_timeline" id="q1-institutional-timeline" class="timeline-input" placeholder="e.g., Q4 2026">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Online / delivery</td>
+                                <td><input type="checkbox" name="q1_online_active" id="q1-online-active"></td>
+                                <td>
+                                    <input type="checkbox" name="q1_online_planned" id="q1-online-planned" class="q1-planned-cb" data-timeline="q1-online-timeline">
+                                    <input type="text" name="q1_online_timeline" id="q1-online-timeline" class="timeline-input" placeholder="e.g., Q4 2026">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="q1_other_text" id="q1-other-text" class="other-channel-input" placeholder="Other &mdash; specify"></td>
+                                <td><input type="checkbox" name="q1_other_active" id="q1-other-active"></td>
+                                <td>
+                                    <input type="checkbox" name="q1_other_planned" id="q1-other-planned" class="q1-planned-cb" data-timeline="q1-other-timeline">
+                                    <input type="text" name="q1_other_timeline" id="q1-other-timeline" class="timeline-input" placeholder="e.g., Q4 2026">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="question-hint" style="margin-top:8px;margin-bottom:0">For &ldquo;Planned&rdquo; channels, enter your best estimate of when you expect to be selling into that channel (month/quarter and year is fine).</p>
                 </div>
 
-                <!-- Q2 -->
+                <!-- Q2 (was Q3) -->
                 <div class="question">
-                    <span class="prefill-note">Pre-filled &mdash; please confirm or correct</span>
-                    <label class="question-label" for="q2">Q2. Which channels are planned but not yet active, and what is the anticipated timeline?</label>
-                    <textarea id="q2" name="q2" class="form-textarea">Retail grocery and wholesale distribution targeted for full-capacity operations by December 2026.</textarea>
-                </div>
-
-                <!-- Q3 -->
-                <div class="question">
-                    <label class="question-label" for="q3">Q3. Do any current buyers have stated food safety or certification requirements (e.g., GAP certification, food safety plan, insurance minimums)? If yes, who and what?</label>
-                    <textarea id="q3" name="q3" class="form-textarea" placeholder="Describe any buyer requirements, or write &#x22;None&#x22; or &#x22;Don&#x27;t know&#x22; if unsure."></textarea>
+                    <label class="question-label" for="q2">Q2. Do any current buyers have stated food safety or certification requirements (e.g., GAP certification, food safety plan, insurance minimums)? If yes, who and what?</label>
+                    <textarea id="q2" name="q2" class="form-textarea" placeholder="Describe any buyer requirements, or write &#x22;None&#x22; or &#x22;Don&#x27;t know&#x22; if unsure."></textarea>
                 </div>
             </div>
 
@@ -613,18 +687,18 @@
             <div class="question-group">
                 <span class="group-label">Group B &mdash; Post-Harvest Handling</span>
 
-                <!-- Q4 -->
+                <!-- Q3 (was Q4) -->
                 <div class="question">
-                    <label class="question-label" for="q4">Q4. Walk me through what happens to produce between harvest and delivery or sale &mdash; step by step. Include washing, sorting, bagging, labeling, refrigeration, and any other handling.</label>
+                    <label class="question-label" for="q3">Q3. Walk me through what happens to produce between harvest and delivery or sale &mdash; step by step. Include washing, sorting, bagging, labeling, refrigeration, and any other handling.</label>
                     <p class="question-hint">This is the most important question on this form. Be as specific as you can &mdash; describe each physical step in sequence.</p>
-                    <textarea id="q4" name="q4" class="form-textarea tall" placeholder="E.g., Harvest &rarr; field crate &rarr; wash station &rarr; sort &rarr; bag / label &rarr; walk-in cooler &rarr; delivery vehicle&hellip;"></textarea>
+                    <textarea id="q3" name="q3" class="form-textarea tall" placeholder="E.g., Harvest &rarr; field crate &rarr; wash station &rarr; sort &rarr; bag / label &rarr; walk-in cooler &rarr; delivery vehicle&hellip;"></textarea>
                     <p class="question-hint" style="margin-top:8px;margin-bottom:0">Your answer here determines how FDA classifies SSF &mdash; as a farm or as a food facility. These classifications carry different registration and compliance requirements, so be as specific as possible about what happens to produce between harvest and delivery.</p>
                 </div>
 
-                <!-- Q5 -->
+                <!-- Q4 (was Q5) -->
                 <div class="question">
-                    <label class="question-label" for="q5">Q5. Is any produce cut, processed, or combined with other ingredients before sale (e.g., salad mixes, cut herbs, blended products)?</label>
-                    <textarea id="q5" name="q5" class="form-textarea" placeholder="Describe any value-added or minimally processed products, or write &#x22;No.&#x22;"></textarea>
+                    <label class="question-label" for="q4">Q4. Is any produce cut, processed, or combined with other ingredients before sale (e.g., salad mixes, cut herbs, blended products)?</label>
+                    <textarea id="q4" name="q4" class="form-textarea" placeholder="Describe any value-added or minimally processed products, or write &#x22;No.&#x22;"></textarea>
                 </div>
             </div>
 
@@ -632,68 +706,50 @@
             <div class="question-group">
                 <span class="group-label">Group C &mdash; Food Safety &amp; Licensing</span>
 
-                <!-- Q6 -->
+                <!-- Q5 (new — was Q6 radio, now free-text) -->
                 <div class="question">
-                    <label class="question-label">Q6. Do you currently hold a Wyoming food establishment license? If yes, was it issued by Teton County Health or WDA Consumer Health Services directly?</label>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="q6" value="Yes — Teton County Health">
-                            Yes &mdash; Teton County Health
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="q6" value="Yes — WDA Consumer Health Services">
-                            Yes &mdash; WDA Consumer Health Services
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="q6" value="Yes — not sure which">
-                            Yes &mdash; not sure which
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="q6" value="No">
-                            No
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="q6" value="Not sure">
-                            Not sure
-                        </label>
-                    </div>
-                    <p class="question-hint" style="margin-top:8px;margin-bottom:0">If you have a license, include which sales channels and physical locations it covers, and the issuing agency (Teton County Health or Wyoming Department of Agriculture). A license that doesn&rsquo;t cover all active channels is a gap we&rsquo;ll need to address.</p>
+                    <label class="question-label" for="q5">Q5. Food establishment license &mdash; current status</label>
+                    <p class="question-hint">Do you currently hold a Wyoming food establishment license? If yes, please describe: who issued it (WDA Consumer Health Services, Teton County, Sublette County, or another agency), what sales channels and locations it covers, and when it was last renewed.</p>
+                    <textarea id="q5" name="q5" class="form-textarea" placeholder="Describe current license status, issuing agency, and coverage &mdash; or write &#x22;No&#x22; or &#x22;Not sure.&#x22;"></textarea>
+                    <p class="question-hint" style="margin-top:8px;margin-bottom:0">SSF operates in Sublette County and sells in Teton County &mdash; jurisdiction for food establishment licensing may run through either the state (WDA CHS), Teton County, Sublette County, or some combination. Include whatever you know; confirming the correct jurisdiction is a goal of the first session.</p>
                 </div>
 
-                <!-- Q7 -->
+                <!-- Q6 (new — replaces Q7 inspections, now nursery/greenhouse) -->
                 <div class="question">
-                    <label class="question-label" for="q7">Q7. Has Silver Stream Farm ever been inspected by a food safety regulator (WDA, Teton County Health, FDA)? If yes, approximately when and what was the outcome?</label>
-                    <textarea id="q7" name="q7" class="form-textarea" placeholder="Describe any inspections and outcomes, or write &#x22;No&#x22; or &#x22;Not sure.&#x22;"></textarea>
+                    <label class="question-label" for="q6">Q6. Wyoming nursery/greenhouse registration &mdash; current status</label>
+                    <p class="question-hint">Do you hold a current Wyoming Department of Agriculture nursery/greenhouse registration? If yes, does it cover your full crop portfolio (leafy greens, herbs, tomatoes, peppers, berries, mushrooms) and all counties where you sell?</p>
+                    <textarea id="q6" name="q6" class="form-textarea" placeholder="Describe current registration status and scope &mdash; or write &#x22;No&#x22; or &#x22;Not sure.&#x22;"></textarea>
+                    <p class="question-hint" style="margin-top:8px;margin-bottom:0">SSF&rsquo;s farm is in Sublette County; sales occur in Teton County and potentially others. WDA registration scope by county and crop type is one of the items to be confirmed with the agency during the engagement. Include whatever you know about current registration status.</p>
                 </div>
 
-                <!-- Q8 -->
+                <!-- Q7 (was Q8) -->
                 <div class="question">
-                    <label class="question-label">Q8. Is there a written food safety plan or HACCP plan currently in place?</label>
+                    <label class="question-label">Q7. Is there a written food safety plan or HACCP plan currently in place?</label>
                     <div class="radio-group">
                         <label class="radio-label">
-                            <input type="radio" name="q8" value="Yes">
+                            <input type="radio" name="q7" value="Yes">
                             Yes
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="q8" value="Partial">
+                            <input type="radio" name="q7" value="Partial">
                             Partial
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="q8" value="No">
+                            <input type="radio" name="q7" value="No">
                             No
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="q8" value="Not sure">
+                            <input type="radio" name="q7" value="Not sure">
                             Not sure
                         </label>
                     </div>
                     <p class="question-hint" style="margin-top:8px;margin-bottom:0">Include anything &mdash; even informal logs, spreadsheets, or sign-in sheets. A partial record is still a starting point. If different record types exist in different formats or locations, note that.</p>
                 </div>
 
-                <!-- Q9 -->
+                <!-- Q8 (was Q9) -->
                 <div class="question">
-                    <label class="question-label" for="q9">Q9. What food safety training has Katie completed or is currently enrolled in? Please include the course name and provider if known.</label>
-                    <textarea id="q9" name="q9" class="form-textarea" placeholder="Course name, provider, and approximate date if known."></textarea>
+                    <label class="question-label" for="q8">Q8. What food safety training has Katie completed or is currently enrolled in? Please include the course name and provider if known.</label>
+                    <textarea id="q8" name="q8" class="form-textarea" placeholder="Course name, provider, and approximate date if known."></textarea>
                 </div>
             </div>
 
@@ -701,35 +757,35 @@
             <div class="question-group">
                 <span class="group-label">Group D &mdash; Water</span>
 
-                <!-- Q10 -->
+                <!-- Q9 (was Q10) -->
                 <div class="question">
-                    <label class="question-label">Q10. What is your primary water source for irrigation and produce washing?</label>
+                    <label class="question-label">Q9. What is your primary water source for irrigation and produce washing?</label>
                     <div class="radio-group">
                         <label class="radio-label">
-                            <input type="radio" name="q10" value="Municipal">
+                            <input type="radio" name="q9" value="Municipal">
                             Municipal
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="q10" value="Well">
+                            <input type="radio" name="q9" value="Well">
                             Well
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="q10" value="Surface water">
+                            <input type="radio" name="q9" value="Surface water">
                             Surface water
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="q10" value="Other" id="q10-other-radio-label">
+                            <input type="radio" name="q9" value="Other" id="q9-other-radio-label">
                             Other:
-                            <input type="text" name="q10_other_text" id="q10-other-text" class="radio-other-input" placeholder="describe" disabled>
+                            <input type="text" name="q9_other_text" id="q9-other-text" class="radio-other-input" placeholder="describe" disabled>
                         </label>
                     </div>
                     <p class="question-hint" style="margin-top:8px;margin-bottom:0">Include all sources used for crop irrigation and post-harvest washing &mdash; even if a source is secondary or used only occasionally. If you use a closed recirculating or RO system, note that specifically.</p>
                 </div>
 
-                <!-- Q11 -->
+                <!-- Q10 (was Q11) -->
                 <div class="question">
-                    <label class="question-label" for="q11">Q11. Has your water ever been tested for agricultural use (microbial or chemical)? If yes, when was the most recent test and do you have results on file?</label>
-                    <textarea id="q11" name="q11" class="form-textarea" placeholder="Test type and date if known, or write &#x22;No&#x22; or &#x22;Not sure.&#x22;"></textarea>
+                    <label class="question-label" for="q10">Q10. Has your water ever been tested for agricultural use (microbial or chemical)? If yes, when was the most recent test and do you have results on file?</label>
+                    <textarea id="q10" name="q10" class="form-textarea" placeholder="Test type and date if known, or write &#x22;No&#x22; or &#x22;Not sure.&#x22;"></textarea>
                 </div>
             </div>
 
@@ -737,16 +793,16 @@
             <div class="question-group">
                 <span class="group-label">Group E &mdash; Worker Safety</span>
 
-                <!-- Q12 -->
+                <!-- Q11 (was Q12) -->
                 <div class="question">
-                    <label class="question-label" for="q12">Q12. Has Silver Stream Farm ever filed an OSHA recordable injury or illness report? Is there an OSHA 300 log currently in place?</label>
-                    <textarea id="q12" name="q12" class="form-textarea" placeholder="Include any OSHA filing history or current log status, or write &#x22;No&#x22; or &#x22;Not sure.&#x22;"></textarea>
+                    <label class="question-label" for="q11">Q11. Has Silver Stream Farm ever filed an OSHA recordable injury or illness report? Is there an OSHA 300 log currently in place?</label>
+                    <textarea id="q11" name="q11" class="form-textarea" placeholder="Include any OSHA filing history or current log status, or write &#x22;No&#x22; or &#x22;Not sure.&#x22;"></textarea>
                 </div>
 
-                <!-- Q13 -->
+                <!-- Q12 (was Q13) -->
                 <div class="question">
-                    <label class="question-label" for="q13">Q13. What safety training have employees received? Include any formal training programs, certifications, or on-the-job instruction with documentation.</label>
-                    <textarea id="q13" name="q13" class="form-textarea" placeholder="Describe programs and certifications, or write &#x22;None documented&#x22; if applicable."></textarea>
+                    <label class="question-label" for="q12">Q12. What safety training have employees received? Include any formal training programs, certifications, or on-the-job instruction with documentation.</label>
+                    <textarea id="q12" name="q12" class="form-textarea" placeholder="Describe programs and certifications, or write &#x22;None documented&#x22; if applicable."></textarea>
                 </div>
             </div>
 
@@ -754,17 +810,17 @@
             <div class="question-group">
                 <span class="group-label">Group F &mdash; Staff &amp; Knowledge Transfer</span>
 
-                <!-- Q14 -->
+                <!-- Q13 (was Q14) -->
                 <div class="question">
                     <span class="prefill-note">Pre-filled &mdash; please confirm or correct</span>
-                    <label class="question-label" for="q14">Q14. Matthew is currently documenting mushroom processes ahead of his August departure. What is the current status of that documentation &mdash; format, completeness, and who is reviewing it?</label>
-                    <textarea id="q14" name="q14" class="form-textarea">Matthew is currently documenting mushroom processes and leaving in August.</textarea>
+                    <label class="question-label" for="q13">Q13. Matthew is currently documenting mushroom processes ahead of his August departure. What is the current status of that documentation &mdash; format, completeness, and who is reviewing it?</label>
+                    <textarea id="q13" name="q13" class="form-textarea">Matthew is currently documenting mushroom processes and leaving in August.</textarea>
                 </div>
 
-                <!-- Q15 -->
+                <!-- Q14 (was Q15) -->
                 <div class="question">
-                    <label class="question-label" for="q15">Q15. Beyond Matthew&rsquo;s departure, are there other key knowledge holders whose processes are not currently documented?</label>
-                    <textarea id="q15" name="q15" class="form-textarea" placeholder="Name and role if applicable, or write &#x22;No&#x22; if all critical processes are covered."></textarea>
+                    <label class="question-label" for="q14">Q14. Beyond Matthew&rsquo;s departure, are there other key knowledge holders whose processes are not currently documented?</label>
+                    <textarea id="q14" name="q14" class="form-textarea" placeholder="Name and role if applicable, or write &#x22;No&#x22; if all critical processes are covered."></textarea>
                 </div>
             </div>
 
@@ -802,17 +858,29 @@
     const LS_KEY = 'ssf-intake-draft';
 
     // ============================================================
-    // OTHER-field enable/disable wiring
+    // Q1 — show/hide timeline inputs when Planned checkbox is checked
     // ============================================================
-    document.getElementById('q1-other-check').addEventListener('change', function() {
-        const txt = document.getElementById('q1-other-text');
-        txt.disabled = !this.checked;
-        if (this.checked) txt.focus();
+    document.querySelectorAll('.q1-planned-cb').forEach(function(cb) {
+        cb.addEventListener('change', function() {
+            var el = document.getElementById(this.getAttribute('data-timeline'));
+            if (el) {
+                if (this.checked) {
+                    el.classList.add('visible');
+                    el.focus();
+                } else {
+                    el.classList.remove('visible');
+                    el.value = '';
+                }
+            }
+        });
     });
 
-    document.querySelectorAll('input[name="q10"]').forEach(function(r) {
+    // ============================================================
+    // Q9 Other radio wiring (was Q10)
+    // ============================================================
+    document.querySelectorAll('input[name="q9"]').forEach(function(r) {
         r.addEventListener('change', function() {
-            const txt = document.getElementById('q10-other-text');
+            const txt = document.getElementById('q9-other-text');
             txt.disabled = (this.value !== 'Other');
             if (this.value === 'Other') txt.focus();
         });
@@ -824,56 +892,86 @@
     function collectFormData() {
         const d = {};
 
-        // Q1 — checkboxes
-        const channels = [];
-        document.querySelectorAll('#q1-checkboxes input[type="checkbox"]').forEach(function(cb) {
-            if (cb.name === 'q1_other_check') {
-                if (cb.checked) {
-                    const t = document.getElementById('q1-other-text').value.trim();
-                    channels.push('Other: ' + (t || '(not specified)'));
-                }
-            } else if (cb.checked) {
-                channels.push(cb.value);
+        // Q1 — channel table
+        const q1Rows = [
+            { key: 'farmers',       label: 'Farmers market / farm stand' },
+            { key: 'csa',           label: 'Direct to consumer (CSA, on-farm pickup)' },
+            { key: 'restaurant',    label: 'Restaurant / foodservice direct' },
+            { key: 'retail',        label: 'Retail grocery' },
+            { key: 'wholesale',     label: 'Wholesale distributor' },
+            { key: 'institutional', label: 'Institutional (schools, hospitals, corporate)' },
+            { key: 'online',        label: 'Online / delivery' },
+            { key: 'other',         label: null },
+        ];
+        const q1Lines = [];
+        const q1Raw   = {};
+        q1Rows.forEach(function(row) {
+            const activeEl   = document.getElementById('q1-' + row.key + '-active');
+            const plannedEl  = document.getElementById('q1-' + row.key + '-planned');
+            const timelineEl = document.getElementById('q1-' + row.key + '-timeline');
+            const isActive  = activeEl  && activeEl.checked;
+            const isPlanned = plannedEl && plannedEl.checked;
+            q1Raw[row.key + '_active']   = isActive;
+            q1Raw[row.key + '_planned']  = isPlanned;
+            q1Raw[row.key + '_timeline'] = timelineEl ? timelineEl.value : '';
+            if (row.key === 'other') {
+                const otherEl = document.getElementById('q1-other-text');
+                q1Raw['other_text'] = otherEl ? otherEl.value : '';
             }
+            if (!isActive && !isPlanned) return;
+            let label = row.label;
+            if (row.key === 'other') {
+                const otherEl = document.getElementById('q1-other-text');
+                label = (otherEl && otherEl.value.trim()) ? otherEl.value.trim() : 'Other';
+            }
+            const parts = [];
+            if (isActive)  parts.push('Active');
+            if (isPlanned) {
+                const tval = timelineEl && timelineEl.value.trim();
+                parts.push(tval ? 'Planned — ' + tval : 'Planned');
+            }
+            q1Lines.push(label + ': ' + parts.join(', '));
         });
-        d['Q1 — Active sales channels'] = channels.length ? channels.join('; ') : '(none selected)';
+        d['Q1 — Sales channels'] = q1Lines.length ? q1Lines.join('\n') : '(none selected)';
+        d['_q1_raw'] = JSON.stringify(q1Raw);
 
-        // Q2–Q5 textareas
-        d['Q2 — Planned channels and timeline']          = document.getElementById('q2').value.trim();
-        d['Q3 — Buyer certification requirements']        = document.getElementById('q3').value.trim();
-        d['Q4 — Post-harvest handling (step by step)']   = document.getElementById('q4').value.trim();
-        d['Q5 — Cut or processed produce']               = document.getElementById('q5').value.trim();
+        // Q2–Q4 textareas
+        d['Q2 — Buyer certification requirements']        = document.getElementById('q2').value.trim();
+        d['Q3 — Post-harvest handling (step by step)']   = document.getElementById('q3').value.trim();
+        d['Q4 — Cut or processed produce']               = document.getElementById('q4').value.trim();
 
-        // Q6 — radio
-        const q6 = document.querySelector('input[name="q6"]:checked');
-        d['Q6 — Wyoming food establishment license'] = q6 ? q6.value : '(not answered)';
+        // Q5 — food establishment license (free text)
+        d['Q5 — Food establishment license']             = document.getElementById('q5').value.trim();
 
-        d['Q7 — Prior food safety inspections']          = document.getElementById('q7').value.trim();
+        // Q6 — nursery/greenhouse registration (free text)
+        d['Q6 — Wyoming nursery/greenhouse registration'] = document.getElementById('q6').value.trim();
 
-        // Q8 — radio
-        const q8 = document.querySelector('input[name="q8"]:checked');
-        d['Q8 — Written food safety or HACCP plan'] = q8 ? q8.value : '(not answered)';
+        // Q7 — radio
+        const q7 = document.querySelector('input[name="q7"]:checked');
+        d['Q7 — Written food safety or HACCP plan'] = q7 ? q7.value : '(not answered)';
 
-        d['Q9 — Katie\'s food safety training']          = document.getElementById('q9').value.trim();
+        // Q8 — textarea
+        d['Q8 — Katie\'s food safety training']          = document.getElementById('q8').value.trim();
 
-        // Q10 — radio
-        const q10 = document.querySelector('input[name="q10"]:checked');
-        if (q10) {
-            if (q10.value === 'Other') {
-                const t = document.getElementById('q10-other-text').value.trim();
-                d['Q10 — Primary water source'] = 'Other: ' + (t || '(not specified)');
+        // Q9 — radio
+        const q9 = document.querySelector('input[name="q9"]:checked');
+        if (q9) {
+            if (q9.value === 'Other') {
+                const t = document.getElementById('q9-other-text').value.trim();
+                d['Q9 — Primary water source'] = 'Other: ' + (t || '(not specified)');
             } else {
-                d['Q10 — Primary water source'] = q10.value;
+                d['Q9 — Primary water source'] = q9.value;
             }
         } else {
-            d['Q10 — Primary water source'] = '(not answered)';
+            d['Q9 — Primary water source'] = '(not answered)';
         }
 
-        d['Q11 — Water testing history']                 = document.getElementById('q11').value.trim();
-        d['Q12 — OSHA filings and 300 log']              = document.getElementById('q12').value.trim();
-        d['Q13 — Employee safety training']              = document.getElementById('q13').value.trim();
-        d['Q14 — Matthew\'s documentation status']       = document.getElementById('q14').value.trim();
-        d['Q15 — Other undocumented knowledge holders']  = document.getElementById('q15').value.trim();
+        // Q10–Q14 textareas
+        d['Q10 — Water testing history']                 = document.getElementById('q10').value.trim();
+        d['Q11 — OSHA filings and 300 log']              = document.getElementById('q11').value.trim();
+        d['Q12 — Employee safety training']              = document.getElementById('q12').value.trim();
+        d['Q13 — Matthew\'s documentation status']       = document.getElementById('q13').value.trim();
+        d['Q14 — Other undocumented knowledge holders']  = document.getElementById('q14').value.trim();
 
         return d;
     }
@@ -882,64 +980,65 @@
     // RESTORE FROM SAVED DATA OBJECT
     // ============================================================
     function restoreFormData(d) {
-        // Q1 checkboxes
-        if (d['Q1 — Active sales channels']) {
-            const saved = d['Q1 — Active sales channels'];
-            document.querySelectorAll('#q1-checkboxes input[type="checkbox"]').forEach(function(cb) {
-                if (cb.name === 'q1_other_check') {
-                    if (saved.includes('Other:')) {
-                        cb.checked = true;
-                        const m = saved.match(/Other:\s*([^;]+)/);
-                        if (m) document.getElementById('q1-other-text').value = m[1].trim();
-                        document.getElementById('q1-other-text').disabled = false;
+        // Q1 — channel table (restore from raw state)
+        if (d['_q1_raw']) {
+            try {
+                const q1r = JSON.parse(d['_q1_raw']);
+                ['farmers','csa','restaurant','retail','wholesale','institutional','online','other'].forEach(function(k) {
+                    const activeEl   = document.getElementById('q1-' + k + '-active');
+                    const plannedEl  = document.getElementById('q1-' + k + '-planned');
+                    const timelineEl = document.getElementById('q1-' + k + '-timeline');
+                    if (activeEl  && q1r[k + '_active'])  activeEl.checked  = true;
+                    if (plannedEl && q1r[k + '_planned']) {
+                        plannedEl.checked = true;
+                        if (timelineEl) {
+                            timelineEl.classList.add('visible');
+                            timelineEl.value = q1r[k + '_timeline'] || '';
+                        }
                     }
-                } else {
-                    cb.checked = saved.includes(cb.value);
+                });
+                if (q1r['other_text']) {
+                    const otherEl = document.getElementById('q1-other-text');
+                    if (otherEl) otherEl.value = q1r['other_text'];
                 }
-            });
+            } catch(e) {}
         }
 
         const textareaMap = {
-            'Q2 — Planned channels and timeline':         'q2',
-            'Q3 — Buyer certification requirements':       'q3',
-            'Q4 — Post-harvest handling (step by step)':  'q4',
-            'Q5 — Cut or processed produce':              'q5',
-            'Q7 — Prior food safety inspections':         'q7',
-            'Q9 — Katie\'s food safety training':         'q9',
-            'Q11 — Water testing history':                'q11',
-            'Q12 — OSHA filings and 300 log':             'q12',
-            'Q13 — Employee safety training':             'q13',
-            'Q14 — Matthew\'s documentation status':      'q14',
-            'Q15 — Other undocumented knowledge holders': 'q15',
+            'Q2 — Buyer certification requirements':        'q2',
+            'Q3 — Post-harvest handling (step by step)':   'q3',
+            'Q4 — Cut or processed produce':               'q4',
+            'Q5 — Food establishment license':             'q5',
+            'Q6 — Wyoming nursery/greenhouse registration': 'q6',
+            'Q8 — Katie\'s food safety training':          'q8',
+            'Q10 — Water testing history':                 'q10',
+            'Q11 — OSHA filings and 300 log':              'q11',
+            'Q12 — Employee safety training':              'q12',
+            'Q13 — Matthew\'s documentation status':       'q13',
+            'Q14 — Other undocumented knowledge holders':  'q14',
         };
         Object.entries(textareaMap).forEach(function([key, id]) {
             if (d[key] !== undefined) {
-                var el = document.getElementById(id);
+                const el = document.getElementById(id);
                 if (el) el.value = d[key];
             }
         });
 
-        // Q6 radio
-        if (d['Q6 — Wyoming food establishment license']) {
-            const val = d['Q6 — Wyoming food establishment license'];
-            document.querySelectorAll('input[name="q6"]').forEach(function(r) { r.checked = r.value === val; });
+        // Q7 radio
+        if (d['Q7 — Written food safety or HACCP plan']) {
+            const val = d['Q7 — Written food safety or HACCP plan'];
+            document.querySelectorAll('input[name="q7"]').forEach(function(r) { r.checked = r.value === val; });
         }
 
-        // Q8 radio
-        if (d['Q8 — Written food safety or HACCP plan']) {
-            const val = d['Q8 — Written food safety or HACCP plan'];
-            document.querySelectorAll('input[name="q8"]').forEach(function(r) { r.checked = r.value === val; });
-        }
-
-        // Q10 radio
-        if (d['Q10 — Primary water source']) {
-            const val = d['Q10 — Primary water source'];
+        // Q9 radio
+        if (d['Q9 — Primary water source']) {
+            const val = d['Q9 — Primary water source'];
             if (val.startsWith('Other:')) {
-                document.querySelectorAll('input[name="q10"]').forEach(function(r) { r.checked = r.value === 'Other'; });
-                document.getElementById('q10-other-text').value   = val.replace(/^Other:\s*/, '');
-                document.getElementById('q10-other-text').disabled = false;
+                document.querySelectorAll('input[name="q9"]').forEach(function(r) { r.checked = r.value === 'Other'; });
+                document.getElementById('q9-other-text').value   = val.replace(/^Other:\s*/, '');
+                document.getElementById('q9-other-text').disabled = false;
             } else {
-                document.querySelectorAll('input[name="q10"]').forEach(function(r) { r.checked = r.value === val; });
+                document.querySelectorAll('input[name="q9"]').forEach(function(r) { r.checked = r.value === val; });
             }
         }
     }
@@ -954,7 +1053,7 @@
     // Restore silently on page load
     window.addEventListener('DOMContentLoaded', function() {
         try {
-            var saved = localStorage.getItem(LS_KEY);
+            const saved = localStorage.getItem(LS_KEY);
             if (saved) restoreFormData(JSON.parse(saved));
         } catch(e) {}
     });
@@ -967,14 +1066,16 @@
     // BRANDED HTML — NOTIFICATION (to Arik)
     // ============================================================
     function buildNotificationHtml(data, label, ts) {
-        var rows = Object.entries(data).map(function([k, v]) {
-            var key = k.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            var val = (v || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            var valCell = val
-                ? '<td style="padding:10px 16px;font-size:13px;color:#142417;vertical-align:top;border-bottom:1px solid #e8ece6;line-height:1.65;white-space:pre-wrap">' + val + '</td>'
-                : '<td style="padding:10px 16px;font-size:13px;color:rgba(20,36,23,0.32);vertical-align:top;border-bottom:1px solid #e8ece6;line-height:1.65;font-style:italic">no response</td>';
-            return '<tr><td style="padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:0.03em;color:#416843;vertical-align:top;border-bottom:1px solid #e8ece6;width:36%;line-height:1.5">' + key + '</td>' + valCell + '</tr>';
-        }).join('');
+        const rows = Object.entries(data)
+            .filter(function([k]) { return !k.startsWith('_'); })
+            .map(function([k, v]) {
+                const key = k.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                const val = (v || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                const valCell = val
+                    ? '<td style="padding:10px 16px;font-size:13px;color:#142417;vertical-align:top;border-bottom:1px solid #e8ece6;line-height:1.65;white-space:pre-wrap">' + val + '</td>'
+                    : '<td style="padding:10px 16px;font-size:13px;color:rgba(20,36,23,0.32);vertical-align:top;border-bottom:1px solid #e8ece6;line-height:1.65;font-style:italic">no response</td>';
+                return '<tr><td style="padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:0.03em;color:#416843;vertical-align:top;border-bottom:1px solid #e8ece6;width:36%;line-height:1.5">' + key + '</td>' + valCell + '</tr>';
+            }).join('');
 
         return '<!DOCTYPE html><html><body style="margin:0;padding:24px;background:#eef1ed;font-family:sans-serif">'
             + '<div style="max-width:660px;margin:0 auto;background:#fff;border:1px solid #D8DDD6">'
@@ -992,14 +1093,16 @@
     // BRANDED HTML — CONFIRMATION (to Nicci)
     // ============================================================
     function buildConfirmationHtml(data) {
-        var rows = Object.entries(data).map(function([k, v]) {
-            var key = k.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            var val = (v || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            var valCell = val
-                ? '<td style="padding:10px 16px;font-size:13px;color:#142417;vertical-align:top;border-bottom:1px solid #e8ece6;line-height:1.65;white-space:pre-wrap">' + val + '</td>'
-                : '<td style="padding:10px 16px;font-size:13px;color:rgba(20,36,23,0.32);vertical-align:top;border-bottom:1px solid #e8ece6;font-style:italic">no response</td>';
-            return '<tr><td style="padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:0.03em;color:#416843;vertical-align:top;border-bottom:1px solid #e8ece6;width:36%;line-height:1.5">' + key + '</td>' + valCell + '</tr>';
-        }).join('');
+        const rows = Object.entries(data)
+            .filter(function([k]) { return !k.startsWith('_'); })
+            .map(function([k, v]) {
+                const key = k.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                const val = (v || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+                const valCell = val
+                    ? '<td style="padding:10px 16px;font-size:13px;color:#142417;vertical-align:top;border-bottom:1px solid #e8ece6;line-height:1.65;white-space:pre-wrap">' + val + '</td>'
+                    : '<td style="padding:10px 16px;font-size:13px;color:rgba(20,36,23,0.32);vertical-align:top;border-bottom:1px solid #e8ece6;font-style:italic">no response</td>';
+                return '<tr><td style="padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:0.03em;color:#416843;vertical-align:top;border-bottom:1px solid #e8ece6;width:36%;line-height:1.5">' + key + '</td>' + valCell + '</tr>';
+            }).join('');
 
         return '<!DOCTYPE html><html><body style="margin:0;padding:24px;background:#eef1ed;font-family:sans-serif">'
             + '<div style="max-width:660px;margin:0 auto;background:#fff;border:1px solid #D8DDD6">'
