@@ -609,7 +609,7 @@
                         <tbody>
                             <tr>
                                 <td>Farmers market / farm stand</td>
-                                <td><input type="checkbox" name="q1_farmers_active" id="q1-farmers-active"></td>
+                                <td><input type="checkbox" name="q1_farmers_active" id="q1-farmers-active" checked></td>
                                 <td>
                                     <input type="checkbox" name="q1_farmers_planned" id="q1-farmers-planned" class="q1-planned-cb" data-timeline="q1-farmers-timeline">
                                     <input type="text" name="q1_farmers_timeline" id="q1-farmers-timeline" class="timeline-input" placeholder="e.g., Q4 2026">
@@ -617,7 +617,7 @@
                             </tr>
                             <tr>
                                 <td>Direct to consumer (CSA, on-farm pickup)</td>
-                                <td><input type="checkbox" name="q1_csa_active" id="q1-csa-active"></td>
+                                <td><input type="checkbox" name="q1_csa_active" id="q1-csa-active" checked></td>
                                 <td>
                                     <input type="checkbox" name="q1_csa_planned" id="q1-csa-planned" class="q1-planned-cb" data-timeline="q1-csa-timeline">
                                     <input type="text" name="q1_csa_timeline" id="q1-csa-timeline" class="timeline-input" placeholder="e.g., Q4 2026">
@@ -735,7 +735,7 @@
                             Partial
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="q7" value="No">
+                            <input type="radio" name="q7" value="No" checked>
                             No
                         </label>
                         <label class="radio-label">
@@ -748,8 +748,9 @@
 
                 <!-- Q8 (was Q9) -->
                 <div class="question">
+                    <span class="prefill-note">Pre-filled &mdash; please confirm or correct</span>
                     <label class="question-label" for="q8">Q8. Remind me of the name of the food safety training has Katie completed or is currently enrolled in? Please include the course name and provider if known. Is anyone else taking or planning to take this training?</label>
-                    <textarea id="q8" name="q8" class="form-textarea" placeholder="Course name, provider, and approximate date if known."></textarea>
+                    <textarea id="q8" name="q8" class="form-textarea" placeholder="Course name, provider, and approximate date if known.">PSA Grower Training Online Course - https://cals.cornell.edu/produce-safety-alliance/training/grower-training-course/online-course</textarea>
                 </div>
             </div>
 
@@ -774,9 +775,9 @@
                             Surface water
                         </label>
                         <label class="radio-label">
-                            <input type="radio" name="q9" value="Other" id="q9-other-radio-label">
+                            <input type="radio" name="q9" value="Other" id="q9-other-radio-label" checked>
                             Other:
-                            <input type="text" name="q9_other_text" id="q9-other-text" class="radio-other-input" placeholder="describe" disabled>
+                            <input type="text" name="q9_other_text" id="q9-other-text" class="radio-other-input" placeholder="describe" value="Well water for irrigation - untreated. Treated with H2O2 for handwashing.">
                         </label>
                     </div>
                     <p class="question-hint" style="margin-top:8px;margin-bottom:0">Include all sources used for crop irrigation and post-harvest washing &mdash; even if a source is secondary or used only occasionally. If you use a closed recirculating or RO system, note that specifically.</p>
@@ -814,7 +815,7 @@
                 <div class="question">
                     <span class="prefill-note">Pre-filled &mdash; please confirm or correct</span>
                     <label class="question-label" for="q13">Q13. Matthew is currently documenting mushroom processes ahead of his August departure. What is the current status of that documentation &mdash; format, completeness, and who is reviewing it?</label>
-                    <textarea id="q13" name="q13" class="form-textarea">Matthew is currently documenting mushroom processes and leaving in August.</textarea>
+                    <textarea id="q13" name="q13" class="form-textarea">Matthew is currently documenting mushroom processes and leaving in August. Replacement for him is still TBD.</textarea>
                 </div>
 
                 <!-- Q14 (was Q15) -->
