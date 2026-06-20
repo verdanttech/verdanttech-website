@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Pre-Session Intake · Silver Stream Farm</title>
+    <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           TOKENS
+        ============================================================ */
+        :root {
+            --ink:        #142417;
+            --paper:      #F3F6F2;
+            --sage:       #416843;
+            --sage-mid:   #6F965E;
+            --sage-light: #A9C89A;
+            --rule:       #D8DDD6;
+            --dark-panel: #213A26;
+
+            --font-display: 'Montserrat', system-ui, sans-serif;
+            --font-body:    'Inter', system-ui, sans-serif;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        a {
+            color: var(--sage);
+            text-decoration: none;
+        }
+        a:hover { text-decoration: underline; }
+
+        /* ============================================================
+           NOISE OVERLAY
+        ============================================================ */
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9000;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+        }
+
+        /* ============================================================
+           PAGE HEADER
+        ============================================================ */
+        .page-header {
+            background: var(--dark-panel);
+            padding: 18px 40px;
+        }
+        .page-header-inner {
+            max-width: 820px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .header-wordmark {
+            font-family: var(--font-display);
+            font-size: 0.8125rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            color: rgba(232, 237, 229, 0.65);
+            white-space: nowrap;
+        }
+        .header-divider {
+            width: 1px;
+            height: 14px;
+            background: rgba(232, 237, 229, 0.2);
+            flex-shrink: 0;
+        }
+        .header-client {
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 300;
+            color: var(--sage-light);
+            letter-spacing: 0.03em;
+        }
+
+        /* ============================================================
+           INTRO BLOCK
+        ============================================================ */
+        .intro-block {
+            background: var(--sage);
+            padding: 52px 40px;
+        }
+        .intro-inner {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .intake-eyebrow {
+            font-family: var(--font-body);
+            font-size: 0.6875rem;
+            font-weight: 500;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--sage-light);
+            display: block;
+            margin-bottom: 16px;
+        }
+        .intake-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.625rem, 3vw, 2.25rem);
+            font-weight: 600;
+            color: #e8ede5;
+            line-height: 1.18;
+            margin-bottom: 20px;
+        }
+        .intake-subhead {
+            font-size: 0.9375rem;
+            font-weight: 300;
+            color: rgba(232, 237, 229, 0.82);
+            line-height: 1.72;
+            max-width: 660px;
+        }
+
+        /* ============================================================
+           MAIN CONTENT AREA
+        ============================================================ */
+        .main {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 52px 40px 88px;
+        }
+
+        /* ============================================================
+           FORM SECTION HEADING
+        ============================================================ */
+        .form-section {
+            margin-bottom: 56px;
+        }
+        .form-section-title {
+            font-family: var(--font-display);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--sage);
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--sage);
+            margin-bottom: 28px;
+        }
+        .section-intro {
+            font-size: 0.9375rem;
+            font-weight: 300;
+            color: rgba(20, 36, 23, 0.68);
+            line-height: 1.7;
+            margin-bottom: 22px;
+        }
+
+        /* ============================================================
+           DOCS LIST
+        ============================================================ */
+        .docs-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 11px;
+        }
+        .docs-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            font-size: 0.9375rem;
+            font-weight: 300;
+            line-height: 1.58;
+            color: var(--ink);
+        }
+        .docs-list li::before {
+            content: '';
+            flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--sage-light);
+            margin-top: 0.54em;
+        }
+
+        /* ============================================================
+           QUESTION GROUPS
+        ============================================================ */
+        .question-group {
+            margin-bottom: 44px;
+        }
+        .group-label {
+            font-family: var(--font-body);
+            font-size: 0.625rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--sage-mid);
+            display: block;
+            margin-bottom: 22px;
+            padding-bottom: 9px;
+            border-bottom: 1px solid var(--rule);
+        }
+
+        .question {
+            margin-bottom: 30px;
+        }
+
+        .question-label {
+            display: block;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--ink);
+            margin-bottom: 4px;
+            line-height: 1.52;
+        }
+        .question-hint {
+            font-size: 0.8125rem;
+            font-weight: 300;
+            color: rgba(20, 36, 23, 0.52);
+            margin-bottom: 10px;
+            line-height: 1.55;
+        }
+
+        /* ============================================================
+           TEXT INPUTS & TEXTAREAS
+        ============================================================ */
+        .form-textarea {
+            width: 100%;
+            background: #fff;
+            border: 1px solid var(--rule);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 0.9375rem;
+            font-weight: 300;
+            padding: 11px 14px;
+            outline: none;
+            transition: border-color 0.2s;
+            border-radius: 0;
+            -webkit-appearance: none;
+            appearance: none;
+            line-height: 1.62;
+            resize: vertical;
+            min-height: 112px;
+        }
+        .form-textarea.tall {
+            min-height: 210px;
+        }
+        .form-textarea::placeholder {
+            color: rgba(20, 36, 23, 0.28);
+        }
+        .form-textarea:focus {
+            border-color: var(--sage);
+        }
+
+        /* ============================================================
+           CHECKBOXES
+        ============================================================ */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.9375rem;
+            font-weight: 300;
+            color: var(--ink);
+            line-height: 1.5;
+            user-select: none;
+        }
+        .checkbox-label input[type="checkbox"] {
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+            margin-top: 0.2em;
+            accent-color: var(--sage);
+            cursor: pointer;
+        }
+        .checkbox-other-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex: 1;
+        }
+        .checkbox-other-tag {
+            flex-shrink: 0;
+            padding-right: 8px;
+        }
+        .checkbox-other-input {
+            flex: 1;
+            min-width: 0;
+            background: #fff;
+            border: 1px solid var(--rule);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 300;
+            padding: 5px 10px;
+            outline: none;
+            border-radius: 0;
+            transition: border-color 0.2s, opacity 0.2s;
+        }
+        .checkbox-other-input:disabled {
+            opacity: 0.4;
+            background: #f7f7f5;
+        }
+        .checkbox-other-input:focus {
+            border-color: var(--sage);
+        }
+
+        /* ============================================================
+           RADIO BUTTONS
+        ============================================================ */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+        .radio-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.9375rem;
+            font-weight: 300;
+            color: var(--ink);
+            line-height: 1.5;
+            user-select: none;
+        }
+        .radio-label input[type="radio"] {
+            flex-shrink: 0;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--sage);
+            cursor: pointer;
+        }
+        .radio-other-input {
+            flex: 1;
+            min-width: 0;
+            background: #fff;
+            border: 1px solid var(--rule);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 300;
+            padding: 5px 10px;
+            outline: none;
+            border-radius: 0;
+            transition: border-color 0.2s, opacity 0.2s;
+        }
+        .radio-other-input:disabled {
+            opacity: 0.4;
+            background: #f7f7f5;
+        }
+        .radio-other-input:focus {
+            border-color: var(--sage);
+        }
+
+        /* ============================================================
+           PRE-FILL BADGE
+        ============================================================ */
+        .prefill-note {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-body);
+            font-size: 0.625rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--sage-mid);
+            margin-bottom: 5px;
+        }
+        .prefill-note::before {
+            content: '';
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            background: var(--sage-light);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* ============================================================
+           BUTTONS
+        ============================================================ */
+        .button-row {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 4px;
+            margin-bottom: 10px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 13px 30px;
+            font-family: var(--font-body);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, opacity 0.2s;
+        }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .btn-draft {
+            background: var(--paper);
+            color: var(--sage);
+            border: 1px solid var(--sage);
+        }
+        .btn-draft:not(:disabled):hover {
+            background: #e4ece1;
+        }
+        .btn-final {
+            background: var(--sage);
+            color: var(--paper);
+        }
+        .btn-final:not(:disabled):hover {
+            background: var(--sage-mid);
+        }
+
+        .submission-status {
+            font-size: 0.875rem;
+            font-weight: 400;
+            color: var(--sage);
+            min-height: 22px;
+            line-height: 1.5;
+        }
+        .submission-status.error {
+            color: #943d25;
+        }
+
+        /* ============================================================
+           THANK YOU STATE
+        ============================================================ */
+        #thank-you {
+            display: none;
+            padding: 56px 0 20px;
+        }
+        #thank-you h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.625rem, 3vw, 2.25rem);
+            font-weight: 600;
+            color: var(--sage);
+            margin-bottom: 18px;
+        }
+        #thank-you p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(20, 36, 23, 0.68);
+            line-height: 1.72;
+            max-width: 520px;
+        }
+        #thank-you p + p {
+            margin-top: 10px;
+        }
+
+        /* ============================================================
+           CLOSING
+        ============================================================ */
+        .closing {
+            margin-top: 52px;
+            padding-top: 24px;
+            border-top: 1px solid var(--rule);
+            font-size: 0.875rem;
+            font-weight: 300;
+            color: rgba(20, 36, 23, 0.52);
+            line-height: 1.75;
+        }
+
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 620px) {
+            .page-header { padding: 16px 20px; }
+            .intro-block { padding: 40px 20px; }
+            .main { padding: 40px 20px 72px; }
+            .button-row { flex-direction: column; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="noise-overlay"></div>
+
+<!-- ================================================================
+     PAGE HEADER
+================================================================ -->
+<header class="page-header">
+    <div class="page-header-inner">
+        <span class="header-wordmark">VERDANTTECH SOLUTIONS</span>
+        <div class="header-divider"></div>
+        <span class="header-client">Silver Stream Farm</span>
+    </div>
+</header>
+
+<!-- ================================================================
+     INTRO BLOCK
+================================================================ -->
+<div class="intro-block">
+    <div class="intro-inner">
+        <span class="intake-eyebrow">Pre-Session Intake</span>
+        <h1 class="intake-title">Silver Stream Farm</h1>
+        <p class="intake-subhead">Please complete this form before our Phase 1 discovery session. Your answers let us use our time together on analysis and decisions rather than gathering basic facts. This should take approximately 15&ndash;20 minutes. If you&rsquo;re unsure about any item, a best estimate or &ldquo;don&rsquo;t know&rdquo; is more useful than leaving it blank.</p>
+    </div>
+</div>
+
+<!-- ================================================================
+     MAIN
+================================================================ -->
+<main class="main">
+
+    <form id="intake-form" novalidate>
+
+        <!-- ============================================================
+             SECTION 1 — DOCUMENTS TO GATHER
+        ============================================================ -->
+        <div class="form-section">
+            <div class="form-section-title">Section 1 &mdash; Documents to Gather</div>
+            <p class="section-intro">Please gather the following documents before our session if possible. Bring what you have &mdash; partial documentation is fine.</p>
+            <ul class="docs-list">
+                <li>Wyoming food establishment license (current), or documentation of pending application</li>
+                <li>Wyoming workers&rsquo; compensation registration or current policy confirmation</li>
+                <li>Wyoming Department of Agriculture nursery/greenhouse registration certificate (if on file)</li>
+                <li>Any existing pesticide application logs</li>
+                <li>Any existing food safety records, logs, or checklists currently in use</li>
+                <li>Current SOPs or job aid documents (any format &mdash; printed, digital, handwritten)</li>
+                <li>Any prior inspection reports from WDA, Teton County Health, or any other regulatory body</li>
+                <li>Documentation of any food safety training completed by any staff member</li>
+            </ul>
+        </div>
+
+        <!-- ============================================================
+             SECTION 2 — SHORT-ANSWER QUESTIONS
+        ============================================================ -->
+        <div class="form-section">
+            <div class="form-section-title">Section 2 &mdash; Short-Answer Questions</div>
+
+            <!-- GROUP A -->
+            <div class="question-group">
+                <span class="group-label">Group A &mdash; Operations &amp; Sales</span>
+
+                <!-- Q1 -->
+                <div class="question">
+                    <label class="question-label">Q1. Which sales channels are currently active? <span style="font-weight:300;color:rgba(20,36,23,0.45);font-size:0.875rem">(select all that apply)</span></label>
+                    <div class="checkbox-group" id="q1-checkboxes">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="q1_direct" value="Direct to consumer (farm stand, CSA, market)">
+                            Direct to consumer (farm stand, CSA, market)
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="q1_restaurant" value="Restaurant / foodservice" checked>
+                            Restaurant / foodservice
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="q1_retail" value="Retail grocery">
+                            Retail grocery
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="q1_wholesale" value="Wholesale distributor">
+                            Wholesale distributor
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="q1_institutional" value="Institutional (schools, hospitals, corporate)">
+                            Institutional (schools, hospitals, corporate)
+                        </label>
+                        <label class="checkbox-label" id="q1-other-row">
+                            <input type="checkbox" name="q1_other_check" id="q1-other-check">
+                            <div class="checkbox-other-wrap">
+                                <span class="checkbox-other-tag">Other:</span>
+                                <input type="text" name="q1_other_text" id="q1-other-text" class="checkbox-other-input" placeholder="describe" disabled>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="question">
+                    <span class="prefill-note">Pre-filled &mdash; please confirm or correct</span>
+                    <label class="question-label" for="q2">Q2. Which channels are planned but not yet active, and what is the anticipated timeline?</label>
+                    <textarea id="q2" name="q2" class="form-textarea">Retail grocery and wholesale distribution targeted for full-capacity operations by December 2026.</textarea>
+                </div>
+
+                <!-- Q3 -->
+                <div class="question">
+                    <label class="question-label" for="q3">Q3. Do any current buyers have stated food safety or certification requirements (e.g., GAP certification, food safety plan, insurance minimums)? If yes, who and what?</label>
+                    <textarea id="q3" name="q3" class="form-textarea" placeholder="Describe any buyer requirements, or write &#x22;None&#x22; or &#x22;Don&#x27;t know&#x22; if unsure."></textarea>
+                </div>
+            </div>
+
+            <!-- GROUP B -->
+            <div class="question-group">
+                <span class="group-label">Group B &mdash; Post-Harvest Handling</span>
+
+                <!-- Q4 -->
+                <div class="question">
+                    <label class="question-label" for="q4">Q4. Walk me through what happens to produce between harvest and delivery or sale &mdash; step by step. Include washing, sorting, bagging, labeling, refrigeration, and any other handling.</label>
+                    <p class="question-hint">This is the most important question on this form. Be as specific as you can &mdash; describe each physical step in sequence.</p>
+                    <textarea id="q4" name="q4" class="form-textarea tall" placeholder="E.g., Harvest &rarr; field crate &rarr; wash station &rarr; sort &rarr; bag / label &rarr; walk-in cooler &rarr; delivery vehicle&hellip;"></textarea>
+                </div>
+
+                <!-- Q5 -->
+                <div class="question">
+                    <label class="question-label" for="q5">Q5. Is any produce cut, processed, or combined with other ingredients before sale (e.g., salad mixes, cut herbs, blended products)?</label>
+                    <textarea id="q5" name="q5" class="form-textarea" placeholder="Describe any value-added or minimally processed products, or write &#x22;No.&#x22;"></textarea>
+                </div>
+            </div>
+
+            <!-- GROUP C -->
+            <div class="question-group">
+                <span class="group-label">Group C &mdash; Food Safety &amp; Licensing</span>
+
+                <!-- Q6 -->
+                <div class="question">
+                    <label class="question-label">Q6. Do you currently hold a Wyoming food establishment license? If yes, was it issued by Teton County Health or WDA Consumer Health Services directly?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="q6" value="Yes — Teton County Health">
+                            Yes &mdash; Teton County Health
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q6" value="Yes — WDA Consumer Health Services">
+                            Yes &mdash; WDA Consumer Health Services
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q6" value="Yes — not sure which">
+                            Yes &mdash; not sure which
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q6" value="No">
+                            No
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q6" value="Not sure">
+                            Not sure
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="question">
+                    <label class="question-label" for="q7">Q7. Has Silver Stream Farm ever been inspected by a food safety regulator (WDA, Teton County Health, FDA)? If yes, approximately when and what was the outcome?</label>
+                    <textarea id="q7" name="q7" class="form-textarea" placeholder="Describe any inspections and outcomes, or write &#x22;No&#x22; or &#x22;Not sure.&#x22;"></textarea>
+                </div>
+
+                <!-- Q8 -->
+                <div class="question">
+                    <label class="question-label">Q8. Is there a written food safety plan or HACCP plan currently in place?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="q8" value="Yes">
+                            Yes
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q8" value="Partial">
+                            Partial
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q8" value="No">
+                            No
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q8" value="Not sure">
+                            Not sure
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="question">
+                    <label class="question-label" for="q9">Q9. What food safety training has Katie completed or is currently enrolled in? Please include the course name and provider if known.</label>
+                    <textarea id="q9" name="q9" class="form-textarea" placeholder="Course name, provider, and approximate date if known."></textarea>
+                </div>
+            </div>
+
+            <!-- GROUP D -->
+            <div class="question-group">
+                <span class="group-label">Group D &mdash; Water</span>
+
+                <!-- Q10 -->
+                <div class="question">
+                    <label class="question-label">Q10. What is your primary water source for irrigation and produce washing?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="q10" value="Municipal">
+                            Municipal
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q10" value="Well">
+                            Well
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q10" value="Surface water">
+                            Surface water
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="q10" value="Other" id="q10-other-radio-label">
+                            Other:
+                            <input type="text" name="q10_other_text" id="q10-other-text" class="radio-other-input" placeholder="describe" disabled>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="question">
+                    <label class="question-label" for="q11">Q11. Has your water ever been tested for agricultural use (microbial or chemical)? If yes, when was the most recent test and do you have results on file?</label>
+                    <textarea id="q11" name="q11" class="form-textarea" placeholder="Test type and date if known, or write &#x22;No&#x22; or &#x22;Not sure.&#x22;"></textarea>
+                </div>
+            </div>
+
+            <!-- GROUP E -->
+            <div class="question-group">
+                <span class="group-label">Group E &mdash; Worker Safety</span>
+
+                <!-- Q12 -->
+                <div class="question">
+                    <label class="question-label" for="q12">Q12. Has Silver Stream Farm ever filed an OSHA recordable injury or illness report? Is there an OSHA 300 log currently in place?</label>
+                    <textarea id="q12" name="q12" class="form-textarea" placeholder="Include any OSHA filing history or current log status, or write &#x22;No&#x22; or &#x22;Not sure.&#x22;"></textarea>
+                </div>
+
+                <!-- Q13 -->
+                <div class="question">
+                    <label class="question-label" for="q13">Q13. What safety training have employees received? Include any formal training programs, certifications, or on-the-job instruction with documentation.</label>
+                    <textarea id="q13" name="q13" class="form-textarea" placeholder="Describe programs and certifications, or write &#x22;None documented&#x22; if applicable."></textarea>
+                </div>
+            </div>
+
+            <!-- GROUP F -->
+            <div class="question-group">
+                <span class="group-label">Group F &mdash; Staff &amp; Knowledge Transfer</span>
+
+                <!-- Q14 -->
+                <div class="question">
+                    <span class="prefill-note">Pre-filled &mdash; please confirm or correct</span>
+                    <label class="question-label" for="q14">Q14. Matthew is currently documenting mushroom processes ahead of his August departure. What is the current status of that documentation &mdash; format, completeness, and who is reviewing it?</label>
+                    <textarea id="q14" name="q14" class="form-textarea">Matthew is currently documenting mushroom processes and leaving in August.</textarea>
+                </div>
+
+                <!-- Q15 -->
+                <div class="question">
+                    <label class="question-label" for="q15">Q15. Beyond Matthew&rsquo;s departure, are there other key knowledge holders whose processes are not currently documented?</label>
+                    <textarea id="q15" name="q15" class="form-textarea" placeholder="Name and role if applicable, or write &#x22;No&#x22; if all critical processes are covered."></textarea>
+                </div>
+            </div>
+
+        </div>
+        <!-- /section 2 -->
+
+    </form>
+
+    <!-- Buttons live outside form — JS handles submission via fetch -->
+    <div class="button-row" id="button-row">
+        <button class="btn btn-draft" id="btn-draft" type="button">Save Draft</button>
+        <button class="btn btn-final" id="btn-final" type="button">Submit Final</button>
+    </div>
+    <div class="submission-status" id="submission-status"></div>
+
+    <!-- Thank-you state (shown after final submission) -->
+    <div id="thank-you">
+        <h2>Thank you, Nicci.</h2>
+        <p>Your intake form has been submitted. A confirmation has been sent to nicci@silverstreamfarm.com.</p>
+        <p>See you at the session.</p>
+    </div>
+
+    <!-- Closing -->
+    <div class="closing">
+        If anything here raises questions before our session, reach out directly:<br>
+        <a href="mailto:arik@verdant.biz">arik@verdant.biz</a> &middot; (307) 413-4104
+    </div>
+
+</main>
+
+<!-- ================================================================
+     JS
+================================================================ -->
+<script>
+    const ACCESS_KEY = 'edd68b28-76a9-4c30-a504-4f0fa04c924f';
+    const LS_KEY     = 'ssf-intake-draft';
+
+    // ============================================================
+    // OTHER-field enable/disable wiring
+    // ============================================================
+    document.getElementById('q1-other-check').addEventListener('change', function() {
+        const txt = document.getElementById('q1-other-text');
+        txt.disabled = !this.checked;
+        if (this.checked) txt.focus();
+    });
+
+    document.querySelectorAll('input[name="q10"]').forEach(function(r) {
+        r.addEventListener('change', function() {
+            const txt = document.getElementById('q10-other-text');
+            txt.disabled = (this.value !== 'Other');
+            if (this.value === 'Other') txt.focus();
+        });
+    });
+
+    // ============================================================
+    // COLLECT ALL FORM DATA INTO A KEYED OBJECT
+    // ============================================================
+    function collectFormData() {
+        const d = {};
+
+        // Q1 — checkboxes
+        const channels = [];
+        document.querySelectorAll('#q1-checkboxes input[type="checkbox"]').forEach(function(cb) {
+            if (cb.name === 'q1_other_check') {
+                if (cb.checked) {
+                    const t = document.getElementById('q1-other-text').value.trim();
+                    channels.push('Other: ' + (t || '(not specified)'));
+                }
+            } else if (cb.checked) {
+                channels.push(cb.value);
+            }
+        });
+        d['Q1 — Active sales channels'] = channels.length ? channels.join('; ') : '(none selected)';
+
+        // Q2–Q5 textareas
+        d['Q2 — Planned channels and timeline']          = document.getElementById('q2').value.trim();
+        d['Q3 — Buyer certification requirements']        = document.getElementById('q3').value.trim();
+        d['Q4 — Post-harvest handling (step by step)']   = document.getElementById('q4').value.trim();
+        d['Q5 — Cut or processed produce']               = document.getElementById('q5').value.trim();
+
+        // Q6 — radio
+        const q6 = document.querySelector('input[name="q6"]:checked');
+        d['Q6 — Wyoming food establishment license'] = q6 ? q6.value : '(not answered)';
+
+        d['Q7 — Prior food safety inspections']          = document.getElementById('q7').value.trim();
+
+        // Q8 — radio
+        const q8 = document.querySelector('input[name="q8"]:checked');
+        d['Q8 — Written food safety or HACCP plan'] = q8 ? q8.value : '(not answered)';
+
+        d['Q9 — Katie\'s food safety training']          = document.getElementById('q9').value.trim();
+
+        // Q10 — radio
+        const q10 = document.querySelector('input[name="q10"]:checked');
+        if (q10) {
+            if (q10.value === 'Other') {
+                const t = document.getElementById('q10-other-text').value.trim();
+                d['Q10 — Primary water source'] = 'Other: ' + (t || '(not specified)');
+            } else {
+                d['Q10 — Primary water source'] = q10.value;
+            }
+        } else {
+            d['Q10 — Primary water source'] = '(not answered)';
+        }
+
+        d['Q11 — Water testing history']                 = document.getElementById('q11').value.trim();
+        d['Q12 — OSHA filings and 300 log']              = document.getElementById('q12').value.trim();
+        d['Q13 — Employee safety training']              = document.getElementById('q13').value.trim();
+        d['Q14 — Matthew\'s documentation status']       = document.getElementById('q14').value.trim();
+        d['Q15 — Other undocumented knowledge holders']  = document.getElementById('q15').value.trim();
+
+        return d;
+    }
+
+    // ============================================================
+    // RESTORE FROM SAVED DATA OBJECT
+    // ============================================================
+    function restoreFormData(d) {
+        // Q1 checkboxes
+        if (d['Q1 — Active sales channels']) {
+            const saved = d['Q1 — Active sales channels'];
+            document.querySelectorAll('#q1-checkboxes input[type="checkbox"]').forEach(function(cb) {
+                if (cb.name === 'q1_other_check') {
+                    if (saved.includes('Other:')) {
+                        cb.checked = true;
+                        const m = saved.match(/Other:\s*([^;]+)/);
+                        if (m) document.getElementById('q1-other-text').value = m[1].trim();
+                        document.getElementById('q1-other-text').disabled = false;
+                    }
+                } else {
+                    cb.checked = saved.includes(cb.value);
+                }
+            });
+        }
+
+        const textareaMap = {
+            'Q2 — Planned channels and timeline':         'q2',
+            'Q3 — Buyer certification requirements':       'q3',
+            'Q4 — Post-harvest handling (step by step)':  'q4',
+            'Q5 — Cut or processed produce':              'q5',
+            'Q7 — Prior food safety inspections':         'q7',
+            'Q9 — Katie\'s food safety training':         'q9',
+            'Q11 — Water testing history':                'q11',
+            'Q12 — OSHA filings and 300 log':             'q12',
+            'Q13 — Employee safety training':             'q13',
+            'Q14 — Matthew\'s documentation status':      'q14',
+            'Q15 — Other undocumented knowledge holders': 'q15',
+        };
+        Object.entries(textareaMap).forEach(function([key, id]) {
+            if (d[key] !== undefined) {
+                var el = document.getElementById(id);
+                if (el) el.value = d[key];
+            }
+        });
+
+        // Q6 radio
+        if (d['Q6 — Wyoming food establishment license']) {
+            const val = d['Q6 — Wyoming food establishment license'];
+            document.querySelectorAll('input[name="q6"]').forEach(function(r) { r.checked = r.value === val; });
+        }
+
+        // Q8 radio
+        if (d['Q8 — Written food safety or HACCP plan']) {
+            const val = d['Q8 — Written food safety or HACCP plan'];
+            document.querySelectorAll('input[name="q8"]').forEach(function(r) { r.checked = r.value === val; });
+        }
+
+        // Q10 radio
+        if (d['Q10 — Primary water source']) {
+            const val = d['Q10 — Primary water source'];
+            if (val.startsWith('Other:')) {
+                document.querySelectorAll('input[name="q10"]').forEach(function(r) { r.checked = r.value === 'Other'; });
+                document.getElementById('q10-other-text').value   = val.replace(/^Other:\s*/, '');
+                document.getElementById('q10-other-text').disabled = false;
+            } else {
+                document.querySelectorAll('input[name="q10"]').forEach(function(r) { r.checked = r.value === val; });
+            }
+        }
+    }
+
+    // ============================================================
+    // AUTO-SAVE TO LOCALSTORAGE
+    // ============================================================
+    function saveToLocalStorage() {
+        try { localStorage.setItem(LS_KEY, JSON.stringify(collectFormData())); } catch(e) {}
+    }
+
+    // Restore silently on page load
+    window.addEventListener('DOMContentLoaded', function() {
+        try {
+            var saved = localStorage.getItem(LS_KEY);
+            if (saved) restoreFormData(JSON.parse(saved));
+        } catch(e) {}
+    });
+
+    // Wire auto-save to every change on the form
+    document.getElementById('intake-form').addEventListener('input',  saveToLocalStorage);
+    document.getElementById('intake-form').addEventListener('change', saveToLocalStorage);
+
+    // ============================================================
+    // PLAIN-TEXT MESSAGE (used for draft emails)
+    // ============================================================
+    function buildPlainMessage(d) {
+        return Object.entries(d)
+            .map(function([k, v]) { return k + ':\n' + (v || '(no response)'); })
+            .join('\n\n---\n\n');
+    }
+
+    // ============================================================
+    // HTML TABLE SUMMARY (used for final submission email)
+    // ============================================================
+    function buildHtmlMessage(d) {
+        var rows = Object.entries(d).map(function([k, v]) {
+            var val = (v || '(no response)').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            return '<tr>'
+                + '<td style="padding:9px 12px;font-weight:600;vertical-align:top;width:38%;'
+                +   'border-bottom:1px solid #dce2da;font-family:sans-serif;font-size:13px;'
+                +   'color:#142417;line-height:1.5">' + k + '</td>'
+                + '<td style="padding:9px 12px;vertical-align:top;border-bottom:1px solid #dce2da;'
+                +   'font-family:sans-serif;font-size:13px;color:#213A26;line-height:1.6;'
+                +   'white-space:pre-wrap">' + val + '</td>'
+                + '</tr>';
+        }).join('');
+
+        return '<table style="border-collapse:collapse;width:100%;max-width:720px;font-family:sans-serif">'
+             + '<thead><tr><th colspan="2" style="background:#416843;color:#F3F6F2;padding:14px 12px;'
+             +   'text-align:left;font-size:14px;font-weight:700;letter-spacing:0.04em">'
+             +   'Silver Stream Farm &mdash; Phase 1 Intake Submission'
+             + '</th></tr></thead>'
+             + '<tbody>' + rows + '</tbody>'
+             + '</table>';
+    }
+
+    // ============================================================
+    // SAVE DRAFT
+    // ============================================================
+    document.getElementById('btn-draft').addEventListener('click', async function() {
+        const btn    = this;
+        const status = document.getElementById('submission-status');
+        const data   = collectFormData();
+        const ts     = new Date().toLocaleString('en-US', {
+            month: 'short', day: 'numeric', year: 'numeric',
+            hour: 'numeric', minute: '2-digit', timeZoneName: 'short'
+        });
+
+        btn.disabled = true;
+        btn.textContent = 'Saving…';
+        status.textContent = '';
+        status.className = 'submission-status';
+
+        try {
+            const res  = await fetch('https://api.web3forms.com/submit', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body:    JSON.stringify({
+                    access_key: ACCESS_KEY,
+                    subject:    'SSF Intake — Draft Saved ' + ts,
+                    from_name:  'Silver Stream Farm Intake',
+                    email:      'arik@verdant.biz',
+                    botcheck:   '',
+                    message:    buildHtmlMessage(data),
+                })
+            });
+            const json = await res.json();
+            if (res.ok && json.success) {
+                status.textContent = 'Draft saved.';
+            } else {
+                throw new Error(json.message || 'Submission failed');
+            }
+        } catch(err) {
+            status.textContent = 'Something went wrong. Try again or email arik@verdant.biz directly.';
+            status.className = 'submission-status error';
+        } finally {
+            btn.disabled = false;
+            btn.textContent = 'Save Draft';
+        }
+    });
+
+    // ============================================================
+    // SUBMIT FINAL
+    // ============================================================
+    document.getElementById('btn-final').addEventListener('click', async function() {
+        const btnFinal = this;
+        const btnDraft = document.getElementById('btn-draft');
+        const status   = document.getElementById('submission-status');
+        const data     = collectFormData();
+
+        btnFinal.disabled = true;
+        btnDraft.disabled = true;
+        btnFinal.textContent = 'Submitting…';
+        status.textContent = '';
+        status.className = 'submission-status';
+
+        // Build an object where every Q&A is a separate named field so
+        // Web3Forms includes them in both the notification to Arik and
+        // the confirmation email to Nicci.
+        const payload = Object.assign({
+            access_key: ACCESS_KEY,
+            subject:    'SSF Intake — Final Submission',
+            from_name:  'Silver Stream Farm Intake',
+            email:      'arikgriffin@gmail.com',
+            replyto:    'arikgriffin@gmail.com',
+            botcheck:   '',
+            message:    buildHtmlMessage(data),
+        }, data);
+
+        try {
+            const res  = await fetch('https://api.web3forms.com/submit', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body:    JSON.stringify(payload)
+            });
+            const json = await res.json();
+            if (res.ok && json.success) {
+                // Show thank-you; hide form and buttons
+                document.getElementById('intake-form').style.display = 'none';
+                document.getElementById('button-row').style.display  = 'none';
+                status.style.display = 'none';
+                document.getElementById('thank-you').style.display   = 'block';
+                document.getElementById('thank-you').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // localStorage intentionally kept — Nicci can return to review answers
+            } else {
+                throw new Error(json.message || 'Submission failed');
+            }
+        } catch(err) {
+            status.textContent = 'Something went wrong. Please try again or email arik@verdant.biz directly.';
+            status.className = 'submission-status error';
+            btnFinal.disabled = false;
+            btnDraft.disabled = false;
+            btnFinal.textContent = 'Submit Final';
+        }
+    });
+</script>
+
+</body>
+</html>
