@@ -1030,7 +1030,7 @@
         });
         if (!res.ok) {
             const err = await res.json().catch(function() { return {}; });
-            throw new Error(err.message || 'Email send failed');
+            throw new Error('[HTTP ' + res.status + '] ' + (err.message || JSON.stringify(err)));
         }
         return res.json();
     }
@@ -1060,7 +1060,7 @@
             );
             status.textContent = 'Draft saved.';
         } catch(err) {
-            status.textContent = 'Something went wrong. Try again or email arik@verdant.biz directly.';
+            status.textContent = err.message || 'Unknown error — check browser console.';
             status.className = 'submission-status error';
         } finally {
             btn.disabled = false;
