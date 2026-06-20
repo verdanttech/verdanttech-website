@@ -924,6 +924,11 @@
             min-height: 130px;
             line-height: 1.6;
         }
+        .form-field input.field-error,
+        .form-field textarea.field-error {
+            border-color: rgba(220, 100, 80, 0.7);
+            background: rgba(220, 100, 80, 0.06);
+        }
         .form-submit {
             align-self: flex-start;
             display: inline-block;
@@ -1718,22 +1723,33 @@
             }
         }
 
+        // Clear field errors on input
+        ['f-name', 'f-email', 'f-message'].forEach(id => {
+            document.getElementById(id).addEventListener('input', function() {
+                this.classList.remove('field-error');
+            });
+        });
+
         // Contact form — Resend via Cloudflare Worker
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn    = document.getElementById('form-submit-btn');
             const status = document.getElementById('form-status');
 
-            const name    = document.getElementById('f-name').value.trim();
-            const email   = document.getElementById('f-email').value.trim();
+            const nameEl    = document.getElementById('f-name');
+            const emailEl   = document.getElementById('f-email');
+            const messageEl = document.getElementById('f-message');
+            const name    = nameEl.value.trim();
+            const email   = emailEl.value.trim();
             const company = document.getElementById('f-company').value.trim();
-            const message = document.getElementById('f-message').value.trim();
+            const message = messageEl.value.trim();
+
+            [nameEl, emailEl, messageEl].forEach(el => el.classList.remove('field-error'));
 
             if (!name || !email || !message) {
-                const missing = !name ? document.getElementById('f-name')
-                              : !email ? document.getElementById('f-email')
-                              : document.getElementById('f-message');
-                missing.focus();
+                if (!name)         { nameEl.classList.add('field-error');    nameEl.focus(); }
+                else if (!email)   { emailEl.classList.add('field-error');   emailEl.focus(); }
+                else               { messageEl.classList.add('field-error'); messageEl.focus(); }
                 return;
             }
 
